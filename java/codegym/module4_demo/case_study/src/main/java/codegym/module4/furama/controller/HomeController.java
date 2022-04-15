@@ -1,4 +1,4 @@
-package codegym.module4.furama.controller.user;
+package codegym.module4.furama.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
     @GetMapping("/")
     public String home(){
-        return "user/index";
+        return "index";
     }
 }
