@@ -24,4 +24,13 @@ public class HelloServlet extends HttpServlet {
 
     public void destroy() {
     }
+
+    private void test(int a, int b){
+        System.out.println("a");
+    }
+
+    private int test(String e, int b){
+        System.out.println("b");
+        return 0;
+    }
 }
