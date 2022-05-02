@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="test_explicit(firstName, lastName)">
+  test with explicit
+  <p th:text="${firstName}"></p>
+  <p th:text="${lastName}"></p>
+</div>
+
+<!--<div th:fragment="test_implicit">-->
+<!--  test with implicit-->
+<!--  <span th:utext="${title}"></span>-->
+<!--  <span th:utext="${name} ?: 'There'"></span>-->
+<!--</div>-->
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title th:replace = "~{fragments/my-template :: title}">Title</title>
+    <th:block th:insert="~{fragments/my-template :: link}"></th:block>
+    <th:block th:insert="~{fragments/my-template :: head/script}"></th:block>
+</head>
+<body>
+<h1>My Page</h1>
+<p>Some Content of My Page</p>
+<div th:insert="~{fragments/my-template :: my-fragment1}"></div>
+<div th:insert="~{fragments/my-template :: my-fragment2}"></div>
+<div th:insert="~{fragments/my-template :: #my-id1}"></div>
+<div th:insert="~{fragments/my-template :: p.my-class }"></div>
+<div th:insert="~{fragments/fragment_with_param :: test_explicit('Quoc', 'Nguyen')}"></div>
+<div th:replace="~{fragments/footer :: footer}"></div>
+<!--<div th:insert="~{fragments/fragment_with_param :: test_implicit('A', 'B')}"></div>-->
+</body>
+</html>
