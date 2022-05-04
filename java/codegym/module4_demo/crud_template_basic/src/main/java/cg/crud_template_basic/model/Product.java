@@ -1,8 +1,10 @@
 package cg.crud_template_basic.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import cg.crud_template_basic.validation.EXPDateValid;
+import cg.crud_template_basic.validation.PriceValid;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.time.LocalDate;
 
 @Entity
@@ -11,10 +13,13 @@ public class Product {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
+    @NotEmpty(message = "Name cannot be empty")
     private String name;
 
+    @PriceValid
     private double price;
 
+    @EXPDateValid
     private LocalDate expDate;
 
     private String manufacturer;

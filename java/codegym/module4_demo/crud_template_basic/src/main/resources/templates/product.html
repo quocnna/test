@@ -100,7 +100,7 @@
 
         <div class="modal fade" id="addEditModal" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
-                <form method="post">
+                <form method="post" th:object="${product}">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title">Edit Item</h5>
@@ -110,14 +110,17 @@
                             <div class="mb-3">
                                 <label class="form-label">Name</label>
                                 <input class="form-control" name="name"/>
+                                <label style="color: #fc9494" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></label>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Price</label>
                                 <input type="number" class="form-control" name="price">
+                                <label style="color: #fc9494" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></label>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">EXP Date</label>
                                 <input type="text" class="date form-control" name="expDate"/>
+                                <label style="color: #fc9494" th:if="${#fields.hasErrors('expDate')}" th:errors="*{expDate}"></label>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Manufacturer</label>
@@ -125,12 +128,6 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Category</label>
-                                <!--<select class="form-select" name="category">
-&lt;!&ndash;                                    <option selected>-&#45;&#45; Select Category -&#45;&#45;</option>&ndash;&gt;
-                                    <option value="1">Cell Phone</option>
-                                    <option value="2">TV</option>
-                                </select>-->
-
                                 <select name="category" class="form-select">
                                     <option th:each="item:${cate}" th:value="${item.id}" th:text="${item.name}"></option>
                                 </select>
@@ -165,6 +162,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>
