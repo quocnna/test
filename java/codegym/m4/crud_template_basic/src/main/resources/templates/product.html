@@ -164,3 +164,18 @@
 </div>
 </body>
 </html>
+<script th:inline="javascript">
+    $( document ).ready(function() {
+        if([[${isError}]]) {
+            $("input[name='name']").val([[${product.name}]]);
+            $("input[name='price']").val([[${product.price}]]);
+            $("input[name='expDate']").val([[${product.expDate}]]);
+            $("input[name='manufacturer']").val([[${product.manufacturer}]]);
+            $("#addEditModal").modal('show');
+        }
+
+        if([[${b}]]){
+            iziToast.success({  position: "topRight",message: "aaaaa"});
+        }
+    })
+</script>

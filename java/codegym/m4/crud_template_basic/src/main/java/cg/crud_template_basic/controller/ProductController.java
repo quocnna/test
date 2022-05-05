@@ -5,7 +5,6 @@ import cg.crud_template_basic.service.CategoryService;
 import cg.crud_template_basic.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
@@ -28,7 +27,7 @@ public class ProductController {
     public String getProduct(Model model, Product product, BindingResult bindingResult, @RequestParam(required = false) String searchBy, @RequestParam(required = false) String searchVal, Pageable pageable){
         Page<Product> res= productService.find(searchBy, searchVal, pageable);
 
-        boolean t= product.getName() == null;
+        boolean b= product == null;
 
         boolean isASC = false;
         Sort sort = res.getSort();
@@ -37,16 +36,19 @@ public class ProductController {
             isASC = "asc".equalsIgnoreCase(sort.toString().split(":")[1].trim());
         }
 
-        model.addAttribute("reverseSortDir", isASC ? "desc" : "asc");
         model.addAttribute("res", res);
+
         model.addAttribute("product", product);
+        model.addAttribute("reverseSortDir", isASC ? "desc" : "asc");
+        model.addAttribute("isError", bindingResult.hasErrors());
+        model.addAttribute("b", b);
         model.addAttribute("cate", categoryService.findAll());
         return "product";
     }
 
     @PostMapping
     public String saveProduct(Model model, @Validated Product product, BindingResult bindingResult, Pageable pageable){
-        if (bindingResult.hasFieldErrors())
+        if (bindingResult.hasErrors())
             return getProduct(model,product, bindingResult,"","", pageable);
 
         productService.saveProduct(product);
