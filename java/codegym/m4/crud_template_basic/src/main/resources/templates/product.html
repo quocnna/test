@@ -14,24 +14,24 @@
                 <a href="#addEditModal" class="btn btn-success add" data-bs-toggle="modal"><i class="material-icons">&#xE147;</i>
                     <span>Add New</span></a>
             </div>
-            <div class="col-lg-6 table-search">
+            <div class="col-lg-6 table-search" th:with="tmp=${#strings.arraySplit(q,':')}">
                 <form class="row gy-2 gx-3 align-items-center">
                     <div class="col-auto">
                         <select class="form-select" id="searchBy">
-                            <option selected value="all">Search by...</option>
-                            <option value="name">Name</option>
-                            <option value="price">From Price</option>
-                            <option value="manufacturer">Manufacturer</option>
-                            <option value="exp_date">From EXPDate</option>
-                            <option value="category">Category</option>
+                            <option th:selected="${tmp.length} > 0 ? ${tmp[0]} == 'all' : false" value="all">Search by...</option>
+                            <option th:selected="${tmp.length} > 0 ? ${tmp[0]} == 'name' : false" value="name">Name</option>
+                            <option th:selected="${tmp.length} > 0 ? ${tmp[0]} == 'price' : false" value="price">From Price</option>
+                            <option th:selected="${tmp.length} > 0 ? ${tmp[0]} == 'manufacturer' : false" value="manufacturer">Manufacturer</option>
+                            <option th:selected="${tmp.length} > 0 ? ${tmp[0]} == 'exp_date' : false" value="exp_date">From EXPDate</option>
+                            <option th:selected="${tmp.length} > 0 ? ${tmp[0]} == 'category' : false" value="category">Category</option>
                         </select>
                     </div>
                     <div class="col-auto">
-                        <input type="text" class="form-control" id="searchVal">
+                        <input type="text" class="form-control" id="searchVal" th:value="${tmp.length} > 0 ? ${tmp[1]} : ''">
                     </div>
 
                     <div class="col-auto">
-                        <a id="sbmSearch" class="btn btn-secondary">Submit</a>
+                        <a id="sbmSearch" href="/" class="btn btn-secondary">Submit</a>
                     </div>
                 </form>
             </div>
