@@ -1,9 +1,7 @@
 package cg.crud_template_basic.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 public class Category {
@@ -13,13 +11,8 @@ public class Category {
 
     private String name;
 
-    public Category() {
-    }
-
-    public Category(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    private Collection<Product> products;
 
     public int getId() {
         return id;

@@ -16,35 +16,40 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public Page<Product> find(String searchBy, String searchVal, Pageable pageable){
-        if(StringUtils.isEmpty(searchBy) && StringUtils.isEmpty(searchVal)){
-            return productRepository.findAll(pageable);
+    public Page<Product> find(String searchQuery, Pageable pageable){
+        if(!StringUtils.isEmpty(searchQuery)){
+            String[] tmp = searchQuery.split(":");
+            String searchBy = tmp[0];
+            String searchVal = tmp[1];
+
+            switch(searchBy){
+                case "name":
+                    return productRepository.findByNameContaining(searchVal, pageable);
+                case "price":
+                    return productRepository.findByPriceGreaterThanEqual(CommonUtil.parseDouble(searchVal), pageable);
+                case "exp_date":
+                    if(CommonUtil.parseLocalDate(searchVal)){
+                        return productRepository.findByEXPDate(LocalDate.parse(searchVal).toString(), LocalDate.now().toString(), pageable);
+                    }
+                    break;
+                case "manufacturer":
+                    return productRepository.findByManufacturerContaining(searchVal, pageable);
+                case "category":
+                    return productRepository.findByCategoryName("%".concat(searchVal).concat("%"), pageable);
+                default:
+                    Page<Product> products= productRepository.findAllByValue("%".concat(searchVal).concat("%"), pageable);
+                    return products;
+            }
         }
 
-        switch(searchBy){
-            case "name":
-                return productRepository.findByNameContaining(searchVal, pageable);
-            case "price":
-                return productRepository.findByPriceGreaterThanEqual(CommonUtil.parseDouble(searchVal), pageable);
-            case "exp_date":
-                if(CommonUtil.parseLocalDate(searchVal)){
-                    return productRepository.findByEXPDate(LocalDate.parse(searchVal).toString(), LocalDate.now().toString(), pageable);
-                }
-                break;
-            case "manufacturer":
-                return productRepository.findByManufacturerContaining(searchVal, pageable);
-            case "category":
-                return productRepository.findByCategoryName("%".concat(searchVal).concat("%"), pageable);
-            default:
-                Page<Product> products= productRepository.findAllByValue("%".concat(searchVal).concat("%"), pageable);
-                return products;
-        }
-
-        return Page.empty();
+        return productRepository.findAll(pageable);
     }
 
-    public Product saveProduct(Product product){
-        Product p= productRepository.save(product);
-        return p;
+    public Product save(Product product){
+        return productRepository.save(product);
+    }
+
+    public void delete(int id){
+        productRepository.deleteById(id);
     }
 }

@@ -1,10 +1,12 @@
 package cg.crud_template_basic.model;
 
 import cg.crud_template_basic.validation.EXPDateValid;
-import cg.crud_template_basic.validation.PriceValid;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -16,9 +18,11 @@ public class Product {
     @NotEmpty(message = "Name cannot be empty")
     private String name;
 
-    @PriceValid
-    private double price;
+    @NotNull(message = "Price cannot be empty")
+    @Min(value = 500, message = "Price should be greater than 1000")
+    private Double price;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @EXPDateValid
     private LocalDate expDate;
 
@@ -29,14 +33,6 @@ public class Product {
     private Category category;
 
     public Product() {
-    }
-
-    public Product(int id, double price, LocalDate expDate, String manufacturer, Category category) {
-        this.id = id;
-        this.price = price;
-        this.expDate = expDate;
-        this.manufacturer = manufacturer;
-        this.category = category;
     }
 
     public int getId() {
@@ -55,11 +51,11 @@ public class Product {
         this.name = name;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

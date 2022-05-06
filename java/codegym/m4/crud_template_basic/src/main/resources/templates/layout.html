@@ -190,6 +190,11 @@
       dateFormat: "yy-mm-dd",
     });
   })
+
+  $(".delete").click(function () {
+    $(".modal-title").text("Delete " + $(this).data("name"));
+    $("#deleteModal form").attr('action', $(this).data("id"));
+  });
 </script>
 </body>
 </html>

@@ -11,9 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ProductController {
@@ -23,35 +22,41 @@ public class ProductController {
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping
-    public String getProduct(Model model, Product product, BindingResult bindingResult, @RequestParam(required = false) String searchBy, @RequestParam(required = false) String searchVal, Pageable pageable){
-        Page<Product> res= productService.find(searchBy, searchVal, pageable);
-
-        boolean b= product == null;
+    @GetMapping()
+    public String view(Model model, Product product, BindingResult bindingResult, @RequestParam(defaultValue = "") String q, Pageable pageable){
+        Page<Product> res= productService.find(q, pageable);
 
         boolean isASC = false;
         Sort sort = res.getSort();
-
         if(sort.isSorted()){
-            isASC = "asc".equalsIgnoreCase(sort.toString().split(":")[1].trim());
+            isASC = sort.get().findFirst().get().isAscending();
         }
 
         model.addAttribute("res", res);
-
         model.addAttribute("product", product);
-        model.addAttribute("reverseSortDir", isASC ? "desc" : "asc");
-        model.addAttribute("isError", bindingResult.hasErrors());
-        model.addAttribute("b", b);
         model.addAttribute("cate", categoryService.findAll());
+        model.addAttribute("reverseSort", isASC ? "desc" : "asc");
+        model.addAttribute("isError", bindingResult.hasErrors());
+        model.addAttribute("q", q);
         return "product";
     }
 
     @PostMapping
-    public String saveProduct(Model model, @Validated Product product, BindingResult bindingResult, Pageable pageable){
+    public String save(Model model, @Validated Product product, BindingResult bindingResult, Pageable pageable, RedirectAttributes redirect){
         if (bindingResult.hasErrors())
-            return getProduct(model,product, bindingResult,"","", pageable);
+            return view(model,product, bindingResult,"", pageable);
 
-        productService.saveProduct(product);
+        productService.save(product);
+        redirect.addFlashAttribute("msg", String.format("%s successfully",(product.getId()>0?"Updated ":"Created ")+ product.getName()));
+
+        return "redirect:/";
+    }
+
+    @DeleteMapping("/{id}")
+    public String delete(Model model, @PathVariable int id, RedirectAttributes redirect){
+        productService.delete(id);
+        redirect.addFlashAttribute("msg", "Deleted successfully");
+
         return "redirect:/";
     }
 }

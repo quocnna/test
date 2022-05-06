@@ -21,8 +21,4 @@ public class CommonUtil {
             return false;
         }
     }
-
-    public static boolean test(){
-        return true;
-    }
 }

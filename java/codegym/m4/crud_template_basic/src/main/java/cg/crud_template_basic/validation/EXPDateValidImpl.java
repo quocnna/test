@@ -10,7 +10,11 @@ import java.time.LocalDate;
 public class EXPDateValidImpl implements ConstraintValidator<EXPDateValid, LocalDate> {
     @Override
     public boolean isValid(LocalDate value, ConstraintValidatorContext context) {
+        if(value == null)
+            return false;
+
         LocalDate after3months = LocalDate.now().plusMonths(3);
-        return after3months.compareTo(value) <= 0;
+        boolean t = value.compareTo(after3months) > 0;
+        return t;
     }
 }
