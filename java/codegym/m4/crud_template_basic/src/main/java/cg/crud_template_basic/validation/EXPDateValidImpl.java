@@ -14,7 +14,6 @@ public class EXPDateValidImpl implements ConstraintValidator<EXPDateValid, Local
             return false;
 
         LocalDate after3months = LocalDate.now().plusMonths(3);
-        boolean t = value.compareTo(after3months) > 0;
-        return t;
+        return value.compareTo(after3months) > 0;
     }
 }

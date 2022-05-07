@@ -22,22 +22,15 @@ public class ProductController {
     @Autowired
     private CategoryService categoryService;
 
-    @GetMapping()
+    @GetMapping
     public String view(Model model, Product product, BindingResult bindingResult, @RequestParam(defaultValue = "") String q, Pageable pageable){
-        Page<Product> res= productService.find(q, pageable);
-
-        boolean isASC = false;
-        Sort sort = res.getSort();
-        if(sort.isSorted()){
-            isASC = sort.get().findFirst().get().isAscending();
-        }
-
-        model.addAttribute("res", res);
-        model.addAttribute("product", product);
+        model.addAttribute("res", productService.find(q, pageable));
         model.addAttribute("cate", categoryService.findAll());
-        model.addAttribute("reverseSort", isASC ? "desc" : "asc");
-        model.addAttribute("isError", bindingResult.hasErrors());
+        model.addAttribute("product", product);
         model.addAttribute("q", q);
+        model.addAttribute("sort", pageable.getSort());
+        model.addAttribute("isError", bindingResult.hasErrors());
+
         return "product";
     }
 
@@ -52,8 +45,8 @@ public class ProductController {
         return "redirect:/";
     }
 
-    @DeleteMapping("/{id}")
-    public String delete(Model model, @PathVariable int id, RedirectAttributes redirect){
+    @DeleteMapping
+    public String delete(@RequestParam int id, RedirectAttributes redirect){
         productService.delete(id);
         redirect.addFlashAttribute("msg", "Deleted successfully");
 

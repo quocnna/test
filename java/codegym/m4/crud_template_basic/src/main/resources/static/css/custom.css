@@ -92,3 +92,8 @@ table.table td i {
     background-color: #181821;
     /*opacity: 0.75;*/
 }
+
+.sort-disabled{
+    color: gray;
+    opacity: 0.5;
+}

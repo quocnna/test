@@ -11,9 +11,6 @@ public class Category {
 
     private String name;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    private Collection<Product> products;
-
     public int getId() {
         return id;
     }
