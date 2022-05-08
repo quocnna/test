@@ -9,14 +9,14 @@ public class ProductService {
     private List<Product> products = new ArrayList<>();
 
     public void create(Product product){
-        //region make id increment
-        int idIncrement = 1;
+        //region get last id
+        int lastId = 0;
 
         if(products.size()> 0){
-            idIncrement= products.get(products.size()-1).getId() + 1;
+            lastId= products.get(products.size()-1).getId();
         }
 
-        product.setId(idIncrement);
+        product.setId(lastId + 1);
         //endregion
         products.add(product);
     }
