@@ -1,12 +1,16 @@
 package service;
 
 import model.Product;
+import util.ConstantUtil;
+import util.FileHelper;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ProductService {
     private List<Product> products = new ArrayList<>();
+    private FileHelper fileHelper = new FileHelper();
 
     public void create(Product product){
         //region get last id
@@ -19,6 +23,7 @@ public class ProductService {
         product.setId(lastId + 1);
         //endregion
         products.add(product);
+        fileHelper.write(ConstantUtil.PRODUCT_PATH, Collections.singletonList(product), true);
     }
 
     public List findAll(){
