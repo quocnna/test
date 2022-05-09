@@ -1,0 +1,22 @@
+body{
+    width: 80%;
+    margin: 0 auto;
+}
+
+table{
+    width: 100%;
+}
+
+th{
+    border: 1px solid;
+    background: gray;
+}
+
+th:last-child{
+    width: 8%;
+    background: white;
+}
+
+td{
+    border: 1px solid;
+}
