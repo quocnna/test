@@ -19,9 +19,9 @@ public class ProductService {
         if(products.size()> 0){
             lastId= products.get(products.size()-1).getId();
         }
-
-        product.setId(lastId + 1);
         //endregion
+        
+        product.setId(lastId + 1);
         products.add(product);
         fileHelper.write(ConstantUtil.PRODUCT_PATH, Collections.singletonList(product), true);
     }
