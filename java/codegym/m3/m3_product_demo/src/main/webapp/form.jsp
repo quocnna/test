@@ -5,29 +5,36 @@
 </head>
 <body>
 <h2>Product Form</h2>
+<form method="post">
+<input type="hidden" name="id">
 <div>
   <label>Name: </label>
-  <input name="name">
+  <input name="name" value="${product.name}">
 </div>
 <div>
   <label>Price: </label>
-  <input name="price">
+  <input name="price" value="${product.price}">
 </div>
 <div>
   <label>Quantity: </label>
-  <input name="quantity">
+  <input name="quantity" value="${product.quantity}">
 </div>
 <div>
   <label>Color: </label>
-  <input name="color">
+  <input name="color" value="${product.color}">
 </div>
 <div>
   <label>Description: </label>
-  <input name="description">
+  <input name="description" value="${product.description}">
 </div>
 <div>
   <label>Category: </label>
-  <input name="name">
+  <select name="category">
+    <option ${product.categoryId == 1 ? 'selected' : ''} value="1">Phone</option>
+    <option ${product.categoryId == 2 ? 'selected' : ''} value="2">TV</option>
+  </select>
 </div>
+  <button>Submit</button>
+</form>
 </body>
 </html>

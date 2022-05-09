@@ -14,8 +14,19 @@ public class ProductServlet extends HttpServlet {
     private ProductService productService = new ProductService();
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        List<Product> result =  productService.findAll();
-        request.setAttribute("result", result);
-        request.getRequestDispatcher ("list.jsp").forward(request, response);
+        String id = request.getParameter("id");
+        if(id != null){
+            request.setAttribute("product", productService.findById(Integer.parseInt(id)));
+            request.getRequestDispatcher("form.jsp").forward(request, response);
+        }
+        else{
+            request.setAttribute("result", productService.findAll());
+            request.getRequestDispatcher ("list.jsp").forward(request, response);
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        System.out.println("a");
     }
 }

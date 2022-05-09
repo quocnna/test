@@ -16,6 +16,10 @@ public class ProductService {
         return productRepository.findAll();
     }
 
+    public Product findById(int id){
+        return productRepository.findById(id);
+    }
+
     public int delete(int id) {
         return 0;
     }
