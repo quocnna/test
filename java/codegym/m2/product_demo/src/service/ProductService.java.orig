@@ -26,8 +26,14 @@ public class ProductService {
             lastId= products.get(products.size()-1).getId();
         }
         //endregion
+<<<<<<< HEAD
         
         product.setId(lastId + 1);
+=======
+
+        product.setId(lastId + 1);
+
+>>>>>>> 82433b546cb4d67685808d53077b1324aab6e33c
         products.add(product);
         fileHelper.write(ConstantUtil.PRODUCT_PATH, Collections.singletonList(product), true);
     }

@@ -50,11 +50,6 @@ public abstract class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", manufacturer='" + manufacturer + '\'' +
-                '}';
+        return String.format("%s,%s,%s,%s,", id, name, price, manufacturer);
     }
 }
