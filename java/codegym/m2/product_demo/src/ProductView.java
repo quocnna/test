@@ -1,6 +1,8 @@
 import model.AuthenticProduct;
 import model.HandProduct;
 import model.Product;
+import service.AuthenticService;
+import service.HandService;
 import service.ProductService;
 
 import java.util.List;
@@ -8,10 +10,11 @@ import java.util.Scanner;
 
 public class ProductView {
     private static Scanner scanner = new Scanner(System.in);
-    private static ProductService productService = new ProductService();
+    private static ProductService authenticService = new AuthenticService();
+    private static ProductService handService = new HandService();
 
     public static void main(String[] args) {
-        while (true){
+        while (true) {
             System.out.println("--- Product Menu---");
             System.out.println("1. Create");
             System.out.println("2. Display");
@@ -41,47 +44,48 @@ public class ProductView {
     }
 
     private static void search() {
-        display();
-        System.out.print("Enter name to search:");
-        String name = scanner.nextLine();
-        List<Product> products= productService.searchByName(name);
-        for (Product product : products) {
-            System.out.println(product);
+        int choose = choiceProductType();
+        if(choose == 1) {
+            System.out.print("Enter name to search:");
+            String name = scanner.nextLine();
+            List<AuthenticProduct> products= authenticService.searchByName(name);
+            displayAuthenticProducts(products);
+        }
+        else {
+            System.out.print("Enter name to search:");
+            String name = scanner.nextLine();
+            List<HandProduct> products= handService.searchByName(name);
+            displayHandProducts(products);
         }
     }
 
     private static void display() {
-        List<Product> products = productService.findAll();
-        if(products.size() > 0){
-            for (Product product : products) {
-                if(product instanceof AuthenticProduct){
-                    System.out.printf("Authentic Product: id= %s, name =%s, price =%s, manufacturer = %s, granteeByYear = %s\n"
-                    , product.getId(), product.getName(), product.getPrice(), product.getManufacturer() , ((AuthenticProduct) product).getGranteeByYear());
-                }
-                else {
-                    System.out.printf("Hand Product: id= %s, name =%s, price =%s, manufacturer = %s, country = %s, status = %s\n"
-                            , product.getId(), product.getName(), product.getPrice(), product.getManufacturer(), ((HandProduct)product).getCountry(), ((HandProduct)product).getStatus());
-                }
-            }
-        }
-        else{
-            System.out.println("Product List is empty");
+        int choose = choiceProductType();
+        if (choose == 1) {
+            displayAuthenticProducts(authenticService.findAll());
+        } else {
+            displayHandProducts(handService.findAll());
         }
     }
 
     private static void delete() {
-        display();
-        System.out.print("Enter id to delete:");
-        int id = Integer.parseInt(scanner.nextLine());
-        productService.delete(id);
+        int choose = choiceProductType();
+        if (choose == 1) {
+            displayAuthenticProducts(authenticService.findAll());
+            System.out.print("Enter id to delete:");
+            int id = Integer.parseInt(scanner.nextLine());
+            authenticService.delete(id);
+        } else {
+            displayHandProducts(handService.findAll());
+            System.out.print("Enter id to delete:");
+            int id = Integer.parseInt(scanner.nextLine());
+            handService.delete(id);
+        }
         System.out.println("Deleted successfully");
     }
 
     private static void create() {
-        System.out.println("Choice product to create:");
-        System.out.println("1. Authentic");
-        System.out.println("2. Hand");
-        int choose = yourChoice();
+        int choose = choiceProductType();
 
         System.out.print("Name:");
         String name = scanner.nextLine();
@@ -95,6 +99,7 @@ public class ProductView {
             System.out.print("Grantee by year:");
             int granteeByYear = Integer.parseInt(scanner.nextLine());
             product = new AuthenticProduct(0, name, price, manufacturer, granteeByYear);
+            authenticService.create(product);
 
         } else {
             System.out.print("Country:");
@@ -102,15 +107,35 @@ public class ProductView {
             System.out.print("Status:");
             String status = scanner.nextLine();
             product = new HandProduct(0, name, price, manufacturer, country, status);
-
+            handService.create(product);
         }
 
-        productService.create(product);
         System.out.println("Created successfully");
     }
 
     private static int yourChoice() {
         System.out.print("Enter your choice:");
         return Integer.parseInt(scanner.nextLine());
+    }
+
+    private static int choiceProductType() {
+        System.out.println("Choice product type:");
+        System.out.println("1. Authentic");
+        System.out.println("2. Hand");
+        return yourChoice();
+    }
+
+    private static void displayAuthenticProducts(List<AuthenticProduct> authenticProducts) {
+        for (AuthenticProduct p : authenticProducts) {
+            System.out.printf("Authentic Product: id= %s, name =%s, price =%s, manufacturer = %s, granteeByYear = %s\n"
+                    , p.getId(), p.getName(), p.getPrice(), p.getManufacturer(), p.getGranteeByYear());
+        }
+    }
+
+    private static void displayHandProducts(List<HandProduct> handProducts) {
+        for (HandProduct p : handProducts) {
+            System.out.printf("Hand Product: id= %s, name =%s, price =%s, manufacturer = %s, country = %s, status = %s\n"
+                    , p.getId(), p.getName(), p.getPrice(), p.getManufacturer(), p.getCountry(), p.getStatus());
+        }
     }
 }

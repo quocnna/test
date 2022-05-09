@@ -1,5 +1,8 @@
 package util;
 
 public interface ConstantUtil {
-    String PRODUCT_PATH = "src/data/product.csv";
+    interface PATH {
+        String AUTHENTIC = "src/data/authentic.csv";
+        String HAND = "src/data/hand.csv";
+    }
 }
