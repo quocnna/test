@@ -33,9 +33,6 @@ public class HandProduct extends Product{
 
     @Override
     public String toString() {
-        return "HandProduct{" +
-                "country='" + country + '\'' +
-                ", status='" + status + '\'' +
-                "} " + super.toString();
+        return super.toString() + country + "," + status;
     }
 }

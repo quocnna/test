@@ -22,8 +22,6 @@ public class AuthenticProduct extends Product{
 
     @Override
     public String toString() {
-        return "AuthenticProduct{" +
-                "granteeByYear=" + granteeByYear +
-                "} " + super.toString();
+        return super.toString() + granteeByYear;
     }
 }

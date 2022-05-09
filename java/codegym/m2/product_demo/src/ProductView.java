@@ -40,11 +40,6 @@ public class ProductView {
         }
     }
 
-    private static int yourChoice() {
-        System.out.print("Enter your choice:");
-        return Integer.parseInt(scanner.nextLine());
-    }
-
     private static void search() {
         display();
         System.out.print("Enter name to search:");
@@ -57,8 +52,20 @@ public class ProductView {
 
     private static void display() {
         List<Product> products = productService.findAll();
-        for (Product product : products) {
-            System.out.println(product);
+        if(products.size() > 0){
+            for (Product product : products) {
+                if(product instanceof AuthenticProduct){
+                    System.out.printf("Authentic Product: id= %s, name =%s, price =%s, manufacturer = %s, granteeByYear = %s\n"
+                    , product.getId(), product.getName(), product.getPrice(), product.getManufacturer() , ((AuthenticProduct) product).getGranteeByYear());
+                }
+                else {
+                    System.out.printf("Hand Product: id= %s, name =%s, price =%s, manufacturer = %s, country = %s, status = %s\n"
+                            , product.getId(), product.getName(), product.getPrice(), product.getManufacturer(), ((HandProduct)product).getCountry(), ((HandProduct)product).getStatus());
+                }
+            }
+        }
+        else{
+            System.out.println("Product List is empty");
         }
     }
 
@@ -100,5 +107,10 @@ public class ProductView {
 
         productService.create(product);
         System.out.println("Created successfully");
+    }
+
+    private static int yourChoice() {
+        System.out.print("Enter your choice:");
+        return Integer.parseInt(scanner.nextLine());
     }
 }
