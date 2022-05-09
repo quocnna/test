@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 <h2>Product Form</h2>
