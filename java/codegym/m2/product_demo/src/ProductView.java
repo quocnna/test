@@ -71,7 +71,7 @@ public class ProductView {
     }
 
     private static void create() {
-        System.out.println("Create Product:");
+        System.out.println("Choice product to create:");
         System.out.println("1. Authentic");
         System.out.println("2. Hand");
         int choose = yourChoice();

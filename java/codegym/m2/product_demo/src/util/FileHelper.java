@@ -32,6 +32,7 @@ public class FileHelper {
         try(BufferedWriter bufferedWriter= new BufferedWriter(new FileWriter(path, isAppend))) {
             for (Product p : products) {
                 bufferedWriter.write(p.toString());
+                bufferedWriter.newLine();
             }
         }
         catch(IOException e){

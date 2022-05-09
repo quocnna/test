@@ -1,2 +1,6 @@
 AuthenticProduct{granteeByYear=1} Product{id=1, name='1', price=1.0, manufacturer='1'}
 a,b,c
+AuthenticProduct{granteeByYear=1} Product{id=1, name='1', price=1.0, manufacturer='1'}AuthenticProduct{granteeByYear=1} Product{id=1, name='1', price=1.0, manufacturer='1'}AuthenticProduct{granteeByYear=1} Product{id=1, name='1', price=1.0, manufacturer='1'}
+HandProduct{country='2', status='2'} Product{id=2, name='2', price=2.0, manufacturer='2'}
+AuthenticProduct{granteeByYear=1} Product{id=3, name='1', price=1.0, manufacturer='1'}
+AuthenticProduct{granteeByYear=1} Product{id=4, name='1', price=1.0, manufacturer='1'}
