@@ -6,8 +6,8 @@
 </head>
 <body>
 <h2>Product Form</h2>
-<form method="post">
-<input type="hidden" name="id">
+<form method="post" action="/product">
+<input type="hidden" name="id" value="0">
 <div>
   <label>Name: </label>
   <input name="name" value="${product.name}">

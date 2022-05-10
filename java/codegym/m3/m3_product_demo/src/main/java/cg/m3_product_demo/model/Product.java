@@ -1,4 +1,4 @@
-package cg.model;
+package cg.m3_product_demo.model;
 
 public class Product {
     private int id;
