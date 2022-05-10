@@ -6,9 +6,7 @@ import cg.m3_product_demo.service.ProductService;
 import java.io.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
-import javax.servlet.annotation.*;
 
-@WebServlet(name = "productServlet", value = "/product")
 public class ProductServlet extends HttpServlet {
     private ProductService productService = new ProductService();
 
@@ -40,6 +38,6 @@ public class ProductServlet extends HttpServlet {
             productService.delete(id);
         }
 
-        res.sendRedirect("/product");
+        res.sendRedirect("/");
     }
 }

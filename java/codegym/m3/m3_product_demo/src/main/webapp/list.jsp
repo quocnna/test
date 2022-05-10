@@ -9,8 +9,17 @@
 <%--    <script src="webjars/jquery/3.6.0/dist/jquery.min.js"></script>--%>
 </head>
 <body>
-<h2>Product List</h2>
-<a href="/form.jsp">Add new</a>
+<div class="row">
+        <h2 class="col-10 pt-2 ps-2">Product List</h2>
+
+    <div class="col-2 pt-4">
+        Search <input name="search"/>
+    </div>
+</div>
+<div class="row float-end mt-2">
+    <a class="me-5 pe-3" href="/form.jsp">Add new</a>
+</div>
+
 <table>
     <thead>
         <th>Name</th>
@@ -30,10 +39,10 @@
             <td>${e.color}</td>
             <td>${e.description}</td>
             <td>${e.categoryName}</td>
-            <th>
+            <td>
                 <a href="?id=${e.id}">Edit</a>
                 <a href="#" onclick="openDeleteModal(${e.id})">Delete</a>
-            </th>
+            </td>
         </tr>
     </c:forEach>
     </tbody>
@@ -41,7 +50,7 @@
 
 <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form action="/product" method="post">
+        <form method="post">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Delete Product</h5>

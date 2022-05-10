@@ -6,7 +6,7 @@
 </head>
 <body>
 <h2>Product Form</h2>
-<form method="post" action="/product">
+<form method="post" action="/">
 <input type="hidden" name="id" value="0">
 <div>
   <label>Name: </label>
@@ -31,8 +31,8 @@
 <div>
   <label>Category: </label>
   <select name="category">
-    <option ${product.categoryId == 1 ? 'selected' : ''} value="1">Phone</option>
-    <option ${product.categoryId == 2 ? 'selected' : ''} value="2">TV</option>
+    <option ${product.categoryId == 1 ? 'selected' : ''} value="1">phone</option>
+    <option ${product.categoryId == 2 ? 'selected' : ''} value="2">tv</option>
   </select>
 </div>
   <button>Submit</button>

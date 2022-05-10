@@ -1,6 +1,6 @@
 body{
-    width: 80%;
-    margin: 0 auto;
+    /*width: 80%;*/
+    /*margin: 0 auto;*/
 }
 
 table{
@@ -13,8 +13,7 @@ th{
 }
 
 th:last-child{
-    width: 8%;
-    background: white;
+    width: 6%;
 }
 
 td{
