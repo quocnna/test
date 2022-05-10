@@ -10,17 +10,22 @@ public class FileHelper {
     public List<String> read(String path){
         List result = new ArrayList<>();
 
-        createFileIfNotExist(path);
-        try(BufferedReader reader = new BufferedReader(new FileReader(path))) {
+        File file = new File(path);
+        try {
+            if(!file.exists()){
+                file.createNewFile();
+            }
+
+            BufferedReader reader = new BufferedReader(new FileReader(path));
             String line;
             while ((line = reader.readLine()) != null){
                 if(!line.isEmpty()){
                     result.add(line);
-
                 }
             }
+            reader.close();
         }
-        catch(IOException e) {
+        catch (IOException e){
             e.printStackTrace();
         }
 
@@ -28,7 +33,6 @@ public class FileHelper {
     }
 
     public void write(String path, List<Product> products, boolean isAppend){
-        createFileIfNotExist(path);
         try(BufferedWriter bufferedWriter= new BufferedWriter(new FileWriter(path, isAppend))) {
             for (Product p : products) {
                 bufferedWriter.write(p.toString());
@@ -37,17 +41,6 @@ public class FileHelper {
         }
         catch(IOException e){
             e.printStackTrace();
-        }
-    }
-
-    private void createFileIfNotExist(String path){
-        File file = new File(path);
-        if(!file.exists()){
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
     }
 }
