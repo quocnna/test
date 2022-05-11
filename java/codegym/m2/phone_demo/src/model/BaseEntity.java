@@ -1,6 +1,6 @@
 package model;
 
-public abstract class BaseEntity {
+public class BaseEntity {
     private int id;
     private String name;
     private Double price;
@@ -50,6 +50,6 @@ public abstract class BaseEntity {
 
     @Override
     public String toString() {
-        return String.format("%s,%s,%s,%s,", id, name, price, manufacturer);
+        return String.format("%s,%s,%s,%s", id, name, price, manufacturer);
     }
 }

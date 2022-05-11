@@ -1,20 +1,21 @@
 package service;
 
 import model.BaseEntity;
+import util.CommonUtil;
 import util.ConstantUtil;
 import util.FileHelper;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class GeneralService {
-    private List<BaseEntity> list = new ArrayList<>();
+    private List<BaseEntity> list;
     private FileHelper fileHelper = new FileHelper();
 
     public GeneralService() {
-        list = Collections.emptyList();
+        list = mapToObject();
     }
 
     public void create(BaseEntity baseEntity) {
@@ -27,7 +28,6 @@ public class GeneralService {
         //endregion
 
         baseEntity.setId(lastId + 1);
-
         list.add(baseEntity);
         fileHelper.write(ConstantUtil.PATH, list, false);
     }
@@ -44,5 +44,20 @@ public class GeneralService {
 
     public List search(String name) {
         return list.stream().filter(e-> e.getName().equals(name)).collect(Collectors.toList());
+    }
+
+    private List mapToObject(){
+        List result = new ArrayList();
+
+        List<String> lines = fileHelper.read(ConstantUtil.PATH);
+        for (String line : lines){
+            String[] tmp = line.split(",");
+
+            List<String> values = Arrays.stream(tmp).collect(Collectors.toList());
+            values.remove(0);
+            result.add(CommonUtil.createInstance(tmp[0], values));
+        }
+
+        return result;
     }
 }

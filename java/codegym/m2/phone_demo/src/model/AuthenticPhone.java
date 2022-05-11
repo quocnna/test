@@ -33,6 +33,6 @@ public class AuthenticPhone extends BaseEntity {
 
     @Override
     public String toString() {
-        return String.format("%s,s%,%s,%s","A",super.toString(),granteeByYear,granteeCode);
+        return String.format("%s,%s,%s,%s", getClass().getSimpleName(), super.toString(), granteeByYear , granteeCode);
     }
 }

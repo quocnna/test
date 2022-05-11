@@ -33,6 +33,6 @@ public class HandPhone extends BaseEntity {
 
     @Override
     public String toString() {
-        return String.format("%s,s%,%s,%s","H",super.toString(),country,status);
+        return String.format("%s,%s,%s,%s", getClass().getSimpleName(), super.toString(), country , status);
     }
 }

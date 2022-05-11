@@ -8,22 +8,19 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class CommonUtil {
-    public static Scanner getScanner(){
+    public static Scanner getScanner() {
         return new Scanner(System.in);
     }
 
     public static List<Field> getAllFields(String className) {
         List<Field> result = new ArrayList<>();
 
-        if(!className.equals("java.lang.Object")){
+        if (!("Object").equals(className)) {
             try {
-                if(!className.contains("model.")){
-                    className = "model."+ className;
-                }
-
+                className = "model." + className;
                 Class<?> clazz = Class.forName(className);
                 if (clazz != null) {
-                    result = new ArrayList<>(getAllFields(clazz.getSuperclass().getName()));
+                    result = new ArrayList<>(getAllFields(clazz.getSuperclass().getSimpleName()));
                     List<Field> filteredFields = Arrays.stream(clazz.getDeclaredFields())
                             .collect(Collectors.toList());
                     result.addAll(filteredFields);
@@ -50,42 +47,46 @@ public class CommonUtil {
                 fieldName = tmp.replaceAll("(^.)", firstChar.toUpperCase());
             }
 
-            String value = "";
-            do {
-                System.out.printf("Input %s: ", fieldName);
-                value = getScanner().nextLine();
-            } while (value.isEmpty());
-
-
-//            if (cls.equals(Villa.class) || cls.equals(House.class) || cls.equals(Room.class)) {
-//                do {
-//                    System.out.printf("Input %s: ", fieldName);
-//                    value = scanner.nextLine();
-//                } while (!Validation.ValidateService(fieldName, value));
-//            } else {
-//                do {
-//                    System.out.printf("Input %s: ", fieldName);
-//                    value = scanner.nextLine();
-//                } while (!Validation.ValidateCustomer(fieldName, value));
-//            }
+            String value = "0";
+            if(!"Id".equals(fieldName)){
+                do {
+                    System.out.printf("Input %s: ", fieldName);
+                    value = getScanner().nextLine();
+                } while (value.isEmpty());
+            }
 
             result.add(value);
         }
         return result;
     }
 
-    public static Object createInstance(String className, List<String> params){
-        try{
-            Class<?> c = Class.forName("model."+ className);
-            Constructor<?> ctor = c.getConstructors()[0];
-            Object object=ctor.newInstance(new Object[]{"ContstractorArgs"});
-//            c.getDeclaredMethods()[0].invoke(object,Object... MethodArgs);
+    public static Object createInstance(String className, List<String> params) {
+        try {
+            Class<?> c = Class.forName("model." + className);
+            Constructor<?> ctor = c.getConstructors()[1];
+            ctor.setAccessible(true);
+
+            Object[] tmp = new Object[params.size()];
+
+            List<Field> fields = getAllFields(className);
+            for (int i = 0; i < fields.size(); i++) {
+                Class<?> fieldType = fields.get(i).getType();
+                switch (fieldType.getCanonicalName()) {
+                    case "int":
+                        tmp[i] = Integer.valueOf(params.get(i));
+                        break;
+                    case "java.lang.Double":
+                        tmp[i] = Double.valueOf(params.get(i));
+                        break;
+                    default:
+                        tmp[i] = params.get(i);
+                }
+            }
+
+            return ctor.newInstance(tmp);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        catch(Exception e){
-
-        }
-
-
 
         return null;
     }
