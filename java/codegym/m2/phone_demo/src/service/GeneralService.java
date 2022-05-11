@@ -6,6 +6,9 @@ import util.CommonUtil;
 import util.ConstantUtil;
 import util.FileHelper;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,25 +41,33 @@ public class GeneralService {
     }
 
     public void delete(int id) throws NotFoundException {
-        if(!list.removeIf(e-> e.getId() == id)){
+        if (!list.removeIf(e -> e.getId() == id)) {
             throw new NotFoundException("ID " + id + " could not found");
         }
     }
 
     public List search(String name) {
-        return list.stream().filter(e-> e.getName().equals(name)).collect(Collectors.toList());
+        return list.stream().filter(e -> e.getName().equals(name)).collect(Collectors.toList());
     }
 
-    private List mapToObject(){
+    private List mapToObject() {
         List result = new ArrayList();
 
-        List<String> lines = fileHelper.read(ConstantUtil.PATH);
-        for (String line : lines){
-            String[] tmp = line.split(",");
+        try {
+            List<String> lines = fileHelper.read(ConstantUtil.PATH);
+            for (String line : lines) {
+                String[] tmp = line.split(",");
 
-            List<String> values = Arrays.stream(tmp).collect(Collectors.toList());
-            values.remove(0);
-            result.add(CommonUtil.createInstance(tmp[0], values));
+                List<String> values = Arrays.stream(tmp).collect(Collectors.toList());
+                values.remove(0);
+                result.add(CommonUtil.createInstance(tmp[0], values));
+            }
+        } catch (Exception e) {
+            try {
+                Files.deleteIfExists(Paths.get(ConstantUtil.PATH));
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
         }
 
         return result;
