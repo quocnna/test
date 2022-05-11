@@ -13,16 +13,9 @@ public class ProductRepository {
     private final String CREATE = "insert into product (`name`, `price`, `quantity`, `color`, `description`, `category_id`) values(?,?,?,?,?,?)";
     private final String UPDATE = "update product set `name`= ?, `price`= ? , `quantity`= ?, `color`= ?, `description`= ?, `category_id`=? where id=?";
 
-    private Connection getConnection() {
-        try {
+    private Connection getConnection() throws ClassNotFoundException, SQLException {
             Class.forName("com.mysql.jdbc.Driver");
-            return DriverManager.getConnection("jdbc:mysql://localhost:3306/m3_product", "root", "12345");
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-
-        return null;
+            return DriverManager.getConnection("jdbc:mysql://localhost:3306/m3_product", "root", "40forever");
     }
 
     public int save(Product product) {
@@ -39,7 +32,7 @@ public class ProductRepository {
 
             return statement.executeUpdate();
         }
-        catch (SQLException e) {
+        catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -52,15 +45,7 @@ public class ProductRepository {
         try(  PreparedStatement statement = getConnection().prepareStatement(SELECT_ALL)) {
             ResultSet rs = statement.executeQuery();
             while(rs.next()) {
-                int id = rs.getInt(1);
-                String name = rs.getString(2);
-                Double price = rs.getDouble(3);
-                int quantity = rs.getInt(4);
-                String color = rs.getString(5);
-                String description = rs.getString(6);
-                int categoryId= rs.getInt(7);
-                String categoryName = rs.getString(9);
-                result.add(new Product(id, name, price, quantity, color, description, categoryId, categoryName));
+                result.add(getProduct(rs));
             }
         }
         catch (Exception e){
@@ -75,14 +60,7 @@ public class ProductRepository {
             statement.setInt(1, id);
             ResultSet rs = statement.executeQuery();
             while (rs.next()){
-                String name = rs.getString(2);
-                Double price = rs.getDouble(3);
-                int quantity = rs.getInt(4);
-                String color = rs.getString(5);
-                String description = rs.getString(6);
-                int categoryId= rs.getInt(7);
-                String categoryName = rs.getString(9);
-                return new Product(id, name, price, quantity, color, description, categoryId, categoryName);
+                return getProduct(rs);
             }
         }
         catch (Exception e) {
@@ -97,7 +75,7 @@ public class ProductRepository {
             statement.setInt(1, id);
             return statement.executeUpdate();
         }
-        catch (SQLException e) {
+        catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -106,5 +84,17 @@ public class ProductRepository {
 
     public List searchByName(String name) {
         return null;
+    }
+
+    private Product getProduct(ResultSet rs) throws SQLException {
+        int id = rs.getInt(1);
+        String name = rs.getString(2);
+        Double price = rs.getDouble(3);
+        int quantity = rs.getInt(4);
+        String color = rs.getString(5);
+        String description = rs.getString(6);
+        int categoryId= rs.getInt(7);
+        String categoryName = rs.getString(9);
+        return new Product(id, name, price, quantity, color, description, categoryId, categoryName);
     }
 }

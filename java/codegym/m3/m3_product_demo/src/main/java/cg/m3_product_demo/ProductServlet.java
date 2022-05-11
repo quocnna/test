@@ -2,6 +2,7 @@ package cg.m3_product_demo;
 
 import cg.m3_product_demo.model.Product;
 import cg.m3_product_demo.service.ProductService;
+import cg.m3_product_demo.util.CommonUtil;
 
 import java.io.*;
 import javax.servlet.ServletException;
@@ -24,7 +25,7 @@ public class ProductServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-        int id = Integer.parseInt(req.getParameter("id"));
+        int id = CommonUtil.toInt(req.getParameter("id"));
         String name = req.getParameter("name");
         if(name != null){
             Double price = Double.parseDouble(req.getParameter("price"));
