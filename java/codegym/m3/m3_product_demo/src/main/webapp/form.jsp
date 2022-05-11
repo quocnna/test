@@ -7,7 +7,7 @@
 <body>
 <h2>Product Form</h2>
 <form method="post" action="/">
-<input type="hidden" name="id" value="0">
+<input type="hidden" name="id" value="${product.id}">
 <div>
   <label>Name: </label>
   <input name="name" value="${product.name}">
