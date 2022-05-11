@@ -1,5 +1,6 @@
 package service;
 
+import exception.NotFoundException;
 import model.AuthenticProduct;
 import model.HandProduct;
 import model.Product;
@@ -37,14 +38,12 @@ public class ProductService {
         return products;
     }
 
-    public void delete(int id){
-        for (int i = 0; i < products.size(); i++) {
-            if(products.get(i).getId() == id){
-                products.remove(i);
-                fileHelper.write(ConstantUtil.PRODUCT_PATH, products, false);
-                return;
-            }
+    public void delete(int id) throws NotFoundException{
+        if(!products.removeIf(e-> e.getId() == id)){
+            throw new NotFoundException("ID " + id + " cound not found. ");
         }
+
+        fileHelper.write(ConstantUtil.PRODUCT_PATH, products, false);
     }
 
     public List searchByName(String name){

@@ -1,7 +1,9 @@
+import exception.NotFoundException;
 import model.AuthenticProduct;
 import model.HandProduct;
 import model.Product;
 import service.ProductService;
+import validation.Validation;
 
 import java.util.List;
 import java.util.Scanner;
@@ -72,9 +74,21 @@ public class ProductView {
     private static void delete() {
         display();
         System.out.print("Enter id to delete:");
-        int id = Integer.parseInt(scanner.nextLine());
-        productService.delete(id);
-        System.out.println("Deleted successfully");
+
+        boolean isExist;
+        do{
+            try{
+                int id = Integer.parseInt(scanner.nextLine());
+                productService.delete(id);
+                System.out.println("Deleted successfully");
+                isExist = false;
+            }
+            catch(NotFoundException e){
+                System.out.print(e.getMessage() + "Please input again:");
+                isExist = true;
+            }
+        }while(isExist);
+
     }
 
     private static void create() {
@@ -83,25 +97,28 @@ public class ProductView {
         System.out.println("2. Hand");
         int choose = yourChoice();
 
-        System.out.print("Name:");
-        String name = scanner.nextLine();
-        System.out.print("Price:");
-        double price = Double.parseDouble(scanner.nextLine());
-        System.out.print("Manufacturer:");
-        String manufacturer = scanner.nextLine();
+        String name = inputWithoutEmpty("name");
+
+        String price = "";
+        do{
+            System.out.print(price.isEmpty() ? "Input price:" : "Price have to greater than 50. Input again: ");
+            price = scanner.nextLine();
+        }while (!Validation.validPrice(price));
+
+        String manufacturer = inputWithoutEmpty("manufacturer");
 
         Product product;
         if (choose == 1) {
             System.out.print("Grantee by year:");
             int granteeByYear = Integer.parseInt(scanner.nextLine());
-            product = new AuthenticProduct(0, name, price, manufacturer, granteeByYear);
+            product = new AuthenticProduct(0, name, Double.parseDouble(price), manufacturer, granteeByYear);
 
         } else {
             System.out.print("Country:");
             String country = scanner.nextLine();
             System.out.print("Status:");
             String status = scanner.nextLine();
-            product = new HandProduct(0, name, price, manufacturer, country, status);
+            product = new HandProduct(0, name, Double.parseDouble(price), manufacturer, country, status);
 
         }
 
@@ -112,5 +129,16 @@ public class ProductView {
     private static int yourChoice() {
         System.out.print("Enter your choice:");
         return Integer.parseInt(scanner.nextLine());
+    }
+
+    private static String inputWithoutEmpty(String fieldName){
+        String result = "0";
+        do{
+            System.out.print(result.isEmpty() ? fieldName.toUpperCase() + " cannot empty. Input again:" : "Input " + fieldName + ":");
+            result = scanner.nextLine();
+        }
+        while (result.isEmpty());
+
+        return result;
     }
 }
