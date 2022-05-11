@@ -3,17 +3,19 @@ package model;
 public class BaseEntity {
     private int id;
     private String name;
-    private Double price;
-    private String manufacturer;
+    private String phone;
+    private Double balance;
+    private String branch;
 
     public BaseEntity() {
     }
 
-    public BaseEntity(int id, String name, Double price, String manufacturer) {
+    public BaseEntity(int id, String name, String phone, Double balance, String branch) {
         this.id = id;
         this.name = name;
-        this.price = price;
-        this.manufacturer = manufacturer;
+        this.phone = phone;
+        this.balance = balance;
+        this.branch = branch;
     }
 
     public int getId() {
@@ -32,24 +34,32 @@ public class BaseEntity {
         this.name = name;
     }
 
-    public Double getPrice() {
-        return price;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPrice(Double price) {
-        this.price = price;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getManufacturer() {
-        return manufacturer;
+    public Double getBalance() {
+        return balance;
     }
 
-    public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
+
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
     }
 
     @Override
     public String toString() {
-        return String.format("%s,%s,%s,%s", id, name, price, manufacturer);
+        return String.format("%s,%s,%s,%s,%s", id, name, phone, balance, branch);
     }
 }
