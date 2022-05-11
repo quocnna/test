@@ -1,12 +1,10 @@
 package util;
 
-import model.Product;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileHelper {
+public class FileHelper<T> {
     public List<String> read(String path){
         List result = new ArrayList<>();
 
@@ -32,10 +30,10 @@ public class FileHelper {
         return result;
     }
 
-    public void write(String path, List<Product> products, boolean isAppend){
+    public void write(String path, List<T> list, boolean isAppend){
         try(BufferedWriter bufferedWriter= new BufferedWriter(new FileWriter(path, isAppend))) {
-            for (Product p : products) {
-                bufferedWriter.write(p.toString());
+            for (T t : list) {
+                bufferedWriter.write(t.toString());
                 bufferedWriter.newLine();
             }
         }
