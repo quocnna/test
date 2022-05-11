@@ -2,12 +2,15 @@ package util;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class CommonUtil {
+    private static Set<Map<String, String>> validations = getValidation();
+
     public static Scanner getScanner() {
         return new Scanner(System.in);
     }
@@ -48,11 +51,21 @@ public class CommonUtil {
             }
 
             String value = "0";
-            if(!"Id".equals(fieldName)){
-                do {
-                    System.out.printf("Input %s: ", fieldName);
-                    value = getScanner().nextLine();
-                } while (value.isEmpty());
+            if (!"Id".equals(fieldName)) {
+                value = inputWithoutEmpty(value, fieldName);
+
+                if (!validations.isEmpty()) {
+                    for (Map<String, String> v : validations) {
+                        if (v.containsKey(fieldName.toLowerCase())) {
+                            String regex = v.get(fieldName.toLowerCase());
+                            while (!value.matches(regex)) {
+                                System.out.print(fieldName + " is invalid format " + regex + ". Please input again:");
+                                value = getScanner().nextLine();
+                            }
+                            break;
+                        }
+                    }
+                }
             }
 
             result.add(value);
@@ -89,5 +102,34 @@ public class CommonUtil {
         }
 
         return null;
+    }
+
+    private static Set<Map<String, String>> getValidation() {
+        Set<Map<String, String>> result = new HashSet<Map<String, String>>();
+        Class<ConstantUtil.VALIDATION> valid = ConstantUtil.VALIDATION.class;
+
+        for (Field f : valid.getDeclaredFields()) {
+            int mod = f.getModifiers();
+            if (Modifier.isStatic(mod) && Modifier.isPublic(mod) && Modifier.isFinal(mod)) {
+                try {
+                    Map<String, String> map = new HashMap<String, String>();
+                    map.put(f.getName(), f.get(null).toString());
+                    result.add(map);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return result;
+    }
+
+    private static String inputWithoutEmpty(String value, String fieldName) {
+        do {
+            System.out.print(value.isEmpty() ? fieldName + " cannot be empty. Please input again:" : "Input " + fieldName + " :");
+            value = getScanner().nextLine();
+        } while (value.isEmpty());
+
+        return value;
     }
 }

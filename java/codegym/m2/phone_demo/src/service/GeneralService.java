@@ -1,5 +1,6 @@
 package service;
 
+import exception.NotFoundException;
 import model.BaseEntity;
 import util.CommonUtil;
 import util.ConstantUtil;
@@ -36,9 +37,9 @@ public class GeneralService {
         return list;
     }
 
-    public void delete(int id) {
+    public void delete(int id) throws NotFoundException {
         if(!list.removeIf(e-> e.getId() == id)){
-            System.out.println("a");
+            throw new NotFoundException("ID " + id + " could not found");
         }
     }
 

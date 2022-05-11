@@ -1,5 +1,6 @@
 package view;
 
+import exception.NotFoundException;
 import model.BaseEntity;
 import service.GeneralService;
 import util.CommonUtil;
@@ -41,7 +42,11 @@ public class HomeView {
     }
 
     private static void create(){
-        int choose =  getChoiceChild("create");
+        System.out.println("Choose items to create:" );
+        for (int i = 0; i < ConstantUtil.CHILD_ENTITY.length; i++){
+            System.out.printf("%s. %s\n", i+1, ConstantUtil.CHILD_ENTITY[i]);
+        }
+        int choose =  getChoice();
 
         for (int i = 0; i < ConstantUtil.CHILD_ENTITY.length; i++){
             if(choose == i+ 1){
@@ -52,42 +57,35 @@ public class HomeView {
     }
 
     private static void display(){
-//        int choose =  getChoiceChild("display");
-        List<BaseEntity> list = generalService.findAll();
-        for (int i = 0; i < list.size(); i++){
-            System.out.println(list.get(i));
-        }
-//        for (int i = 0; i < ConstantUtil.CHILD_ENTITY.length; i++){
-//            if(choose == i+ 1){
-//                Object o = CommonUtil.createInstance(ConstantUtil.CHILD_ENTITY[i] , CommonUtil.inputFields(ConstantUtil.CHILD_ENTITY[i]));
-//                generalService.create((BaseEntity) o);
-//            }
-//        }
+         generalService.findAll().forEach(System.out::println);
     }
 
     private static void delete(){
         display();
-        System.out.print("Enter id to delete:");
-        int id = Integer.parseInt(CommonUtil.getScanner().nextLine());
-        generalService.delete(id);
-        System.out.println("Deleted successfully");
+        boolean isExists;
+        System.out.print("Enter ID to delete:");
+        do{
+            try {
+                int id = Integer.parseInt(CommonUtil.getScanner().nextLine());
+                generalService.delete(id);
+                System.out.println("Deleted successfully");
+                isExists = false;
+            }
+            catch (NotFoundException e){
+                System.out.print(e.getMessage() + " Please input ID again:");
+                isExists = true;
+            }
+        }while(isExists);
     }
 
     private static void search(){
-
+        System.out.print("Input name to delete:");
+        String name = CommonUtil.getScanner().nextLine();
+        generalService.search(name).forEach(System.out::println);
     }
 
     private static int getChoice() {
         System.out.print("Enter your choice:");
         return Integer.parseInt(CommonUtil.getScanner().nextLine());
-    }
-
-    private static int getChoiceChild(String action){
-        System.out.println("Choose items to :" + action);
-        for (int i = 0; i < ConstantUtil.CHILD_ENTITY.length; i++){
-            System.out.printf("%s. %s\n", i+1, ConstantUtil.CHILD_ENTITY[i]);
-        }
-
-        return getChoice();
     }
 }
