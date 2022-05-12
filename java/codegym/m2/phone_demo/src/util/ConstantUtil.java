@@ -2,7 +2,7 @@ package util;
 
 public interface ConstantUtil {
     String PATH = "src/data/data.csv";
-    String[] CHILD_ENTITY = { "CreditAccount", "SavingAccount"};
+    String[] CHILD = { "CreditAccount", "SavingAccount"};
 
     interface VALIDATION{
 //        String name = "[ABC]\\w*";

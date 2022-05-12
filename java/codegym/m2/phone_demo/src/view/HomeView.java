@@ -6,8 +6,6 @@ import service.GeneralService;
 import util.CommonUtil;
 import util.ConstantUtil;
 
-import java.util.List;
-
 public class HomeView {
     private static GeneralService generalService = new GeneralService();
 
@@ -43,14 +41,14 @@ public class HomeView {
 
     private static void create(){
         System.out.println("Choose items to create:" );
-        for (int i = 0; i < ConstantUtil.CHILD_ENTITY.length; i++){
-            System.out.printf("%s. %s\n", i+1, ConstantUtil.CHILD_ENTITY[i]);
+        for (int i = 0; i < ConstantUtil.CHILD.length; i++){
+            System.out.printf("%s. %s\n", i+1, ConstantUtil.CHILD[i]);
         }
         int choose =  getChoice();
 
-        for (int i = 0; i < ConstantUtil.CHILD_ENTITY.length; i++){
+        for (int i = 0; i < ConstantUtil.CHILD.length; i++){
             if(choose == i+ 1){
-               Object o = CommonUtil.createInstance(ConstantUtil.CHILD_ENTITY[i] , CommonUtil.inputFields(ConstantUtil.CHILD_ENTITY[i]));
+               Object o = CommonUtil.createInstance(ConstantUtil.CHILD[i] , CommonUtil.inputFields(ConstantUtil.CHILD[i]));
                generalService.create((BaseEntity) o);
             }
         }
