@@ -17,6 +17,8 @@ import java.util.stream.Collectors;
 public class GeneralService {
     private List<BaseEntity> list;
     private FileHelper fileHelper = new FileHelper();
+    public static final String TEXT_RED = "\u001B[31m";
+    public static final String ANSI_RESET = "\u001B[0m";
 
     public GeneralService() {
         list = mapToObject();
@@ -63,11 +65,7 @@ public class GeneralService {
                 result.add(CommonUtil.createInstance(tmp[0], values));
             }
         } catch (Exception e) {
-            try {
-                Files.deleteIfExists(Paths.get(ConstantUtil.PATH));
-            } catch (IOException ioException) {
-                ioException.printStackTrace();
-            }
+            System.out.println(TEXT_RED + "Cannot map to object. Please delete file data..." + ANSI_RESET);
         }
 
         return result;
