@@ -5,6 +5,8 @@ import cg.m3_product_demo.service.ProductService;
 import cg.m3_product_demo.util.CommonUtil;
 
 import java.io.*;
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
@@ -13,12 +15,15 @@ public class ProductServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
         String id = req.getParameter("id");
+        String q = req.getParameter("q");
+
         if(id != null){
             req.setAttribute("product", productService.findById(Integer.parseInt(id)));
             req.getRequestDispatcher("form.jsp").forward(req, res);
         }
         else{
-            req.setAttribute("result", productService.findAll());
+            List<Product> products= productService.findAll();
+            req.setAttribute("result", q!= null ? products.stream().filter(e -> e.getName().contains(q)).collect(Collectors.toList()) : products);
             req.getRequestDispatcher ("list.jsp").forward(req, res);
         }
     }

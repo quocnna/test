@@ -43,14 +43,6 @@
             <artifactId>jquery</artifactId>
             <version>3.6.0</version>
         </dependency>
-<!--
-        use sping boot
--->
-<!--        <dependency>-->
-<!--            <groupId>org.webjars</groupId>-->
-<!--            <artifactId>webjars-locator-core</artifactId>-->
-<!--            <version>0.50</version>-->
-<!--        </dependency>-->
 
     </dependencies>
 

@@ -12,7 +12,7 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public List findAll() {
+    public List<Product> findAll() {
         return productRepository.findAll();
     }
 
