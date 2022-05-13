@@ -6,14 +6,14 @@
     <link rel="stylesheet" href="assets/style.css">
     <link rel="stylesheet" href="webjars/bootstrap/5.1.3/css/bootstrap.min.css">
     <script src="webjars/bootstrap/5.1.3/js/bootstrap.min.js"></script>
-<%--    <script src="webjars/jquery/3.6.0/dist/jquery.min.js"></script>--%>
 </head>
 <body>
 <div class="row">
-        <h2 class="col-10 pt-2 ps-2">Product List</h2>
+        <h2 class="col-8 pt-2 ps-2">Product List</h2>
 
-    <div class="col-2 pt-4">
-        Search <input name="search"/>
+    <div class="col-4 pt-2">
+        <a class="btn btn-primary float-end" id="btSearch" onclick="searchName(document.getElementById('ipSearch').value)">Search</a>
+        <input class="form-control-sm float-end" id="ipSearch"/>
     </div>
 </div>
 <div class="row float-end mt-2">
@@ -76,6 +76,10 @@
             keyboard: false
         })
         deleteModal.show();
+    }
+
+    function searchName(name){
+        document.getElementById('btSearch').href = '?q='+ name;
     }
 </script>
 
