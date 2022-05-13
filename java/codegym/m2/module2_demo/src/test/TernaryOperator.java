@@ -1,5 +1,6 @@
 package test;
 
+// switch = if, else if;  ternary = all (nested if)
 public class TernaryOperator {
     public static void main(String[] args) {
         int diem = 12;
@@ -22,7 +23,7 @@ public class TernaryOperator {
         System.out.println(kq);
 
         int year = 2022;
-        String ms = year % 4 ==0 ?
+        String ms = year % 4 == 0 ?
                 year % 100 == 0 ?
                         year % 400 == 0 ? "nhuan" : "ko phai nhuan"
                         : "nhuan"
