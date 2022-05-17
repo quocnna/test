@@ -1,4 +1,4 @@
-package test.other;
+package test;
 
 public class QueueUsingArrayMain {
     private int capacity;

@@ -1,4 +1,4 @@
-package other;
+package test;
 
 // cannot mark static class for top level
 public class StaticForClass {
