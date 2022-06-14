@@ -4,3 +4,6 @@
 [submodule "java/codegym/m2/product_demo_m2"]
 	path = java/codegym/m2/product_demo_m2
 	url = https://github.com/quocnna/product_demo_m2.git
+[submodule "java/codegym/m4/product_demo_m4"]
+	path = java/codegym/m4/product_demo_m4
+	url = https://github.com/quocnna/product_demo_m4.git
