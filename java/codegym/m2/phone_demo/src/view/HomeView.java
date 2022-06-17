@@ -79,7 +79,7 @@ public class HomeView {
     }
 
     private static void search(){
-        System.out.print("Input name to delete:");
+        System.out.print("Input name to search:");
         String name = CommonUtil.getScanner().nextLine();
         generalService.search(name).forEach(System.out::println);
     }
