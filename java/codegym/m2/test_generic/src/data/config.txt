@@ -1,0 +1,8 @@
+Product(parent):id-int,name-String,price-double,color-String
+ProductAuthentic:status-String,country-String
+ProductHand:abc-String
+search:name
+sort:name-asc
+validate:name-[ABC]\w*,price-number
+menu:create,display,delete,search
+path:src/data/product.txt
