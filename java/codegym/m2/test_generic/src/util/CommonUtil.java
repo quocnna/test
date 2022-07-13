@@ -235,16 +235,6 @@ public class CommonUtil {
     }
 
     private static String generateToString(RunTimeClass runTimeClass) {
-//        String head = "@Override\n public String toString() { return \"" + runTimeClass.getEntityName() + "{\" +\n";
-//        String body = "";
-//        for (Map.Entry<String, String> entry : runTimeClass.getFields().entrySet()) {
-//            String key = entry.getKey();
-//            body += "\", " + key + "=\"" + String.format(" + %s +\n", key);
-//        }
-//        String res = head + body.replaceFirst(", ", "") + "'}';}";
-//
-//        return res;
-
         String head = "@Override\n public String toString() { return \"" + runTimeClass.getEntityName() + ",\"";
         String body = "";
         for (Map.Entry<String, String> entry : runTimeClass.getFields().entrySet()) {
