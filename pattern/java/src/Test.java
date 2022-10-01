@@ -11,6 +11,7 @@ public class Test {
         List<Product> productSearchPrice= productService.search(new ProductSearch() {
             @Override
             public List<Product> search() {
+                System.out.println("a");
                 return productService.getAll().stream().filter(e-> e.getPrice()> 500).collect(Collectors.toList());
             }
         });

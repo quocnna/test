@@ -18,6 +18,7 @@ public class ProductService {
 
 
     public List<Product> search(ProductSearch productSearch){
+        System.out.println("b");
         return productSearch.search();
     }
 
