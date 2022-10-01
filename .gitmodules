@@ -1,6 +1,0 @@
-[submodule "java/codegym/m3/product_demo"]
-	path = java/codegym/m3/product_demo
-	url = https://github.com/quocnna/product_demo_m3.git
-[submodule "java/codegym/m2/product_demo_m2"]
-	path = java/codegym/m2/product_demo_m2
-	url = https://github.com/quocnna/product_demo_m2.git
