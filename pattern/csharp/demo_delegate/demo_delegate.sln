@@ -1,0 +1,17 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "demo_delegate", "demo_delegate\demo_delegate.csproj", "{BB29CA36-DC2C-4A6F-8FCD-FF9783ECEFA4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BB29CA36-DC2C-4A6F-8FCD-FF9783ECEFA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB29CA36-DC2C-4A6F-8FCD-FF9783ECEFA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB29CA36-DC2C-4A6F-8FCD-FF9783ECEFA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB29CA36-DC2C-4A6F-8FCD-FF9783ECEFA4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
