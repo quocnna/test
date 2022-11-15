@@ -1,0 +1,27 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:AutoTest.UserControls" x:Class="AutoTest.UserControls.TestCaseDetailUI" 
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="400">
+    <Grid>
+        <Grid.Resources>
+            <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
+        </Grid.Resources>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0" >
+                <Label Content="Allow user call as a function"/>
+                <CheckBox x:Name="chkIsAllowCall" VerticalAlignment="Center" />
+            </StackPanel>
+            <Label Grid.Row="1" Content="Test Case Parameters"></Label>
+            <local:VariablesUI x:Name="ucVariable" Grid.Row="2" />
+        </Grid>
+    </Grid>
+</UserControl>

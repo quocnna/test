@@ -1,0 +1,851 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NeogovTest>
+  <Mark Start="" End="" />
+  <TestCase Id="ceab1c6e-8621-49b0-9210-73feeb179601" Title="Init App" IsFunction="false" Status="3" LogRowIndex="0">
+    <Steps>
+      <TestStep Id="dbadcfc8-b04a-4865-9e63-c6089923aa20" Title="lauch application" Status="3" LogRowIndex="2">
+        <BeforeRunning>me.StepData["Browser"] = me.Data["AppInfo.Browser"];</BeforeRunning>
+        <AfterRunning></AfterRunning>
+        <Action Type="AutoTest.WebAction.WebAction">
+          <Name>WebUI Action</Name>
+          <States>
+            <State Key="Event" Value="LaunchApp" />
+            <State Key="Browser" Value="Firefox" />
+            <State Key="Url" Value="{AppInfo.MainUrl}" />
+          </States>
+        </Action>
+      </TestStep>
+      <TestStep Id="1f48d222-513a-4d43-a9d2-c8599a7b7625" Title="open login" Status="3" LogRowIndex="17">
+        <BeforeRunning></BeforeRunning>
+        <AfterRunning></AfterRunning>
+        <Action Type="AutoTest.UserControls.CallTestAction">
+          <TestCaseId>7ae16f60-e168-4686-97e9-a1fbef560caf</TestCaseId>
+          <States>
+            <Variable Name="LoginUrl" Value="{AppInfo.LoginUrl}" IsPublic="true" Description="" />
+            <Variable Name="Username" Value="{LoginInfo.Username}" IsPublic="true" Description="" />
+            <Variable Name="Password" Value="{LoginInfo.Password}" IsPublic="true" Description="" />
+          </States>
+        </Action>
+      </TestStep>
+    </Steps>
+  </TestCase>
+  <TestCase Id="34ef5655-8247-48e6-a7c2-ef9183264c76" Title="Danh Muc" IsFunction="false" Status="4" LogRowIndex="96">
+    <Children>
+      <TestCase Id="78d52216-79a8-4ccc-bd5d-fb3bdad56ae3" Title="Loai Dich Vu TTS" IsFunction="false" Status="4" LogRowIndex="98">
+        <Steps>
+          <TestStep Id="94a8a503-aee3-4dc2-b697-3717c5cfd71a" Title="Create Loai Dich vuTTS" Status="4" LogRowIndex="256">
+            <BeforeRunning>if (me.Data["DanhMuc.LoaiDichVuTTS.Name"].IsEmpty())
+    me.ExitCurrentTestCase();</BeforeRunning>
+            <AfterRunning>if (me.Data.MoveNext("DanhMuc.LoaiDichVuTTS"))
+          me.Jump(0);</AfterRunning>
+            <Action Type="AutoTest.UserControls.CallTestAction">
+              <TestCaseId>d65a1db9-10c5-415f-bc2b-03fe7650c167</TestCaseId>
+              <States>
+                <Variable Name="tenloaidichvu" Value="{DanhMuc.LoaiDichVuTTS.Name}" IsPublic="true" Description="" />
+                <Variable Name="apikey" Value="{DanhMuc.LoaiDichVuTTS.Apikey}" IsPublic="true" Description="" />
+                <Variable Name="sokytutoida" Value="{DanhMuc.LoaiDichVuTTS.Sokytutoida}" IsPublic="true" Description="" />
+              </States>
+            </Action>
+          </TestStep>
+        </Steps>
+      </TestCase>
+    </Children>
+  </TestCase>
+  <TestCase Id="dd04ef50-8b23-4233-9cae-c6f4c038fcdd" Title="He Thong" IsFunction="false" Status="0" LogRowIndex="412" />
+  <TestCase Id="ccd5577d-2447-4073-a7f8-27860278d856" Title="Functions" IsFunction="false" Status="2" LogRowIndex="0">
+    <Children>
+      <TestCase Id="7ae16f60-e168-4686-97e9-a1fbef560caf" Title="Login" IsFunction="true" Status="3" LogRowIndex="28">
+        <TestCaseParams>
+          <Variable Name="LoginUrl" Value="" IsPublic="true" Description="" />
+          <Variable Name="Username" Value="" IsPublic="true" Description="" />
+          <Variable Name="Password" Value="" IsPublic="true" Description="" />
+        </TestCaseParams>
+        <Steps>
+          <TestStep Id="0a9578cd-d47b-4c63-8d47-d26a8fb9903f" Title="navigate to login page" Status="3" LogRowIndex="30">
+            <BeforeRunning></BeforeRunning>
+            <AfterRunning></AfterRunning>
+            <Action Type="AutoTest.WebAction.WebAction">
+              <Name>WebUI Action</Name>
+              <States>
+                <State Key="Event" Value="Navigate" />
+                <State Key="Url" Value="{LoginUrl}" />
+              </States>
+            </Action>
+          </TestStep>
+          <TestStep Id="ef75577e-fa14-40b3-ab62-107459230be3" Title="enter username" Status="3" LogRowIndex="41">
+            <BeforeRunning></BeforeRunning>
+            <AfterRunning></AfterRunning>
+            <Action Type="AutoTest.WebAction.WebAction">
+              <Name>WebUI Action</Name>
+              <States>
+                <State Key="Event" Value="SetText" />
+                <State Key="FindBy" Value="XPath" />
+                <State Key="ObjectIdentify" Value="/html/body/div[2]/div[2]/form/div[1]/input" />
+                <State Key="Condition" Value="" />
+                <State Key="Value" Value="{Username}" />
+              </States>
+            </Action>
+          </TestStep>
+          <TestStep Id="24b9a7fd-e0e3-4dcf-838e-f4b76d264fff" Title="enter password" Status="3" LogRowIndex="57">
+            <BeforeRunning></BeforeRunning>
+            <AfterRunning></AfterRunning>
+            <Action Type="AutoTest.WebAction.WebAction">
+              <Name>WebUI Action</Name>
+              <States>
+                <State Key="Event" Value="TypeText" />
+                <State Key="FindBy" Value="XPath" />
+                <State Key="ObjectIdentify" Value="/html/body/div[2]/div[2]/form/div[2]/input" />
+                <State Key="Condition" Value="" />
+                <State Key="Value" Value="{Password}" />
+              </States>
+            </Action>
+          </TestStep>
+          <TestStep Id="8f8d01e8-1d6c-44bd-89f0-c72e7a910f60" Title="click login" Status="3" LogRowIndex="73">
+            <BeforeRunning></BeforeRunning>
+            <AfterRunning></AfterRunning>
+            <Action Type="AutoTest.WebAction.WebAction">
+              <Name>WebUI Action</Name>
+              <States>
+                <State Key="Event" Value="Click" />
+                <State Key="FindBy" Value="XPath" />
+                <State Key="ObjectIdentify" Value="/html/body/div[2]/div[2]/form/div[3]/div[2]/button" />
+                <State Key="Condition" Value="" />
+                <State Key="X" Value="" />
+                <State Key="Y" Value="" />
+              </States>
+            </Action>
+          </TestStep>
+        </Steps>
+      </TestCase>
+    </Children>
+  </TestCase>
+  <TestCase Id="01072051-9cdc-438a-92fa-44301c6bd920" Title="Danh Muc" IsFunction="false" Status="4" LogRowIndex="415">
+    <Children>
+      <TestCase Id="d65a1db9-10c5-415f-bc2b-03fe7650c167" Title="Create Loai Dich Vu TTS" IsFunction="true" Status="4" LogRowIndex="417">
+        <TestCaseParams>
+          <Variable Name="tenloaidichvu" Value="" IsPublic="true" Description="" />
+          <Variable Name="apikey" Value="" IsPublic="true" Description="" />
+          <Variable Name="sokytutoida" Value="" IsPublic="true" Description="" />
+        </TestCaseParams>
+        <Steps>
+          <TestStep Id="7535db7e-4595-4b62-8143-b0fea8e9795b" Title="navigate to homepage" Status="3" LogRowIndex="419">
+            <BeforeRunning></BeforeRunning>
+            <AfterRunning></AfterRunning>
+            <Action Type="AutoTest.WebAction.WebAction">
+              <Name>WebUI Action</Name>
+              <States>
+                <State Key="Event" Value="Navigate" />
+                <State Key="Url" Value="http://demo.unioffice.vn/" />
+              </States>
+            </Action>
+          </TestStep>
+          <TestStep Id="a87f268f-32a2-4441-a320-e26116410b5e" Title="navigage to Danh Muc" Status="3" LogRowIndex="429">
+            <BeforeRunning></BeforeRunning>
+            <AfterRunning></AfterRunning>
+            <Action Type="AutoTest.WebAction.WebAction">
+              <Name>WebUI Action</Name>
+              <States>
+                <State Key="Event" Value="Click" />
+                <State Key="FindBy" Value="XPath" />
+                <State Key="ObjectIdentify" Value="//*[@id=&quot;cssmenu&quot;]/ul/li[3]/a" />
+                <State Key="Condition" Value="" />
+                <State Key="X" Value="" />
+                <State Key="Y" Value="" />
+              </States>
+            </Action>
+          </TestStep>
+          <TestStep Id="4dccdcc7-f52e-444d-84d2-e4e8267cfaf6" Title="click to Loai Dich Vu TTS" Status="3" LogRowIndex="445">
+            <BeforeRunning></BeforeRunning>
+            <AfterRunning></AfterRunning>
+            <Action Type="AutoTest.WebAction.WebAction">
+              <Name>WebUI Action</Name>
+              <States>
+                <State Key="Event" Value="Click" />
+                <State Key="FindBy" Value="XPath" />
+                <State Key="ObjectIdentify" Value="//*[@id=&quot;cssmenu&quot;]/ul/li[3]/ul/li[1]/a" />
+                <State Key="Condition" Value="" />
+                <State Key="X" Value="" />
+                <State Key="Y" Value="" />
+              </States>
+            </Action>
+          </TestStep>
+          <TestStep Id="da3b9cfb-9da9-4d7f-b63a-af6258080b7f" Title="click button them moi" Status="3" LogRowIndex="461">
+            <BeforeRunning></BeforeRunning>
+            <AfterRunning></AfterRunning>
+            <Action Type="AutoTest.WebAction.WebAction">
+              <Name>WebUI Action</Name>
+              <States>
+                <State Key="Event" Value="Click" />
+                <State Key="FindBy" Value="XPath" />
+                <State Key="ObjectIdentify" Value="//*[@id=&quot;cn_themmoi&quot;]" />
+                <State Key="Condition" Value="" />
+                <State Key="X" Value="" />
+                <State Key="Y" Value="" />
+              </States>
+            </Action>
+          </TestStep>
+          <TestStep Id="60419f4e-8977-49a3-855a-890524cb2003" Title="input ten loai dich vu" Status="3" LogRowIndex="477">
+            <BeforeRunning></BeforeRunning>
+            <AfterRunning></AfterRunning>
+            <Action Type="AutoTest.WebAction.WebAction">
+              <Name>WebUI Action</Name>
+              <States>
+                <State Key="Event" Value="SetText" />
+                <State Key="FindBy" Value="XPath" />
+                <State Key="ObjectIdentify" Value="//*[@id=&quot;themDichVuForm&quot;]/div[2]/div/input" />
+                <State Key="Condition" Value="" />
+                <State Key="Value" Value="{tenloaidichvu}" />
+              </States>
+            </Action>
+          </TestStep>
+          <TestStep Id="7517b7c6-86c7-4845-927a-8aba7d0fd57a" Title="input api key" Status="3" LogRowIndex="493">
+            <BeforeRunning></BeforeRunning>
+            <AfterRunning></AfterRunning>
+            <Action Type="AutoTest.WebAction.WebAction">
+              <Name>WebUI Action</Name>
+              <States>
+                <State Key="Event" Value="SetText" />
+                <State Key="FindBy" Value="XPath" />
+                <State Key="ObjectIdentify" Value="//*[@id=&quot;themDichVuForm&quot;]/div[5]/div/input" />
+                <State Key="Condition" Value="" />
+                <State Key="Value" Value="{apikey}" />
+              </States>
+            </Action>
+          </TestStep>
+          <TestStep Id="2974fe3c-1d9d-40fb-94c8-3d7742ec74f9" Title="input sokytutoida" Status="3" LogRowIndex="509">
+            <BeforeRunning></BeforeRunning>
+            <AfterRunning></AfterRunning>
+            <Action Type="AutoTest.WebAction.WebAction">
+              <Name>WebUI Action</Name>
+              <States>
+                <State Key="Event" Value="SetText" />
+                <State Key="FindBy" Value="XPath" />
+                <State Key="ObjectIdentify" Value="//*[@id=&quot;sokytutoida&quot;]" />
+                <State Key="Condition" Value="" />
+                <State Key="Value" Value="{sokytutoida}" />
+              </States>
+            </Action>
+          </TestStep>
+          <TestStep Id="d4569798-160a-4e3b-bde3-e63510815646" Title="click button them moi" Status="3" LogRowIndex="525">
+            <BeforeRunning></BeforeRunning>
+            <AfterRunning>me.Sleep(2000);</AfterRunning>
+            <Action Type="AutoTest.WebAction.WebAction">
+              <Name>WebUI Action</Name>
+              <States>
+                <State Key="Event" Value="Click" />
+                <State Key="FindBy" Value="XPath" />
+                <State Key="ObjectIdentify" Value="//*[@id=&quot;myModal&quot;]/div/div/div[1]/ul/li[1]/a" />
+                <State Key="Condition" Value="" />
+                <State Key="X" Value="" />
+                <State Key="Y" Value="" />
+              </States>
+            </Action>
+          </TestStep>
+          <TestStep Id="f6ea5768-37c9-4105-b1bb-a17165b9fa90" Title="New action..." Status="4" LogRowIndex="541">
+            <BeforeRunning></BeforeRunning>
+            <AfterRunning></AfterRunning>
+            <Action Type="AutoTest.WebAction.WebAction">
+              <Name>WebUI Action</Name>
+              <States>
+                <State Key="Event" Value="JavaScript" />
+                <State Key="FindBy" Value="Id" />
+                <State Key="ObjectIdentify" Value="" />
+                <State Key="Condition" Value="" />
+                <State Key="ScriptContent" Value="location.reload();" />
+              </States>
+            </Action>
+          </TestStep>
+        </Steps>
+      </TestCase>
+    </Children>
+  </TestCase>
+  <Global Title="AppInfo">
+    <Variables>
+      <Variable Name="Browser" Value="Chrome" />
+      <Variable Name="MainUrl" Value="http://demo.unioffice.vn" />
+      <Variable Name="LoginUrl" Value="{AppInfo.MainUrl}/login" />
+    </Variables>
+  </Global>
+  <Global Title="LoginInfo">
+    <Variables>
+      <Variable Name="Username" Value="admin" />
+      <Variable Name="Password" Value="Unitech@123" />
+    </Variables>
+  </Global>
+  <Global Title="DanhMuc">
+    <Children>
+      <Global Title="LoaiDichVuTTS">
+        <TableData>
+          <Cols>
+            <Col Header="Name" />
+            <Col Header="Apikey" />
+            <Col Header="Sokytutoida" />
+          </Cols>
+          <Rows>
+            <Row _0="test vietel9" _1="v1" _2="10000" />
+            <Row _0="test fpt9" _1="f1" _2="5000" />
+          </Rows>
+        </TableData>
+      </Global>
+    </Children>
+  </Global>
+  <Global Title="HeThong">
+    <Children>
+      <Global Title="NguoiDung" />
+      <Global Title="DonVi" />
+    </Children>
+  </Global>
+  <Log><![CDATA[
+0:03 AM: _________________________________________________________
+0:03 AM: BEGIN TESTCASE Init App
+
+0:03 AM: BEGIN STEP lauch application
+0:03 AM: [Before Running...]
+0:03 AM: AppInfo.Browser=Chrome
+0:03 AM: [Execute Action...]
+0:03 AM: Action: LaunchApp
+0:03 AM: Executing: LaunchApp...
+0:03 AM: Browser=Chrome
+0:03 AM: Browser = Chrome
+0:03 AM: AppInfo.MainUrl=http://demo.unioffice.vn
+0:03 AM: Url=http://demo.unioffice.vn
+0:03 AM: Url = Chrome
+0:03 AM: Executed
+0:03 AM: [After Running...]
+0:03 AM: END STEP lauch application
+
+0:03 AM: BEGIN STEP open login
+0:03 AM: [Before Running...]
+0:03 AM: [Execute Action...]
+0:03 AM: AppInfo.MainUrl=http://demo.unioffice.vn
+0:03 AM: AppInfo.LoginUrl=http://demo.unioffice.vn/login
+0:03 AM: LoginUrl=http://demo.unioffice.vn/login
+0:03 AM: LoginInfo.Username=admin
+0:03 AM: Username=admin
+0:03 AM: LoginInfo.Password=Unitech@123
+0:03 AM: Password=Unitech@123
+0:03 AM:   _________________________________________________________
+0:03 AM:   BEGIN TESTCASE Login
+
+0:03 AM:   BEGIN STEP navigate to login page
+0:03 AM:   [Before Running...]
+0:03 AM:   [Execute Action...]
+0:03 AM:   Action: Navigate
+0:03 AM:   Executing: Navigate...
+0:03 AM:   LoginUrl=http://demo.unioffice.vn/login
+0:03 AM:   Url=http://demo.unioffice.vn/login
+0:03 AM:   Executed
+0:03 AM:   [After Running...]
+0:03 AM:   END STEP navigate to login page
+
+0:03 AM:   BEGIN STEP enter username
+0:03 AM:   [Before Running...]
+0:03 AM:   [Execute Action...]
+0:03 AM:   Action: SetText
+0:03 AM:   Executing: SetText...
+0:03 AM:   FindBy=XPath
+0:03 AM:   Condition=
+0:03 AM:   ObjectIdentify=/html/body/div[2]/div[2]/form/div[1]/input
+0:03 AM:   Displayed: True
+0:03 AM:   Find OK
+0:03 AM:   Username=admin
+0:03 AM:   Value=admin
+0:03 AM:   Executed
+0:03 AM:   [After Running...]
+0:03 AM:   END STEP enter username
+
+0:03 AM:   BEGIN STEP enter password
+0:03 AM:   [Before Running...]
+0:03 AM:   [Execute Action...]
+0:03 AM:   Action: TypeText
+0:03 AM:   Executing: TypeText...
+0:03 AM:   FindBy=XPath
+0:03 AM:   Condition=
+0:03 AM:   ObjectIdentify=/html/body/div[2]/div[2]/form/div[2]/input
+0:03 AM:   Displayed: True
+0:03 AM:   Find OK
+0:03 AM:   Password=Unitech@123
+0:03 AM:   Value=Unitech@123
+0:03 AM:   Executed
+0:03 AM:   [After Running...]
+0:03 AM:   END STEP enter password
+
+0:03 AM:   BEGIN STEP click login
+0:03 AM:   [Before Running...]
+0:03 AM:   [Execute Action...]
+0:03 AM:   Action: Click
+0:03 AM:   Executing: Click...
+0:03 AM:   FindBy=XPath
+0:03 AM:   Condition=
+0:03 AM:   ObjectIdentify=/html/body/div[2]/div[2]/form/div[3]/div[2]/button
+0:03 AM:   Displayed: True
+0:03 AM:   Find OK
+0:03 AM:   X=
+0:03 AM:   Y=
+0:03 AM:   Executed
+0:03 AM:   [After Running...]
+0:03 AM:   END STEP click login
+0:03 AM:   END TESTCASE Login
+0:03 AM:   LoginUrl=http://demo.unioffice.vn/login
+0:03 AM:   Username=admin
+0:03 AM:   Password=Unitech@123
+0:03 AM: [After Running...]
+0:03 AM: END STEP open login
+0:03 AM: END TESTCASE Init App
+0:03 AM: _________________________________________________________
+0:03 AM: BEGIN TESTCASE Danh Muc
+0:03 AM: _________________________________________________________
+0:03 AM: BEGIN TESTCASE Loai Dich Vu TTS
+
+0:03 AM: BEGIN STEP Create Loai Dich vuTTS
+0:03 AM: [Before Running...]
+0:03 AM: DanhMuc.LoaiDichVuTTS.Name=test vietel9
+0:03 AM: [Execute Action...]
+0:03 AM: DanhMuc.LoaiDichVuTTS.Name=test vietel9
+0:03 AM: tenloaidichvu=test vietel9
+0:03 AM: DanhMuc.LoaiDichVuTTS.Apikey=v1
+0:03 AM: apikey=v1
+0:03 AM: DanhMuc.LoaiDichVuTTS.Sokytutoida=10000
+0:03 AM: sokytutoida=10000
+0:03 AM:   _________________________________________________________
+0:03 AM:   BEGIN TESTCASE Create Loai Dich Vu TTS
+
+0:03 AM:   BEGIN STEP navigate to homepage
+0:03 AM:   [Before Running...]
+0:03 AM:   [Execute Action...]
+0:03 AM:   Action: Navigate
+0:03 AM:   Executing: Navigate...
+0:03 AM:   Url=http://demo.unioffice.vn/
+0:03 AM:   Executed
+0:03 AM:   [After Running...]
+0:03 AM:   END STEP navigate to homepage
+
+0:03 AM:   BEGIN STEP navigage to Danh Muc
+0:03 AM:   [Before Running...]
+0:03 AM:   [Execute Action...]
+0:03 AM:   Action: Click
+0:03 AM:   Executing: Click...
+0:03 AM:   FindBy=XPath
+0:03 AM:   Condition=
+0:03 AM:   ObjectIdentify=//*[@id="cssmenu"]/ul/li[3]/a
+0:03 AM:   Displayed: True
+0:03 AM:   Find OK
+0:03 AM:   X=
+0:03 AM:   Y=
+0:03 AM:   Executed
+0:03 AM:   [After Running...]
+0:03 AM:   END STEP navigage to Danh Muc
+
+0:03 AM:   BEGIN STEP click to Loai Dich Vu TTS
+0:03 AM:   [Before Running...]
+0:03 AM:   [Execute Action...]
+0:03 AM:   Action: Click
+0:03 AM:   Executing: Click...
+0:03 AM:   FindBy=XPath
+0:03 AM:   Condition=
+0:03 AM:   ObjectIdentify=//*[@id="cssmenu"]/ul/li[3]/ul/li[1]/a
+0:03 AM:   Displayed: True
+0:03 AM:   Find OK
+0:03 AM:   X=
+0:03 AM:   Y=
+0:03 AM:   Executed
+0:03 AM:   [After Running...]
+0:03 AM:   END STEP click to Loai Dich Vu TTS
+
+0:03 AM:   BEGIN STEP click button them moi
+0:03 AM:   [Before Running...]
+0:03 AM:   [Execute Action...]
+0:03 AM:   Action: Click
+0:03 AM:   Executing: Click...
+0:03 AM:   FindBy=XPath
+0:03 AM:   Condition=
+0:03 AM:   ObjectIdentify=//*[@id="cn_themmoi"]
+0:03 AM:   Displayed: True
+0:03 AM:   Find OK
+0:03 AM:   X=
+0:03 AM:   Y=
+0:03 AM:   Executed
+0:03 AM:   [After Running...]
+0:03 AM:   END STEP click button them moi
+
+0:03 AM:   BEGIN STEP input ten loai dich vu
+0:03 AM:   [Before Running...]
+0:03 AM:   [Execute Action...]
+0:03 AM:   Action: SetText
+0:03 AM:   Executing: SetText...
+0:03 AM:   FindBy=XPath
+0:03 AM:   Condition=
+0:03 AM:   ObjectIdentify=//*[@id="themDichVuForm"]/div[2]/div/input
+0:03 AM:   Displayed: False
+0:03 AM:   Displayed: True
+0:03 AM:   Find OK
+0:03 AM:   tenloaidichvu=test vietel9
+0:03 AM:   Value=test vietel9
+0:03 AM:   Executed
+0:03 AM:   [After Running...]
+0:03 AM:   END STEP input ten loai dich vu
+
+0:03 AM:   BEGIN STEP input api key
+0:03 AM:   [Before Running...]
+0:03 AM:   [Execute Action...]
+0:03 AM:   Action: SetText
+0:03 AM:   Executing: SetText...
+0:03 AM:   FindBy=XPath
+0:03 AM:   Condition=
+0:03 AM:   ObjectIdentify=//*[@id="themDichVuForm"]/div[5]/div/input
+0:03 AM:   Displayed: True
+0:03 AM:   Find OK
+0:03 AM:   apikey=v1
+0:03 AM:   Value=v1
+0:03 AM:   Executed
+0:03 AM:   [After Running...]
+0:03 AM:   END STEP input api key
+
+0:03 AM:   BEGIN STEP input sokytutoida
+0:03 AM:   [Before Running...]
+0:03 AM:   [Execute Action...]
+0:03 AM:   Action: SetText
+0:03 AM:   Executing: SetText...
+0:03 AM:   FindBy=XPath
+0:03 AM:   Condition=
+0:03 AM:   ObjectIdentify=//*[@id="sokytutoida"]
+0:03 AM:   Displayed: True
+0:03 AM:   Find OK
+0:03 AM:   sokytutoida=10000
+0:03 AM:   Value=10000
+0:03 AM:   Executed
+0:03 AM:   [After Running...]
+0:03 AM:   END STEP input sokytutoida
+
+0:03 AM:   BEGIN STEP click button them moi
+0:03 AM:   [Before Running...]
+0:03 AM:   [Execute Action...]
+0:03 AM:   Action: Click
+0:03 AM:   Executing: Click...
+0:03 AM:   FindBy=XPath
+0:03 AM:   Condition=
+0:03 AM:   ObjectIdentify=//*[@id="myModal"]/div/div/div[1]/ul/li[1]/a
+0:03 AM:   Displayed: True
+0:03 AM:   Find OK
+0:03 AM:   X=
+0:03 AM:   Y=
+0:03 AM:   Executed
+0:03 AM:   [After Running...]
+0:03 AM:   END STEP click button them moi
+
+0:03 AM:   BEGIN STEP New action...
+0:03 AM:   [Before Running...]
+0:03 AM:   [Execute Action...]
+0:03 AM:   Action: JavaScript
+0:03 AM:   Executing: JavaScript...
+0:03 AM:   FindBy=Id
+0:03 AM:   Condition=
+0:03 AM:   ObjectIdentify=
+0:03 AM:   Fail: unexpected alert open: {Alert text : Thêm mới loại dịch vụ TTS thành công}
+  (Session info: chrome=88.0.4324.146)
+0:03 AM:   END STEP New action...
+0:03 AM:   END TESTCASE Create Loai Dich Vu TTS
+0:03 AM:   tenloaidichvu=test vietel9
+0:03 AM:   apikey=v1
+0:03 AM:   sokytutoida=10000
+0:03 AM: [After Running...]
+0:03 AM: DanhMuc.LoaiDichVuTTS=AutoTest.Data.TableData
+0:03 AM: END STEP Create Loai Dich vuTTS
+0:03 AM: Jump (0): 
+
+0:03 AM: BEGIN STEP Create Loai Dich vuTTS
+0:03 AM: [Before Running...]
+0:03 AM: DanhMuc.LoaiDichVuTTS.Name=test fpt9
+0:03 AM: [Execute Action...]
+0:03 AM: DanhMuc.LoaiDichVuTTS.Name=test fpt9
+0:03 AM: tenloaidichvu=test fpt9
+0:03 AM: DanhMuc.LoaiDichVuTTS.Apikey=f1
+0:03 AM: apikey=f1
+0:03 AM: DanhMuc.LoaiDichVuTTS.Sokytutoida=5000
+0:03 AM: sokytutoida=5000
+0:03 AM:   _________________________________________________________
+0:03 AM:   BEGIN TESTCASE Create Loai Dich Vu TTS
+
+0:03 AM:   BEGIN STEP navigate to homepage
+0:03 AM:   [Before Running...]
+0:03 AM:   [Execute Action...]
+0:03 AM:   Action: Navigate
+0:03 AM:   Executing: Navigate...
+0:03 AM:   Url=http://demo.unioffice.vn/
+0:03 AM:   Executed
+0:03 AM:   [After Running...]
+0:03 AM:   END STEP navigate to homepage
+
+0:03 AM:   BEGIN STEP navigage to Danh Muc
+0:03 AM:   [Before Running...]
+0:03 AM:   [Execute Action...]
+0:03 AM:   Action: Click
+0:03 AM:   Executing: Click...
+0:03 AM:   FindBy=XPath
+0:03 AM:   Condition=
+0:03 AM:   ObjectIdentify=//*[@id="cssmenu"]/ul/li[3]/a
+0:03 AM:   Displayed: True
+0:03 AM:   Find OK
+0:03 AM:   X=
+0:03 AM:   Y=
+0:03 AM:   Executed
+0:03 AM:   [After Running...]
+0:03 AM:   END STEP navigage to Danh Muc
+
+0:03 AM:   BEGIN STEP click to Loai Dich Vu TTS
+0:03 AM:   [Before Running...]
+0:03 AM:   [Execute Action...]
+0:03 AM:   Action: Click
+0:03 AM:   Executing: Click...
+0:03 AM:   FindBy=XPath
+0:03 AM:   Condition=
+0:03 AM:   ObjectIdentify=//*[@id="cssmenu"]/ul/li[3]/ul/li[1]/a
+0:03 AM:   Displayed: True
+0:03 AM:   Find OK
+0:03 AM:   X=
+0:03 AM:   Y=
+0:03 AM:   Executed
+0:03 AM:   [After Running...]
+0:03 AM:   END STEP click to Loai Dich Vu TTS
+
+0:03 AM:   BEGIN STEP click button them moi
+0:03 AM:   [Before Running...]
+0:03 AM:   [Execute Action...]
+0:03 AM:   Action: Click
+0:03 AM:   Executing: Click...
+0:03 AM:   FindBy=XPath
+0:03 AM:   Condition=
+0:03 AM:   ObjectIdentify=//*[@id="cn_themmoi"]
+0:03 AM:   Displayed: True
+0:03 AM:   Find OK
+0:03 AM:   X=
+0:03 AM:   Y=
+0:03 AM:   Executed
+0:03 AM:   [After Running...]
+0:03 AM:   END STEP click button them moi
+
+0:03 AM:   BEGIN STEP input ten loai dich vu
+0:03 AM:   [Before Running...]
+0:03 AM:   [Execute Action...]
+0:03 AM:   Action: SetText
+0:03 AM:   Executing: SetText...
+0:03 AM:   FindBy=XPath
+0:03 AM:   Condition=
+0:03 AM:   ObjectIdentify=//*[@id="themDichVuForm"]/div[2]/div/input
+0:03 AM:   Displayed: True
+0:03 AM:   Find OK
+0:03 AM:   tenloaidichvu=test fpt9
+0:03 AM:   Value=test fpt9
+0:03 AM:   Executed
+0:03 AM:   [After Running...]
+0:03 AM:   END STEP input ten loai dich vu
+
+0:03 AM:   BEGIN STEP input api key
+0:03 AM:   [Before Running...]
+0:03 AM:   [Execute Action...]
+0:03 AM:   Action: SetText
+0:03 AM:   Executing: SetText...
+0:03 AM:   FindBy=XPath
+0:03 AM:   Condition=
+0:03 AM:   ObjectIdentify=//*[@id="themDichVuForm"]/div[5]/div/input
+0:03 AM:   Displayed: True
+0:03 AM:   Find OK
+0:03 AM:   apikey=f1
+0:03 AM:   Value=f1
+0:03 AM:   Executed
+0:03 AM:   [After Running...]
+0:03 AM:   END STEP input api key
+
+0:03 AM:   BEGIN STEP input sokytutoida
+0:03 AM:   [Before Running...]
+0:03 AM:   [Execute Action...]
+0:03 AM:   Action: SetText
+0:03 AM:   Executing: SetText...
+0:03 AM:   FindBy=XPath
+0:03 AM:   Condition=
+0:03 AM:   ObjectIdentify=//*[@id="sokytutoida"]
+0:03 AM:   Displayed: True
+0:03 AM:   Find OK
+0:03 AM:   sokytutoida=5000
+0:03 AM:   Value=5000
+0:03 AM:   Executed
+0:03 AM:   [After Running...]
+0:03 AM:   END STEP input sokytutoida
+
+0:03 AM:   BEGIN STEP click button them moi
+0:03 AM:   [Before Running...]
+0:03 AM:   [Execute Action...]
+0:03 AM:   Action: Click
+0:03 AM:   Executing: Click...
+0:03 AM:   FindBy=XPath
+0:03 AM:   Condition=
+0:03 AM:   ObjectIdentify=//*[@id="myModal"]/div/div/div[1]/ul/li[1]/a
+0:03 AM:   Displayed: True
+0:03 AM:   Find OK
+0:03 AM:   X=
+0:03 AM:   Y=
+0:03 AM:   Executed
+0:03 AM:   [After Running...]
+0:03 AM:   END STEP click button them moi
+
+0:03 AM:   BEGIN STEP New action...
+0:03 AM:   [Before Running...]
+0:03 AM:   [Execute Action...]
+0:03 AM:   Action: JavaScript
+0:03 AM:   Executing: JavaScript...
+0:03 AM:   FindBy=Id
+0:03 AM:   Condition=
+0:03 AM:   ObjectIdentify=
+0:03 AM:   Fail: unexpected alert open: {Alert text : Thêm mới loại dịch vụ TTS thành công}
+  (Session info: chrome=88.0.4324.146)
+0:03 AM:   END STEP New action...
+0:03 AM:   END TESTCASE Create Loai Dich Vu TTS
+0:03 AM:   tenloaidichvu=test fpt9
+0:03 AM:   apikey=f1
+0:03 AM:   sokytutoida=5000
+0:03 AM: [After Running...]
+0:03 AM: DanhMuc.LoaiDichVuTTS=AutoTest.Data.TableData
+0:03 AM: END STEP Create Loai Dich vuTTS
+0:03 AM: END TESTCASE Loai Dich Vu TTS
+0:03 AM: END TESTCASE Danh Muc
+0:03 AM: _________________________________________________________
+0:03 AM: BEGIN TESTCASE He Thong
+0:03 AM: END TESTCASE He Thong
+0:03 AM: _________________________________________________________
+0:03 AM: BEGIN TESTCASE Danh Muc
+0:03 AM: _________________________________________________________
+0:03 AM: BEGIN TESTCASE Create Loai Dich Vu TTS
+
+0:03 AM: BEGIN STEP navigate to homepage
+0:03 AM: [Before Running...]
+0:03 AM: [Execute Action...]
+0:03 AM: Action: Navigate
+0:03 AM: Executing: Navigate...
+0:03 AM: Url=http://demo.unioffice.vn/
+0:03 AM: Executed
+0:03 AM: [After Running...]
+0:03 AM: END STEP navigate to homepage
+
+0:03 AM: BEGIN STEP navigage to Danh Muc
+0:03 AM: [Before Running...]
+0:03 AM: [Execute Action...]
+0:03 AM: Action: Click
+0:03 AM: Executing: Click...
+0:03 AM: FindBy=XPath
+0:03 AM: Condition=
+0:03 AM: ObjectIdentify=//*[@id="cssmenu"]/ul/li[3]/a
+0:03 AM: Displayed: True
+0:03 AM: Find OK
+0:03 AM: X=
+0:03 AM: Y=
+0:03 AM: Executed
+0:03 AM: [After Running...]
+0:03 AM: END STEP navigage to Danh Muc
+
+0:03 AM: BEGIN STEP click to Loai Dich Vu TTS
+0:03 AM: [Before Running...]
+0:03 AM: [Execute Action...]
+0:03 AM: Action: Click
+0:03 AM: Executing: Click...
+0:03 AM: FindBy=XPath
+0:03 AM: Condition=
+0:03 AM: ObjectIdentify=//*[@id="cssmenu"]/ul/li[3]/ul/li[1]/a
+0:03 AM: Displayed: True
+0:03 AM: Find OK
+0:03 AM: X=
+0:03 AM: Y=
+0:03 AM: Executed
+0:03 AM: [After Running...]
+0:03 AM: END STEP click to Loai Dich Vu TTS
+
+0:03 AM: BEGIN STEP click button them moi
+0:03 AM: [Before Running...]
+0:03 AM: [Execute Action...]
+0:03 AM: Action: Click
+0:03 AM: Executing: Click...
+0:03 AM: FindBy=XPath
+0:03 AM: Condition=
+0:03 AM: ObjectIdentify=//*[@id="cn_themmoi"]
+0:03 AM: Displayed: True
+0:03 AM: Find OK
+0:03 AM: X=
+0:03 AM: Y=
+0:03 AM: Executed
+0:03 AM: [After Running...]
+0:03 AM: END STEP click button them moi
+
+0:03 AM: BEGIN STEP input ten loai dich vu
+0:03 AM: [Before Running...]
+0:03 AM: [Execute Action...]
+0:03 AM: Action: SetText
+0:03 AM: Executing: SetText...
+0:03 AM: FindBy=XPath
+0:03 AM: Condition=
+0:03 AM: ObjectIdentify=//*[@id="themDichVuForm"]/div[2]/div/input
+0:03 AM: Displayed: True
+0:03 AM: Find OK
+0:03 AM: tenloaidichvu=
+0:03 AM: Value=
+0:03 AM: Executed
+0:03 AM: [After Running...]
+0:03 AM: END STEP input ten loai dich vu
+
+0:03 AM: BEGIN STEP input api key
+0:03 AM: [Before Running...]
+0:03 AM: [Execute Action...]
+0:03 AM: Action: SetText
+0:03 AM: Executing: SetText...
+0:03 AM: FindBy=XPath
+0:03 AM: Condition=
+0:03 AM: ObjectIdentify=//*[@id="themDichVuForm"]/div[5]/div/input
+0:03 AM: Displayed: True
+0:03 AM: Find OK
+0:03 AM: apikey=
+0:03 AM: Value=
+0:03 AM: Executed
+0:03 AM: [After Running...]
+0:03 AM: END STEP input api key
+
+0:03 AM: BEGIN STEP input sokytutoida
+0:03 AM: [Before Running...]
+0:03 AM: [Execute Action...]
+0:03 AM: Action: SetText
+0:03 AM: Executing: SetText...
+0:03 AM: FindBy=XPath
+0:03 AM: Condition=
+0:03 AM: ObjectIdentify=//*[@id="sokytutoida"]
+0:03 AM: Displayed: True
+0:03 AM: Find OK
+0:03 AM: sokytutoida=
+0:03 AM: Value=
+0:03 AM: Executed
+0:03 AM: [After Running...]
+0:03 AM: END STEP input sokytutoida
+
+0:03 AM: BEGIN STEP click button them moi
+0:03 AM: [Before Running...]
+0:03 AM: [Execute Action...]
+0:03 AM: Action: Click
+0:03 AM: Executing: Click...
+0:03 AM: FindBy=XPath
+0:03 AM: Condition=
+0:03 AM: ObjectIdentify=//*[@id="myModal"]/div/div/div[1]/ul/li[1]/a
+0:03 AM: Displayed: True
+0:03 AM: Find OK
+0:03 AM: X=
+0:03 AM: Y=
+0:03 AM: Executed
+0:03 AM: [After Running...]
+0:03 AM: END STEP click button them moi
+
+0:03 AM: BEGIN STEP New action...
+0:03 AM: [Before Running...]
+0:03 AM: [Execute Action...]
+0:03 AM: Action: JavaScript
+0:03 AM: Executing: JavaScript...
+0:03 AM: FindBy=Id
+0:03 AM: Condition=
+0:03 AM: ObjectIdentify=
+0:03 AM: Fail: Thread was being aborted.
+0:03 AM: END STEP New action...]]></Log>
+</NeogovTest>

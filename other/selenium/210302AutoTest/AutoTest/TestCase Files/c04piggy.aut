@@ -1,0 +1,770 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NeogovTest>
+  <Mark Start="" End="" />
+  <TestCase Id="d2854df9-9f15-4407-bda4-0e5b145149cb" Title="Init Application" IsFunction="false" Status="0" LogRowIndex="0">
+    <Steps>
+      <TestStep Id="9b73f593-6b72-4d3e-a5f6-96f7c50d82da" Title="Launch Application" Status="0" LogRowIndex="2">
+        <BeforeRunning>me.StepData["Browser"] = me.Data["AppInfo.Broswer"];</BeforeRunning>
+        <AfterRunning></AfterRunning>
+        <Action Type="AutoTest.WebAction.WebAction">
+          <Name>WebUI Action</Name>
+          <States>
+            <State Key="Event" Value="LaunchApp" />
+            <State Key="Url" Value="{App.MainUrl}" />
+            <State Key="Browser" Value="Chrome" />
+          </States>
+        </Action>
+      </TestStep>
+      <TestStep Id="4786a258-dfa0-4c42-b158-d673ef3c1414" Title="Open login" Status="0" LogRowIndex="23">
+        <BeforeRunning></BeforeRunning>
+        <AfterRunning></AfterRunning>
+        <Action Type="AutoTest.UserControls.CallTestAction">
+          <TestCaseId>8a2d62de-ae82-4d52-a3f0-ae7a231a7251</TestCaseId>
+          <States>
+            <Variable Name="LoginUrl" Value="{App.LoginUrl}" IsPublic="true" Description="" />
+            <Variable Name="Username" Value="{Login.Username}" IsPublic="true" Description="" />
+            <Variable Name="Password" Value="{Login.Password}" IsPublic="true" Description="" />
+          </States>
+        </Action>
+      </TestStep>
+    </Steps>
+  </TestCase>
+  <TestCase Id="b4590666-64d0-48d4-82a0-14340c353bfb" Title="Treatment" IsFunction="false" Status="0" LogRowIndex="746">
+    <Steps>
+      <TestStep Id="7d84b097-083f-4f58-a1be-08237a558174" Title="Init Data (Start Loop for Objects)" Status="0" LogRowIndex="748">
+        <BeforeRunning>me.Data.MoveFirst("Treatment");</BeforeRunning>
+        <AfterRunning></AfterRunning>
+        <Action Type="AutoTest.DBAction.DBAction">
+          <Name>DB Command</Name>
+        </Action>
+      </TestStep>
+      <TestStep Id="fd86d03f-507c-431a-85bf-191b20c9bd55" Title="Open Design Fields Page (Loop Table Fields)" Status="0" LogRowIndex="2005">
+        <BeforeRunning></BeforeRunning>
+        <AfterRunning></AfterRunning>
+        <Action Type="AutoTest.UserControls.CallTestAction">
+          <TestCaseId>e4c097a5-5b30-4664-a43a-6422189805a5</TestCaseId>
+          <States>
+            <Variable Name="CustomObjectsUrl" Value="{AppInfo.CustomObjectsUrl}" IsPublic="false" Description="" />
+            <Variable Name="ObjectName" Value="{CODesign.Objects.Name}" IsPublic="false" Description="" />
+          </States>
+        </Action>
+      </TestStep>
+      <TestStep Id="6d255d90-1c83-4b92-8192-7538f571b9b6" Title="Design Fields" Status="0" LogRowIndex="4013">
+        <BeforeRunning></BeforeRunning>
+        <AfterRunning>if (me.Data.MoveNext("{CODesign.Objects.FieldPath}"))
+	me.Jump(0);</AfterRunning>
+        <Action Type="AutoTest.UserControls.CallTestAction">
+          <TestCaseId>bb4bce8b-da37-4fb3-af03-7539b9851ecf</TestCaseId>
+          <States>
+            <Variable Name="Label" Value="{{CODesign.Objects.FieldPath}.Label}" IsPublic="false" Description="" />
+            <Variable Name="Type" Value="{{CODesign.Objects.FieldPath}.Type}" IsPublic="false" Description="" />
+            <Variable Name="DefaultValue" Value="{{CODesign.Objects.FieldPath}.DefaultValue}" IsPublic="false" Description="" />
+            <Variable Name="Items" Value="{{CODesign.Objects.FieldPath}.Items}" IsPublic="false" Description="" />
+            <Variable Name="IsRequired" Value="{{CODesign.Objects.FieldPath}.IsRequired}" IsPublic="false" Description="" />
+            <Variable Name="IsUnique" Value="{{CODesign.Objects.FieldPath}.IsUnique}" IsPublic="false" Description="" />
+            <Variable Name="DisplayType" Value="{{CODesign.Objects.FieldPath}.DisplayType}" IsPublic="false" Description="" />
+            <Variable Name="DisplayField" Value="{{CODesign.Objects.FieldPath}.DisplayField}" IsPublic="false" Description="" />
+            <Variable Name="UniqueField" Value="{{CODesign.Objects.FieldPath}.UniqueField}" IsPublic="false" Description="" />
+            <Variable Name="ShowOnList" Value="{{CODesign.Objects.FieldPath}.ShowOnList}" IsPublic="false" Description="" />
+            <Variable Name="Row" Value="{{CODesign.Objects.FieldPath}.Row}" IsPublic="false" Description="Y" />
+            <Variable Name="Col" Value="{{CODesign.Objects.FieldPath}.Col}" IsPublic="false" Description="X: 1 or 2" />
+            <Variable Name="SelectObject" Value="{{CODesign.Objects.FieldPath}.SelectObject}" IsPublic="false" Description="" />
+          </States>
+        </Action>
+      </TestStep>
+      <TestStep Id="e531d322-a984-4c2c-8182-386645d6c47f" Title="Click Save" Status="0" LogRowIndex="4227">
+        <BeforeRunning></BeforeRunning>
+        <AfterRunning></AfterRunning>
+        <Action Type="AutoTest.WebAction.WebAction">
+          <Name>WebUI Action</Name>
+          <States>
+            <State Key="Event" Value="Click" />
+            <State Key="ObjectIdentify" Value="fromBuilder_Save" />
+            <State Key="FindBy" Value="Id" />
+            <State Key="UsingJavaScriptToInteract" Value="No" />
+            <State Key="X" Value="" />
+            <State Key="Y" Value="" />
+            <State Key="Condition" Value="" />
+          </States>
+        </Action>
+      </TestStep>
+      <TestStep Id="9141e355-3a5f-4746-bba1-d6287d0a8f65" Title="Wait for processing complete" Status="0" LogRowIndex="5283">
+        <BeforeRunning></BeforeRunning>
+        <AfterRunning>if((string)me.Result == "Custom Object Details")
+{
+ if (me.Data.MoveNext("CODesign.Objects"))
+  me.Jump(-3);
+ else
+  me.ExitCurrentStep();
+}
+else
+{
+ me.Sleep(200);
+ me.Jump(0);
+}</AfterRunning>
+        <Action Type="AutoTest.WebAction.WebAction">
+          <Name>WebUI Action</Name>
+          <States>
+            <State Key="Event" Value="GetPageTitle" />
+          </States>
+        </Action>
+      </TestStep>
+    </Steps>
+  </TestCase>
+  <TestCase Id="ac0236d9-613c-4f29-b00b-d238a49dcae2" Title="Notification" IsFunction="false" Status="0" LogRowIndex="6581">
+    <Steps>
+      <TestStep Id="c797e1f6-cc98-4a81-abef-1aff487ffcfd" Title="Init Data (Start Loop for Objects)" Status="0" LogRowIndex="6583">
+        <BeforeRunning>me.Data.MoveFirst("CODesign.Objects");</BeforeRunning>
+        <AfterRunning></AfterRunning>
+        <Action Type="AutoTest.DBAction.DBAction">
+          <Name>DB Command</Name>
+        </Action>
+      </TestStep>
+      <TestStep Id="3cc228ab-befb-43a2-af0d-86bb7adb324c" Title="Add an approval and Init Data of Approval" Status="0" LogRowIndex="7946">
+        <BeforeRunning>if (me.Data["CODesign.Objects.ApprovalPath"].IsEmpty())
+{	
+	if (me.Data.MoveNext("CODesign.Objects"))
+		me.Jump(0);
+	else
+		me.Jump(3);	
+}</BeforeRunning>
+        <AfterRunning></AfterRunning>
+        <Action Type="AutoTest.UserControls.CallTestAction">
+          <TestCaseId>f248b5b8-42ed-4f68-9f8d-f5cebb91d4c8</TestCaseId>
+          <States>
+            <Variable Name="CustomObjectsUrl" Value="{AppInfo.CustomObjectsUrl}" IsPublic="false" Description="" />
+            <Variable Name="ObjectName" Value="{CODesign.Objects.Name}" IsPublic="false" Description="" />
+            <Variable Name="ApprovalName" Value="{{CODesign.Objects.ApprovalPath}.Process.Name}" IsPublic="false" Description="" />
+          </States>
+        </Action>
+      </TestStep>
+      <TestStep Id="27dfcb0f-ae22-4489-a8b1-87bc3e2c1e63" Title="Wait for processing" Status="0" LogRowIndex="7406">
+        <BeforeRunning>me.Sleep(200);</BeforeRunning>
+        <AfterRunning></AfterRunning>
+        <Action Type="AutoTest.WebAction.WebAction">
+          <Name>WebUI Action</Name>
+          <States>
+            <State Key="Event" Value="GetElement" />
+            <State Key="FindBy" Value="Id" />
+            <State Key="ObjectIdentify" Value="COLoading" />
+            <State Key="Condition" Value="style=&quot;display: none&quot;" />
+            <State Key="TimeOut" Value="" />
+          </States>
+        </Action>
+      </TestStep>
+      <TestStep Id="88985cd1-9d28-49c9-a43a-2d925e9c5635" Title="Add steps" Status="0" LogRowIndex="7679">
+        <BeforeRunning>me.Log(me.Data["CODesign.Objects.Name"]);</BeforeRunning>
+        <AfterRunning>if (me.Data.MoveNext("{{CODesign.Objects.ApprovalPath}.Process.SetupPath}"))
+	me.Jump(0);
+else if (me.Data.MoveNext("{CODesign.Objects.ApprovalPath}.Process"))
+	me.Jump(-2);
+else if (me.Data.MoveNext("CODesign.Objects"))
+	me.Jump(-2);</AfterRunning>
+        <Action Type="AutoTest.UserControls.CallTestAction">
+          <TestCaseId>d3600071-ea92-4e0c-879d-7246981dce31</TestCaseId>
+          <States>
+            <Variable Name="ApprovalName" Value="{{CODesign.Objects.ApprovalPath}.Process.Name}" IsPublic="false" Description="" />
+            <Variable Name="Subject" Value="{{{CODesign.Objects.ApprovalPath}.Process.SetupPath}.Subject}" IsPublic="false" Description="" />
+            <Variable Name="Type" Value="{{{CODesign.Objects.ApprovalPath}.Process.SetupPath}.Type}" IsPublic="false" Description="" />
+            <Variable Name="OnDenyGoTo" Value="{{{CODesign.Objects.ApprovalPath}.Process.SetupPath}.OnDenyGoTo}" IsPublic="false" Description="" />
+            <Variable Name="OnApproveLockFor" Value="{{{CODesign.Objects.ApprovalPath}.Process.SetupPath}.OnApproveLockFor}" IsPublic="false" Description="" />
+            <Variable Name="ApproverType" Value="{{{CODesign.Objects.ApprovalPath}.Process.SetupPath}.ApproverType}" IsPublic="false" Description="" />
+            <Variable Name="ApproverName" Value="{{{CODesign.Objects.ApprovalPath}.Process.SetupPath}.ApproverName}" IsPublic="false" Description="" />
+            <Variable Name="DueDate" Value="{{{CODesign.Objects.ApprovalPath}.Process.SetupPath}.DueDate}" IsPublic="false" Description="" />
+          </States>
+        </Action>
+      </TestStep>
+    </Steps>
+  </TestCase>
+  <TestCase Id="8b67e68c-d50d-4be6-a911-5ab8d791b859" Title="Stock" IsFunction="false" Status="0" LogRowIndex="10243">
+    <Steps>
+      <TestStep Id="c428d440-bdab-4519-80e9-665bfa09e48c" Title="Init Data (Start Loop for Data Records)" Status="0" LogRowIndex="10245">
+        <BeforeRunning>me.Data.MoveFirst("CODesign.Objects");</BeforeRunning>
+        <AfterRunning></AfterRunning>
+        <Action Type="AutoTest.DBAction.DBAction">
+          <Name>DB Command</Name>
+        </Action>
+      </TestStep>
+      <TestStep Id="f89befd3-1fec-4a3f-8732-49957c6521b2" Title="Goto Add/Edit Page" Status="0" LogRowIndex="15703">
+        <BeforeRunning></BeforeRunning>
+        <AfterRunning></AfterRunning>
+        <Action Type="AutoTest.UserControls.CallTestAction">
+          <TestCaseId>d9aa2f50-5f01-404a-9952-d6f0e11be498</TestCaseId>
+          <States>
+            <Variable Name="CustomObjectsUrl" Value="{AppInfo.CustomObjectsUrl}" IsPublic="false" Description="" />
+            <Variable Name="ObjectName" Value="{CODesign.Objects.Name}" IsPublic="false" Description="" />
+          </States>
+        </Action>
+      </TestStep>
+      <TestStep Id="c4ba48b0-e66d-40e5-bc83-05a2b7cd347c" Title="Loop Each Data Rows" Status="0" LogRowIndex="16258">
+        <BeforeRunning>me.Data.MoveFirst("{CODesign.Objects.FieldPath}");</BeforeRunning>
+        <AfterRunning></AfterRunning>
+        <Action Type="AutoTest.DBAction.DBAction">
+          <Name>DB Command</Name>
+        </Action>
+      </TestStep>
+      <TestStep Id="baeafa09-91f3-43d1-816b-4e5c5fe09d3f" Title="Loop Each Field to fill Data" Status="0" LogRowIndex="16575">
+        <BeforeRunning>if (me.StepData["Value"].IsEmpty())
+	me.ExitToAfterRunning();</BeforeRunning>
+        <AfterRunning>if(me.Data.MoveNext("{CODesign.Objects.FieldPath}"))
+	me.Jump(0);</AfterRunning>
+        <Action Type="AutoTest.UserControls.CallTestAction">
+          <TestCaseId>a0bf9427-aa2f-486a-8600-fd54f7986e35</TestCaseId>
+          <States>
+            <Variable Name="Label" Value="{{CODesign.Objects.FieldPath}.Label}" IsPublic="false" Description="" />
+            <Variable Name="FieldType" Value="{{CODesign.Objects.FieldPath}.Type}" IsPublic="false" Description="" />
+            <Variable Name="Value" Value="{{CODesign.Objects.DataPath}.{{CODesign.Objects.FieldPath}.Label}}" IsPublic="false" Description="" />
+            <Variable Name="CustomObjectInternalName" Value="{CODesign.Objects.InternalName}" IsPublic="false" Description="" />
+            <Variable Name="CustomObjectName" Value="{CODesign.Objects.Name}" IsPublic="false" Description="" />
+            <Variable Name="Browser" Value="{AppInfo.Browser}" IsPublic="false" Description="" />
+          </States>
+        </Action>
+      </TestStep>
+      <TestStep Id="d418b2b4-5abd-450e-a49d-4b9833fa11e5" Title="Save Add New" Status="0" LogRowIndex="16641">
+        <BeforeRunning>if(!me.Data.MoveNext("{CODesign.Objects.DataPath}"))
+	me.Jump(2);</BeforeRunning>
+        <AfterRunning></AfterRunning>
+        <Action Type="AutoTest.WebAction.WebAction">
+          <Name>WebUI Action</Name>
+          <States>
+            <State Key="Event" Value="Click" />
+            <State Key="ObjectIdentify" Value="btnSaveAddNew" />
+            <State Key="FindBy" Value="Id" />
+            <State Key="UsingJavaScriptToInteract" Value="No" />
+            <State Key="X" Value="" />
+            <State Key="Y" Value="" />
+            <State Key="Condition" Value="" />
+          </States>
+        </Action>
+      </TestStep>
+      <TestStep Id="388fc89c-0faf-4fb4-b1fc-551e75a380eb" Title="Wait for processing" Status="0" LogRowIndex="16241">
+        <BeforeRunning>me.Sleep(200);</BeforeRunning>
+        <AfterRunning>me.Jump(-3);</AfterRunning>
+        <Action Type="AutoTest.WebAction.WebAction">
+          <Name>WebUI Action</Name>
+          <States>
+            <State Key="Event" Value="GetElement" />
+            <State Key="FindBy" Value="Id" />
+            <State Key="ObjectIdentify" Value="coLoading" />
+            <State Key="Condition" Value="style=&quot;display: none&quot;" />
+            <State Key="TimeOut" Value="" />
+          </States>
+        </Action>
+      </TestStep>
+      <TestStep Id="cb9f1033-58ac-48ee-8faf-4e5688cca46d" Title="Save" Status="0" LogRowIndex="16648">
+        <BeforeRunning></BeforeRunning>
+        <AfterRunning></AfterRunning>
+        <Action Type="AutoTest.WebAction.WebAction">
+          <Name>WebUI Action</Name>
+          <States>
+            <State Key="Event" Value="Click" />
+            <State Key="ObjectIdentify" Value="btnSave" />
+            <State Key="FindBy" Value="Id" />
+            <State Key="X" Value="" />
+            <State Key="Y" Value="" />
+            <State Key="Condition" Value="" />
+          </States>
+        </Action>
+      </TestStep>
+      <TestStep Id="dc26429b-3a9d-490b-90ec-ba643058f53f" Title="Wait for returning page" Status="0" LogRowIndex="16675">
+        <BeforeRunning></BeforeRunning>
+        <AfterRunning>if((string)me.Result != me.Data["CODesign.Objects.Name"] + " List")
+{
+	me.Sleep(200);
+	me.Jump(0);
+}
+else if(me.Data.MoveNext("CODesign.Objects"))
+	me.Jump(-6);</AfterRunning>
+        <Action Type="AutoTest.WebAction.WebAction">
+          <Name>WebUI Action</Name>
+          <States>
+            <State Key="Event" Value="GetPageTitle" />
+          </States>
+        </Action>
+      </TestStep>
+    </Steps>
+  </TestCase>
+  <TestCase Id="b020728e-751f-4720-99a4-b0a61f1d9908" Title="Vacxin" IsFunction="false" Status="0" LogRowIndex="16687">
+    <Steps>
+      <TestStep Id="02a00740-7639-4150-ad74-7b10ab63968a" Title="Init Data (Start Loop for Approvals)" Status="0" LogRowIndex="16689">
+        <BeforeRunning>me.Data.MoveFirst("CODesign.Objects");</BeforeRunning>
+        <AfterRunning></AfterRunning>
+        <Action Type="AutoTest.DBAction.DBAction">
+          <Name>DB Command</Name>
+        </Action>
+      </TestStep>
+      <TestStep Id="e8f0f022-79d7-49b2-ba9c-5d670e1c534f" Title="Approve" Status="0" LogRowIndex="17545">
+        <BeforeRunning>if (me.Data["CODesign.Objects.ApprovalPath"].IsEmpty())
+	me.ExitToAfterRunning();</BeforeRunning>
+        <AfterRunning>if (me.Data.MoveNext("{CODesign.Objects.WorkflowTriggerPath}.ApproveTasks"))
+	me.Jump(0);
+else if (me.Data.MoveNext("CODesign.Objects"))
+{
+	me.Data.MoveFirst("{CODesign.Objects.WorkflowTriggerPath}.ApproveTasks");
+	me.Jump(0);
+}</AfterRunning>
+        <Action Type="AutoTest.UserControls.CallTestAction">
+          <TestCaseId>a1b829e7-3407-4d40-a5c3-0038f6967537</TestCaseId>
+          <States>
+            <Variable Name="LoginUrl" Value="{AppInfo.LoginUrl}" IsPublic="false" Description="" />
+            <Variable Name="Username" Value="{{CODesign.Objects.WorkflowTriggerPath}.ApproveTasks.Username}" IsPublic="false" Description="" />
+            <Variable Name="Password" Value="{{CODesign.Objects.WorkflowTriggerPath}.ApproveTasks.Password}" IsPublic="false" Description="" />
+            <Variable Name="DataViewUrll" Value="{AppInfo.MainUrl}/Cloud/{CODesign.Objects.InternalName}" IsPublic="false" Description="" />
+            <Variable Name="SearchValue" Value="{{CODesign.Objects.WorkflowTriggerPath}.ApproveTasks.SearchValue}" IsPublic="false" Description="" />
+            <Variable Name="Status" Value="{{CODesign.Objects.WorkflowTriggerPath}.ApproveTasks.Status}" IsPublic="false" Description="" />
+            <Variable Name="Action" Value="{{CODesign.Objects.WorkflowTriggerPath}.ApproveTasks.Action}" IsPublic="false" Description="" />
+            <Variable Name="NewStatus" Value="{{CODesign.Objects.WorkflowTriggerPath}.ApproveTasks.NewStatus}" IsPublic="false" Description="" />
+            <Variable Name="StepName" Value="{{CODesign.Objects.WorkflowTriggerPath}.ApproveTasks.StepName}" IsPublic="false" Description="" />
+          </States>
+        </Action>
+      </TestStep>
+    </Steps>
+  </TestCase>
+  <TestCase Id="1e18ad55-eb2c-440a-9ff6-7ee99a6998f0" Title="Cote" IsFunction="false" Status="0" LogRowIndex="0" />
+  <TestCase Id="e421c83b-00e7-4f11-9c2c-ca142f635e29" Title="Clean Up" IsFunction="false" Status="0" LogRowIndex="18895">
+    <Children>
+      <TestCase Id="66efb2a7-c7c1-4cb3-bc1b-0e902575b7ef" Title="Login by admin account" IsFunction="false" Status="0" LogRowIndex="18897">
+        <Steps>
+          <TestStep Id="bd5ba721-ae75-4d3c-acd2-cba926fbf44d" Title="Logout" Status="0" LogRowIndex="18899">
+            <BeforeRunning></BeforeRunning>
+            <AfterRunning></AfterRunning>
+            <Action Type="AutoTest.WebAction.WebAction">
+              <Name>WebUI Action</Name>
+              <States>
+                <State Key="Event" Value="Navigate" />
+                <State Key="Url" Value="{AppInfo.LogoutUrl}" />
+              </States>
+            </Action>
+          </TestStep>
+          <TestStep Id="17bba314-5ebc-4d61-826b-653ebe38d212" Title="Login by admin" Status="0" LogRowIndex="18911">
+            <BeforeRunning></BeforeRunning>
+            <AfterRunning></AfterRunning>
+            <Action Type="AutoTest.UserControls.CallTestAction">
+              <TestCaseId>8a2d62de-ae82-4d52-a3f0-ae7a231a7251</TestCaseId>
+              <States>
+                <Variable Name="LoginUrl" Value="{AppInfo.LoginUrl}" IsPublic="false" Description="" />
+                <Variable Name="Username" Value="{LoginInfo.Username}" IsPublic="false" Description="" />
+                <Variable Name="Password" Value="{LoginInfo.Password}" IsPublic="false" Description="" />
+              </States>
+            </Action>
+          </TestStep>
+        </Steps>
+      </TestCase>
+      <TestCase Id="d437e260-fe0a-4d6a-8566-520a0d880973" Title="Remove Association Fields" IsFunction="false" Status="0" LogRowIndex="18990">
+        <Steps>
+          <TestStep Id="72a7269f-20a3-418c-961d-e3420d3d0ec7" Title="Init Data (Loop Objects)" Status="0" LogRowIndex="18992">
+            <BeforeRunning>me.Data.MoveFirst("CODesign.Objects");</BeforeRunning>
+            <AfterRunning></AfterRunning>
+            <Action Type="AutoTest.DBAction.DBAction">
+              <Name>DB Command</Name>
+            </Action>
+          </TestStep>
+          <TestStep Id="0b39408f-5a56-4d73-857c-ab55b44af664" Title="Open Object Detail Page" Status="0" LogRowIndex="19307">
+            <BeforeRunning></BeforeRunning>
+            <AfterRunning></AfterRunning>
+            <Action Type="AutoTest.UserControls.CallTestAction">
+              <TestCaseId>b681f9a5-4ab4-4d5e-ac2d-28414bb4fd0f</TestCaseId>
+              <States>
+                <Variable Name="CustomObjectsUrl" Value="{AppInfo.CustomObjectsUrl}" IsPublic="false" Description="" />
+                <Variable Name="ObjectName" Value="{CODesign.Objects.Name}" IsPublic="false" Description="" />
+              </States>
+            </Action>
+          </TestStep>
+          <TestStep Id="616aed75-5ad5-409c-93a8-6595012bd8a4" Title="Remove Association Fields" Status="0" LogRowIndex="19381">
+            <BeforeRunning></BeforeRunning>
+            <AfterRunning>if(me.Data.MoveNext("CODesign.Objects"))
+	me.Jump(-1);</AfterRunning>
+            <Action Type="AutoTest.UserControls.CallTestAction">
+              <TestCaseId>af72e0aa-246a-449a-a9a4-56ca11f23333</TestCaseId>
+              <States />
+            </Action>
+          </TestStep>
+        </Steps>
+      </TestCase>
+      <TestCase Id="a99c4ccc-c3f3-43ad-b7bd-3e1dd1424daa" Title="Delete records" IsFunction="false" Status="0" LogRowIndex="19424">
+        <Steps>
+          <TestStep Id="dc9f92f3-3552-4336-ac25-aa6754ca0d6a" Title="Init" Status="0" LogRowIndex="19426">
+            <BeforeRunning>me.Data.MoveFirst("CODesign.Objects");
+me.Data.MoveFirst(me.Data["CODesign.Objects.DataPath"].ToString());</BeforeRunning>
+            <AfterRunning></AfterRunning>
+            <Action Type="AutoTest.DBAction.DBAction">
+              <Name>DB Command</Name>
+            </Action>
+          </TestStep>
+          <TestStep Id="ce7b97ef-85b0-421e-929b-c0df0c841710" Title="Go to DataView (Start Loop for Objects)" Status="0" LogRowIndex="20567">
+            <BeforeRunning></BeforeRunning>
+            <AfterRunning></AfterRunning>
+            <Action Type="AutoTest.UserControls.CallTestAction">
+              <TestCaseId>d9aa2f50-5f01-404a-9952-d6f0e11be49e</TestCaseId>
+              <States>
+                <Variable Name="CustomObjectsUrl" Value="{AppInfo.CustomObjectsUrl}" IsPublic="false" Description="" />
+                <Variable Name="ObjectName" Value="{CODesign.Objects.Name}" IsPublic="false" Description="" />
+              </States>
+            </Action>
+          </TestStep>
+          <TestStep Id="a46804dd-91f9-4c83-bab3-5d8fad553b25" Title="Loop Each Record of the current Object" Status="0" LogRowIndex="20797">
+            <BeforeRunning>me.Data.MoveFirst(me.Data["CODesign.Objects.FieldPath"].ToString());
+
+string FieldPath = (string)me.Data["CODesign.Objects.FieldPath"];
+
+string FieldName = (string)me.Data[FieldPath + ".Label"];
+
+me.StepData["SearchValue"] = "{" + 
+								me.Data["CODesign.Objects.DataPath"] + 
+								"." + FieldName + 
+							  "}";</BeforeRunning>
+            <AfterRunning>if (me.Data.MoveNext(me.Data["CODesign.Objects.DataPath"].ToString()))
+	me.Jump(0);</AfterRunning>
+            <Action Type="AutoTest.UserControls.CallTestAction">
+              <TestCaseId>3becf9c0-d2b8-4dc7-be32-ae401053a27d</TestCaseId>
+              <States>
+                <Variable Name="SearchValue" Value="" IsPublic="false" Description="" />
+              </States>
+            </Action>
+          </TestStep>
+          <TestStep Id="b42bdcaf-909e-4f69-a38b-40236e369da5" Title="Move Next Object and Loop" Status="0" LogRowIndex="20905">
+            <BeforeRunning></BeforeRunning>
+            <AfterRunning>if (me.Data.MoveNext("CODesign.Objects"))
+{
+    me.Data.MoveFirst(me.Data["CODesign.Objects.DataPath"].ToString());
+	me.Jump(-2);
+}</AfterRunning>
+            <Action Type="AutoTest.DBAction.DBAction">
+              <Name>DB Command</Name>
+            </Action>
+          </TestStep>
+        </Steps>
+      </TestCase>
+      <TestCase Id="b17d664c-6179-4d84-a5a1-ef31cd810134" Title="Delete objects" IsFunction="false" Status="0" LogRowIndex="20913">
+        <Steps>
+          <TestStep Id="60a49374-1b83-4e37-80bd-e276119dcda2" Title="Init Data (Loop Objects)" Status="0" LogRowIndex="20915">
+            <BeforeRunning>me.Data.MoveFirst("CODesign.Objects");</BeforeRunning>
+            <AfterRunning></AfterRunning>
+            <Action Type="AutoTest.DBAction.DBAction">
+              <Name>DB Command</Name>
+            </Action>
+          </TestStep>
+          <TestStep Id="f21896ff-306a-4a59-ae11-d7f46f37cf3f" Title="Delete an Object" Status="0" LogRowIndex="21070">
+            <BeforeRunning></BeforeRunning>
+            <AfterRunning>if (me.Data.MoveNext("CODesign.Objects"))
+	me.Jump(0);</AfterRunning>
+            <Action Type="AutoTest.UserControls.CallTestAction">
+              <TestCaseId>b1017350-d7d3-4225-b54e-8c4646763491</TestCaseId>
+              <States>
+                <Variable Name="CustomObjectsUrl" Value="{AppInfo.CustomObjectsUrl}" IsPublic="false" Description="" />
+                <Variable Name="ObjectName" Value="{CODesign.Objects.Name}" IsPublic="false" Description="" />
+              </States>
+            </Action>
+          </TestStep>
+        </Steps>
+      </TestCase>
+    </Children>
+  </TestCase>
+  <TestCase Id="576893b7-cc49-423d-96ed-bc2d46d243ea" Title="Functions" IsFunction="false" Status="2" LogRowIndex="19703">
+    <Children>
+      <TestCase Id="8a2d62de-ae82-4d52-a3f0-ae7a231a7251" Title="Login" IsFunction="true" Status="0" LogRowIndex="34">
+        <TestCaseParams>
+          <Variable Name="LoginUrl" Value="" IsPublic="true" Description="" />
+          <Variable Name="Username" Value="" IsPublic="true" Description="" />
+          <Variable Name="Password" Value="" IsPublic="true" Description="" />
+        </TestCaseParams>
+        <Steps>
+          <TestStep Id="dd711757-8947-4f30-97c9-06e10e8551b8" Title="Navigate to Login Page" Status="0" LogRowIndex="36">
+            <BeforeRunning></BeforeRunning>
+            <AfterRunning></AfterRunning>
+            <Action Type="AutoTest.WebAction.WebAction">
+              <Name>WebUI Action</Name>
+              <States>
+                <State Key="Event" Value="Navigate" />
+                <State Key="Url" Value="{LoginUrl}" />
+              </States>
+            </Action>
+          </TestStep>
+          <TestStep Id="0d25752e-4cc0-4642-a95e-935e9d8f44c4" Title="Enter username" Status="0" LogRowIndex="47">
+            <BeforeRunning></BeforeRunning>
+            <AfterRunning></AfterRunning>
+            <Action Type="AutoTest.WebAction.WebAction">
+              <Name>WebUI Action</Name>
+              <States>
+                <State Key="Event" Value="SetText" />
+                <State Key="ObjectIdentify" Value="UserName" />
+                <State Key="Value" Value="{Username}" />
+                <State Key="FindBy" Value="Id" />
+                <State Key="Condition" Value="" />
+              </States>
+            </Action>
+          </TestStep>
+          <TestStep Id="530dba88-2dc9-4d2a-ad2c-49f3de318a41" Title="Enter password" Status="0" LogRowIndex="63">
+            <BeforeRunning></BeforeRunning>
+            <AfterRunning></AfterRunning>
+            <Action Type="AutoTest.WebAction.WebAction">
+              <Name>WebUI Action</Name>
+              <States>
+                <State Key="Event" Value="SetText" />
+                <State Key="ObjectIdentify" Value="Password" />
+                <State Key="Value" Value="{Password}" />
+                <State Key="FindBy" Value="Id" />
+                <State Key="Condition" Value="" />
+              </States>
+            </Action>
+          </TestStep>
+          <TestStep Id="7d93b33e-70c6-4d4d-ae2c-53ebd507a18c" Title="Click Log on" Status="0" LogRowIndex="79">
+            <BeforeRunning></BeforeRunning>
+            <AfterRunning></AfterRunning>
+            <Action Type="AutoTest.WebAction.WebAction">
+              <Name>WebUI Action</Name>
+              <States>
+                <State Key="Event" Value="Click" />
+                <State Key="ObjectIdentify" Value="loginBtn" />
+                <State Key="FindBy" Value="Id" />
+                <State Key="Condition" Value="" />
+                <State Key="X" Value="" />
+                <State Key="Y" Value="" />
+              </States>
+            </Action>
+          </TestStep>
+        </Steps>
+      </TestCase>
+      <TestCase Id="6d2756f0-0af1-44d5-9fdd-9169263eeb65" Title="Search a Record" IsFunction="true" Status="0" LogRowIndex="20816">
+        <TestCaseParams>
+          <Variable Name="SearchValue" Value="" IsPublic="true" Description="" />
+        </TestCaseParams>
+        <Steps>
+          <TestStep Id="0f60ba93-e143-41f6-92f1-71b02fdf51e0" Title="Clear Search old value" Status="0" LogRowIndex="20818">
+            <BeforeRunning></BeforeRunning>
+            <AfterRunning></AfterRunning>
+            <Action Type="AutoTest.WebAction.WebAction">
+              <Name>WebUI Action</Name>
+              <States>
+                <State Key="Event" Value="SetText" />
+                <State Key="FindBy" Value="CssSelector" />
+                <State Key="ObjectIdentify" Value="label &gt; input[type=&quot;text&quot;]" />
+                <State Key="Value" Value="" />
+                <State Key="Condition" Value="" />
+              </States>
+            </Action>
+          </TestStep>
+          <TestStep Id="137efcbd-351b-4821-9c8e-a8ee6f3466b7" Title="Type Search Value " Status="0" LogRowIndex="20833">
+            <BeforeRunning></BeforeRunning>
+            <AfterRunning></AfterRunning>
+            <Action Type="AutoTest.WebAction.WebAction">
+              <Name>WebUI Action</Name>
+              <States>
+                <State Key="Event" Value="TypeText" />
+                <State Key="FindBy" Value="CssSelector" />
+                <State Key="ObjectIdentify" Value="label &gt; input[type=&quot;text&quot;]" />
+                <State Key="Condition" Value="" />
+                <State Key="Value" Value="{SearchValue}" />
+              </States>
+            </Action>
+          </TestStep>
+          <TestStep Id="9b082520-6c0b-4067-9de6-d0545c003dc7" Title="Wait for processing" Status="0" LogRowIndex="20849">
+            <BeforeRunning>me.Sleep(200);</BeforeRunning>
+            <AfterRunning></AfterRunning>
+            <Action Type="AutoTest.WebAction.WebAction">
+              <Name>WebUI Action</Name>
+              <States>
+                <State Key="Event" Value="GetElement" />
+                <State Key="FindBy" Value="Id" />
+                <State Key="ObjectIdentify" Value="CoLoading" />
+                <State Key="Condition" Value="style=&quot;display: none&quot;" />
+                <State Key="TimeOut" Value="" />
+              </States>
+            </Action>
+          </TestStep>
+        </Steps>
+      </TestCase>
+      <TestCase Id="f5ed94b2-e9f4-4e8a-90a7-b22ae83b68ec" Title="Delete a Record" IsFunction="false" Status="0" LogRowIndex="0">
+        <Children>
+          <TestCase Id="3becf9c0-d2b8-4dc7-be32-ae401053a27d" Title="Delete a Record" IsFunction="true" Status="0" LogRowIndex="20808">
+            <TestCaseParams>
+              <Variable Name="SearchValue" Value="" IsPublic="true" Description="" />
+            </TestCaseParams>
+            <Steps>
+              <TestStep Id="1b3d3ec6-8090-44d3-94a2-e93f1e86b704" Title="Search record" Status="0" LogRowIndex="20810">
+                <BeforeRunning></BeforeRunning>
+                <AfterRunning></AfterRunning>
+                <Action Type="AutoTest.UserControls.CallTestAction">
+                  <TestCaseId>6d2756f0-0af1-44d5-9fdd-9169263eeb65</TestCaseId>
+                  <States>
+                    <Variable Name="SearchValue" Value="{SearchValue}" IsPublic="false" Description="" />
+                  </States>
+                </Action>
+              </TestStep>
+              <TestStep Id="bf031ddc-301f-4504-8897-738a6b3fdc4a" Title="Click Delete icon" Status="0" LogRowIndex="20869">
+                <BeforeRunning></BeforeRunning>
+                <AfterRunning></AfterRunning>
+                <Action Type="AutoTest.WebAction.WebAction">
+                  <Name>WebUI Action</Name>
+                  <States>
+                    <State Key="Event" Value="Confirm" />
+                    <State Key="FindBy" Value="XPath" />
+                    <State Key="ObjectIdentify" Value="//div[@class='action_links']/div[2]/a" />
+                  </States>
+                </Action>
+              </TestStep>
+              <TestStep Id="220a41b0-8b51-44ef-98e3-f76ac3b4764d" Title="Wait for processing" Status="0" LogRowIndex="20883">
+                <BeforeRunning>me.Sleep(200);</BeforeRunning>
+                <AfterRunning></AfterRunning>
+                <Action Type="AutoTest.WebAction.WebAction">
+                  <Name>WebUI Action</Name>
+                  <States>
+                    <State Key="Event" Value="GetElement" />
+                    <State Key="FindBy" Value="Id" />
+                    <State Key="ObjectIdentify" Value="CoLoading" />
+                    <State Key="Condition" Value="style=&quot;display: none&quot;" />
+                    <State Key="TimeOut" Value="" />
+                  </States>
+                </Action>
+              </TestStep>
+            </Steps>
+          </TestCase>
+          <TestCase Id="d9aa2f50-5f01-404a-9952-d6f0e11be49e" Title="Go to DataView" IsFunction="true" Status="0" LogRowIndex="20576">
+            <TestCaseParams>
+              <Variable Name="CustomObjectsUrl" Value="" IsPublic="true" Description="" />
+              <Variable Name="ObjectName" Value="" IsPublic="true" Description="" />
+            </TestCaseParams>
+            <Steps>
+              <TestStep Id="71bb1bcf-e666-43f6-a674-b9e0bb00ea1f" Title="Open Object Detail Page" Status="0" LogRowIndex="20578">
+                <BeforeRunning></BeforeRunning>
+                <AfterRunning></AfterRunning>
+                <Action Type="AutoTest.UserControls.CallTestAction">
+                  <TestCaseId>b681f9a5-4ab4-4d5e-ac2d-28414bb4fd0f</TestCaseId>
+                  <States>
+                    <Variable Name="CustomObjectsUrl" Value="{CustomObjectsUrl}" IsPublic="false" Description="" />
+                    <Variable Name="ObjectName" Value="{ObjectName}" IsPublic="false" Description="" />
+                  </States>
+                </Action>
+              </TestStep>
+              <TestStep Id="cc85ff67-b03f-40be-84b2-5808b0d53bda" Title="Click Gear Button" Status="0" LogRowIndex="20651">
+                <BeforeRunning></BeforeRunning>
+                <AfterRunning></AfterRunning>
+                <Action Type="AutoTest.WebAction.WebAction">
+                  <Name>WebUI Action</Name>
+                  <States>
+                    <State Key="Event" Value="Click" />
+                    <State Key="FindBy" Value="XPath" />
+                    <State Key="ObjectIdentify" Value="//div[@id='customObjectDetailsGear']/a/b/i" />
+                  </States>
+                </Action>
+              </TestStep>
+              <TestStep Id="a8c3d3a2-0b22-44a0-a93b-6d2f8629eec4" Title="Click DataView" Status="0" LogRowIndex="20667">
+                <BeforeRunning></BeforeRunning>
+                <AfterRunning></AfterRunning>
+                <Action Type="AutoTest.WebAction.WebAction">
+                  <Name>WebUI Action</Name>
+                  <States>
+                    <State Key="Event" Value="Click" />
+                    <State Key="FindBy" Value="LinkText" />
+                    <State Key="ObjectIdentify" Value="Data View" />
+                  </States>
+                </Action>
+              </TestStep>
+            </Steps>
+          </TestCase>
+        </Children>
+      </TestCase>
+    </Children>
+  </TestCase>
+  <Global Title="App">
+    <Variables>
+      <Variable Name="Broswer" Value="Chrome" />
+      <Variable Name="MainUrl" Value="http://localhost:4200" />
+      <Variable Name="LoginUrl" Value="{AppInfo.MainUrl}/login" />
+      <Variable Name="LogoutUrl" Value="{AppInfo.MainUrl}/logout" />
+    </Variables>
+  </Global>
+  <Global Title="Login">
+    <Variables>
+      <Variable Name="Username" Value="quoc" />
+      <Variable Name="Password" Value="12345" />
+    </Variables>
+  </Global>
+  <Global Title="Staff">
+    <TableData>
+      <Cols>
+        <Col Header="Username" />
+        <Col Header="Password" />
+        <Col Header="Role" />
+        <Col Header="Fullname" />
+      </Cols>
+      <Rows>
+        <Row _0="quoc" _1="12345" _2="admin" _3="Anh Quoc" />
+        <Row _0="huy" _1="12345" _2="admin" _3="Nhat Huy" />
+        <Row _0="thinh" _1="12345" _2="manager" _3="Van Thinh" />
+        <Row _0="tuong" _1="12345" _2="user" _3="Le Tuong" />
+      </Rows>
+    </TableData>
+  </Global>
+  <Global Title="Roles">
+    <TableData>
+      <Cols>
+        <Col Header="Name" />
+      </Cols>
+      <Rows>
+        <Row _0="user" />
+        <Row _0="manager" />
+        <Row _0="admin" />
+      </Rows>
+    </TableData>
+  </Global>
+  <Global Title="Treatment">
+    <TableData>
+      <Cols>
+        <Col Header="Field" />
+        <Col Header="Field1" />
+        <Col Header="Field2" />
+      </Cols>
+    </TableData>
+  </Global>
+  <Global Title="Cote" />
+  <Log><![CDATA[
+3:10 PM: _________________________________________________________
+3:10 PM: BEGIN TESTCASE New Test Case
+
+3:10 PM: BEGIN STEP AutoComplete-FindInput
+3:10 PM: [Before Running...]
+3:10 PM: [Execute Action...]
+3:10 PM: Action: TypeText
+3:10 PM: Executing: TypeText...
+3:10 PM: FindBy=Id
+3:10 PM: Condition=
+3:10 PM: ObjectIdentify=token-input-BuiltinId
+3:10 PM: Displayed: True
+3:10 PM: Find OK
+3:10 PM: Value=Vu Nguyen
+3:10 PM: Executed
+3:10 PM: [After Running...]
+3:10 PM: END STEP AutoComplete-FindInput
+
+3:10 PM: BEGIN STEP AutoComplete-WaitElement
+3:10 PM: [Before Running...]
+3:10 PM: [Execute Action...]
+3:10 PM: Action: GetElement
+3:10 PM: Executing: GetElement...
+3:10 PM: TimeOut=30
+3:10 PM: FindBy=XPath
+3:10 PM: Condition=
+3:10 PM: ObjectIdentify=//div[@class='token-input-dropdown']/descendant::b[text()='Vu Nguyen']
+3:10 PM: Displayed: False
+3:10 PM: Get OK
+3:10 PM: Executed
+3:10 PM: [After Running...]
+3:10 PM: END STEP AutoComplete-WaitElement
+
+3:10 PM: BEGIN STEP AutoComplete-EnterKey
+3:10 PM: [Before Running...]
+3:10 PM: [Execute Action...]
+3:10 PM: Action: SystemKeyDown
+3:10 PM: Executing: SystemKeyDown...
+3:10 PM: FindBy=Id
+3:10 PM: Condition=
+3:10 PM: ObjectIdentify=token-input-BuiltinId
+3:10 PM: Displayed: True
+3:10 PM: Find OK
+3:10 PM: Key=Enter
+3:10 PM: Executed
+3:10 PM: [After Running...]
+3:10 PM: END STEP AutoComplete-EnterKey
+3:10 PM: END TESTCASE New Test Case]]></Log>
+</NeogovTest>

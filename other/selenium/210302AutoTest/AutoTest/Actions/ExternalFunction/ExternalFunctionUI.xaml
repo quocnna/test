@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="AutoTest.ExternalFunction.ExternalFunctionUI"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="400">
+    <UserControl.Resources>
+        <Style x:Key="row" TargetType="StackPanel">
+            <Setter Property="Height" Value="40"/>
+        </Style>
+        <Style x:Key="label" TargetType="Label">
+            <Setter Property="Margin"  Value="2,4,0,0"/>
+            <Setter Property="Foreground"  Value="Gray"/>
+        </Style>
+    </UserControl.Resources>
+    <StackPanel Margin="10">
+        <Label Content="Assembly" Style="{StaticResource label}"/>
+        <ComboBox x:Name="cmbAssembly" Padding="4" Width="300" HorizontalAlignment="Left" DisplayMemberPath="Name" SelectedValuePath="Key">
+        </ComboBox>
+        <TextBlock x:Name="lblAssembly" />
+        <Label Content="Class" Style="{StaticResource label}"/>
+        <ComboBox x:Name="cmbClass" Padding="4" Width="300" HorizontalAlignment="Left" DisplayMemberPath="Name" SelectedValuePath="Key">
+        </ComboBox>
+        <TextBlock x:Name="lblClass" />
+        <Label Content="Function" Style="{StaticResource label}"/>
+        <ComboBox x:Name="cmbFunction" Padding="4" Width="300" HorizontalAlignment="Left" DisplayMemberPath="Name" SelectedValuePath="Key">
+        </ComboBox>
+        <TextBlock x:Name="lblFunction" />
+        <Label Content="Parameters" Style="{StaticResource label}"/>
+        <DataGrid x:Name="dataGrid" CanUserAddRows="False" AutoGenerateColumns="False" RowHeaderWidth="0" 
+                  CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Width="2*" Binding="{Binding Path=Name}" IsReadOnly="True" />
+                <DataGridTextColumn Header="Value" Width="2*" Binding="{Binding Path=Value}" />
+                <DataGridTextColumn Header="Description" Width="4*" Binding="{Binding Path=Description}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </StackPanel>
+</UserControl>

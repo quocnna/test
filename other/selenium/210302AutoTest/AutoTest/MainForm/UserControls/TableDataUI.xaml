@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="AutoTest.UserControls.TableDataUI"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             xmlns:common="clr-namespace:AutoTest.Core;assembly=AutoTest.Core">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <Button x:Name="btnAddColumn" Content="Add Column" Style="{StaticResource button}"/>
+            <Button x:Name="btnDeleteColumn" Content="Delete Column" Style="{StaticResource button}" Margin="5,0,0,0"/>
+        </StackPanel>
+        <DataGrid Grid.Row="1" x:Name="dataGrid" AutoGenerateColumns="False" Visibility="Collapsed" 
+                  ColumnReordering="dataGrid_ColumnReordering" ColumnReordered="dataGrid_ColumnReordered" CurrentCellChanged="dataGrid_CurrentCellChanged">
+            <DataGrid.CommandBindings>
+                <CommandBinding Command="Copy" CanExecute="dataGridCopyCommand_CanExecute" />
+                <CommandBinding Command="common:UICommands.MoveUp" CanExecute="dataGridMoveUpCommand_CanExecute" Executed="dataGridMoveUpCommand_Executed" />
+                <CommandBinding Command="common:UICommands.MoveDown" CanExecute="dataGridMoveDownCommand_CanExecute" Executed="dataGridMoveDownCommand_Executed" />
+            </DataGrid.CommandBindings>
+        </DataGrid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,42 @@
+﻿<Window x:Class="AutoTest.CheckPoints"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:local="clr-namespace:AutoTest"
+        Style="{StaticResource window}"
+        Title="Check Points" Height="600" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <RadioButton Content="Check Points" Style="{StaticResource tabButton}" IsChecked="True"></RadioButton>
+            <ListBox Name="lstCheckPoints" DisplayMemberPath="Title" BorderThickness="0" Grid.Row="1" />
+        </Grid>
+        <GridSplitter Grid.Column="1"/>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <RadioButton Content="Application Image" Style="{StaticResource tabButton}" IsChecked="True"></RadioButton>
+            <Image Name="imgApplication" Grid.Row="1" />
+        </Grid>
+        <GridSplitter Grid.Column="3"/>
+        <Grid Grid.Column="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <RadioButton Content="Log" Style="{StaticResource tabButton}" IsChecked="True"></RadioButton>
+            <TextBox Grid.Row="1" IsReadOnly="True" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Background="Black" Foreground="#FFC0C0C0" Text="{Binding SelectedItem.LogData, ElementName=lstCheckPoints}"></TextBox>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,335 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:AutoTest.UserControls" 
+        xmlns:UserControls="clr-namespace:AutoTest.UserControls" 
+        xmlns:common="clr-namespace:AutoTest.Core;assembly=AutoTest.Core"
+        x:Class="AutoTest.Main" Style="{StaticResource window}"
+        WindowState="Maximized" AllowDrop="True" DragOver="window_DragOver" Drop="window_Drop">
+    <Window.Resources>
+        <Style x:Key="toobarImage" TargetType="{x:Type Image}">
+            <Setter Property="Width" Value="32"/>
+            <Setter Property="Height"  Value="32"/>
+            <Setter Property="Margin"  Value="2"/>
+        </Style>
+        <Style x:Key="labelSection" TargetType="Label">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="Blue"/>
+        </Style>
+        <LinearGradientBrush x:Key="labelSectionBackground" EndPoint="0.6,1" MappingMode="RelativeToBoundingBox" StartPoint="0,0">
+            <GradientStop Color="Teal"/>
+            <GradientStop Color="{x:Static SystemColors.MenuColor}" Offset="1"/>
+        </LinearGradientBrush>
+        <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
+    </Window.Resources>
+    <Window.CommandBindings>
+        <CommandBinding Command="common:UICommands.NewProject" Executed="newProject_Executed" />
+        <CommandBinding Command="common:UICommands.OpenProject" Executed="openProject_Executed" />
+        <CommandBinding Command="common:UICommands.SaveProject" Executed="saveProject_Executed" />
+        <CommandBinding Command="common:UICommands.SaveAsProject" Executed="saveAsProject_Executed" />
+        <CommandBinding Command="common:UICommands.CompileProject" Executed="compileProject_Executed" />
+        <CommandBinding Command="common:UICommands.RunAll" CanExecute="runAll_CanExecute" Executed="runAll_Executed" />
+        <CommandBinding Command="common:UICommands.RunCurrentStep" CanExecute="runCurrentStep_CanExecute" Executed="runCurrentStep_Executed" />
+        <CommandBinding Command="common:UICommands.RunCurrentTestCase" CanExecute="runCurrentTestCase_CanExecute" Executed="runCurrentTestCase_Executed" />
+        <CommandBinding Command="common:UICommands.Stop" CanExecute="stop_CanExecute" Executed="stop_Executed" />
+        <CommandBinding Command="common:UICommands.EditTestCase" CanExecute="editTestCase_CanExecute" Executed="editTestCase_Executed" />
+        <CommandBinding Command="common:UICommands.AddTestCase" CanExecute="addTestCase_CanExecute" Executed="addTestCase_Executed" />
+        <CommandBinding Command="common:UICommands.AddChildTestCase" CanExecute="addChildTestCase_CanExecute" Executed="addChildTestCase_Executed" />
+        <CommandBinding Command="common:UICommands.AddAction" CanExecute="addAction_CanExecute" Executed="addAction_Executed" />
+    </Window.CommandBindings>
+    <Window.InputBindings>
+        <KeyBinding Command="common:UICommands.NewProject" Gesture="CTRL+N" />
+        <KeyBinding Command="common:UICommands.OpenProject" Gesture="CTRL+O" />
+        <KeyBinding Command="common:UICommands.SaveProject" Gesture="CTRL+S" />
+        <KeyBinding Command="common:UICommands.CompileProject" Gesture="SHIFT+F6" />
+        <KeyBinding Command="common:UICommands.RunAll" Gesture="F5" />
+        <KeyBinding Command="common:UICommands.EditTestCase" Gesture="F2" />
+    </Window.InputBindings>
+    <Window.Icon>
+        <ImageSource>logo.ico</ImageSource>
+    </Window.Icon>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" Padding="2">
+            <MenuItem x:Name="mnuFile" Header="FILE">
+                <MenuItem Header="New" InputGestureText="Ctrl+N" Command="common:UICommands.NewProject">
+                    <MenuItem.Icon>
+                        <Image Source="Images/new.png" Width="16" Height="16"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Open File..." InputGestureText="Ctrl+O" Command="common:UICommands.OpenProject">
+                    <MenuItem.Icon>
+                        <Image Source="Images/open.png" Width="16" Height="16"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="mnuFile_Load" Header="Load From Database..." IsEnabled="False" />
+                <Separator/>
+                <MenuItem Header="Save" InputGestureText="Ctrl+S" Command="common:UICommands.SaveProject">
+                    <MenuItem.Icon>
+                        <Image Source="Images/save.png" Width="16" Height="16"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Save As..." Command="common:UICommands.SaveAsProject" />
+                <MenuItem x:Name="mnuFile_SynchronizeDB" Header="Synchronize Database..." IsEnabled="False">
+                    <MenuItem.Icon>
+                        <Image Source="Images/sync.png" Width="16" Height="16"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator x:Name="sepFile_Exit"/>
+                <MenuItem x:Name="mnuFile_Exit" Header="Exit" InputGestureText="Alt+F4"/>
+            </MenuItem>
+            <MenuItem Header="EDIT">
+                <MenuItem Header="Edit" Command="common:UICommands.EditTestCase">
+                    <MenuItem.Icon>
+                        <Image Source="Images/edit.png" Width="16" Height="16"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Cut" Command="Cut" InputGestureText="Ctrl+X">
+                    <MenuItem.Icon>
+                        <Image Source="Images/cut.png" Width="16" Height="16"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Copy" Command="Copy" InputGestureText="Ctrl+C">
+                    <MenuItem.Icon>
+                        <Image Source="Images/copy.png" Width="16" Height="16"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Paste" Command="Paste" InputGestureText="Ctrl+V">
+                    <MenuItem.Icon>
+                        <Image Source="Images/paste.png" Width="16" Height="16"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Delete" Command="Delete" InputGestureText="Del">
+                    <MenuItem.Icon>
+                        <Image Source="Images/delete.png" Width="16" Height="16"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="VIEW">
+                <MenuItem Header="Global Variables" Click="mnuGlobalVariables_Click"></MenuItem>
+                <MenuItem Header="Log File" Click="mnuLogFile_Click"/>
+                <MenuItem Header="Check Points..." Click="mnuCheckPoints_Click"/>
+            </MenuItem>
+            <MenuItem Header="START">
+                <MenuItem x:Name="mnuStart_MarkStart" Header="Mark Start Step">
+                    <MenuItem.Icon>
+                        <Image Source="Images/markStart.png" Width="16" Height="16"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="mnuStart_MarkEnd" Header="Mark End Step">
+                    <MenuItem.Icon>
+                        <Image Source="Images/markEnd.png" Width="16" Height="16"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Compile" Command="common:UICommands.CompileProject" InputGestureText="Shift+F6" >
+                    <MenuItem.Icon>
+                        <Image Source="Images/compile.png" Width="16" Height="16"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Run All" Command="common:UICommands.RunAll" InputGestureText="F5">
+                    <MenuItem.Icon>
+                        <Image Source="Images/play.png" Width="16" Height="16"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="mnuStart_RunCurrentStep" Command="common:UICommands.RunCurrentStep" Header="Run Current Step"/>
+                <MenuItem x:Name="mnuStart_RunCurrentTestCase" Command="common:UICommands.RunCurrentTestCase" Header="Run Current Test Case"/>
+                <MenuItem x:Name="mnuStart_RunFromCurrentStep" Header="Run From Current Step" IsEnabled="False"/>
+                <MenuItem x:Name="mnuStart_RunToCurrentStep" Header="Run To Current Step" IsEnabled="False"/>
+            </MenuItem>
+            <MenuItem Header="TOOLS">
+                <MenuItem Header="Load Unit Tests" Click="mnuLoadUnitTests_Click"/>
+                <Separator/>
+                <MenuItem Header="Add-in Actions..."/>
+                <Separator/>
+                <MenuItem Header="Customize...">
+                    <MenuItem.Icon>
+                        <Image Source="Images/customize.png" Width="16" Height="16"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Options...">
+                    <MenuItem.Icon>
+                        <Image Source="Images/setting.png" Width="16" Height="16"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="NETWORK">
+                <MenuItem x:Name="mnuAddServer" Header="Server Setting..." IsEnabled="False">
+                    <MenuItem.Icon>
+                        <Image Source="Images/socketConfig.png" Width="16" Height="16"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="mnuNetwork_StartStopServer" Header="Start Server" IsEnabled="False">
+                    <MenuItem.Icon>
+                        <Image Source="Images/server.png" Width="16" Height="16"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator></Separator>
+                <MenuItem x:Name="mnuConnectServer" Header="Connect to Server..." IsEnabled="False">
+                    <MenuItem.Icon>
+                        <Image Source="Images/connect.png" Width="16" Height="16"></Image>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator></Separator>
+                <MenuItem x:Name="mnuNetwork_GetLast" Header="Get Last" IsEnabled="False"></MenuItem>
+
+            </MenuItem>
+            <MenuItem Header="REPORT">
+                <MenuItem Header="Master Report" IsEnabled="False"/>
+                <MenuItem Header="Report Detail" IsEnabled="False"/>
+            </MenuItem>
+            <MenuItem Header="HELP">
+                <MenuItem Header="About..." Click="mnuAbout_Click"/>
+            </MenuItem>
+        </Menu>
+        <ToolBarTray Name="toolBarTray" DockPanel.Dock="Top" Background="{DynamicResource {x:Static SystemColors.MenuBrushKey}}" Height="46">
+            <ToolBar Background="{DynamicResource {x:Static SystemColors.MenuBrushKey}}">
+                <Button ToolTip="New Test" Command="common:UICommands.NewProject" Style="{StaticResource toolBarButton}">
+                    <Image Source="Images/new.png" Style="{StaticResource toobarImage}"/>
+                </Button>
+                <Button ToolTip="Open Test" Command="common:UICommands.OpenProject" Style="{StaticResource toolBarButton}">
+                    <Image Source="Images/open.png" Style="{StaticResource toobarImage}"/>
+                </Button>
+                <Button ToolTip="Save" Command="common:UICommands.SaveProject" Style="{StaticResource toolBarButton}">
+                    <Image Source="Images/save.png" Style="{StaticResource toobarImage}"/>
+                </Button>
+                <Separator/>
+                <Button ToolTip="Run" Command="common:UICommands.RunAll" Style="{StaticResource toolBarButton}">
+                    <Image Source="Images/play.png" Style="{StaticResource toobarImage}"/>
+                </Button>
+                <Button Command="common:UICommands.Stop" ToolTip="Stop" Style="{StaticResource toolBarButton}">
+                    <Image Source="Images/stop.png" Style="{StaticResource toobarImage}"/>
+                </Button>
+            </ToolBar>
+            <ToolBar Name="testCaseToolBar" Background="{DynamicResource {x:Static SystemColors.MenuBrushKey}}">
+                <Button ToolTip="Add test case" Command="common:UICommands.AddTestCase" Style="{StaticResource toolBarButton}">
+                    <Image Source="Images/add.png" Style="{StaticResource toobarImage}"/>
+                </Button>
+                <Button ToolTip="Add child test case" Command="common:UICommands.AddChildTestCase" Style="{StaticResource toolBarButton}">
+                    <Image Source="Images/add_child.png" Style="{StaticResource toobarImage}"/>
+                </Button>
+                <Button ToolTip="Add action" Command="common:UICommands.AddAction" Style="{StaticResource toolBarButton}">
+                    <Image Source="Images/addAction.png" Style="{StaticResource toobarImage}"/>
+                </Button>
+                <Separator/>
+                <Button ToolTip="Edit" Command="common:UICommands.EditTestCase" Style="{StaticResource toolBarButton}">
+                    <Image Source="Images/edit.png" Style="{StaticResource toobarImage}"/>
+                </Button>
+                <Button ToolTip="Cut" Command="Cut" Style="{StaticResource toolBarButton}">
+                    <Image Source="Images/cut.png" Style="{StaticResource toobarImage}"/>
+                </Button>
+                <Button ToolTip="Copy" Command="Copy" Style="{StaticResource toolBarButton}">
+                    <Image Source="Images/copy.png" Style="{StaticResource toobarImage}"/>
+                </Button>
+                <Button ToolTip="Paste" Command="Paste" Style="{StaticResource toolBarButton}">
+                    <Image Source="Images/paste.png" Style="{StaticResource toobarImage}"/>
+                </Button>
+                <Button ToolTip="Move Up" Command="common:UICommands.MoveUp" Style="{StaticResource toolBarButton}">
+                    <Image Source="Images/arrow_up.png" Style="{StaticResource toobarImage}"/>
+                </Button>
+                <Button ToolTip="Move Down" Command="common:UICommands.MoveDown" Style="{StaticResource toolBarButton}">
+                    <Image Source="Images/arrow_down.png" Style="{StaticResource toobarImage}"/>
+                </Button>
+                <Separator/>
+                <Button ToolTip="Lock" Command="common:UICommands.Lock" Style="{StaticResource toolBarButton}">
+                    <Image Source="Images/lock.png" Style="{StaticResource toobarImage}" />
+                </Button>
+                <Button ToolTip="Unlock" Command="common:UICommands.Unlock" Style="{StaticResource toolBarButton}">
+                    <Image Source="Images/lock_open.png" Style="{StaticResource toobarImage}" />
+                </Button>
+                <Separator/>
+                <Button Name="btnMarkStart"  ToolTip="Mark Start" Style="{StaticResource toolBarButton}">
+                    <Image Source="Images/markStart.png" Style="{StaticResource toobarImage}"></Image>
+                </Button>
+                <Label x:Name="txtMarkStart" Width="140" BorderBrush="Gray" BorderThickness="1" Height="26" VerticalContentAlignment="Center" ></Label>
+                <Button Name="btnClearStarStep" ToolTip="Clear all mark" Style="{StaticResource toolBarButton}">
+                    <Image Source="Images/delete.png" Style="{StaticResource toobarImage}"></Image>
+                </Button>
+                <Button Name="btnMarkEnd" ToolTip="Mark End" Style="{StaticResource toolBarButton}">
+                    <Image Source="Images/markEnd.png" Style="{StaticResource toobarImage}"></Image>
+                </Button>
+                <Label x:Name="txtMarkEnd" Width="140" BorderBrush="Gray" BorderThickness="1" Height="26"></Label>
+                <Button Name="btnClearEndStep" ToolTip="Clear all mark" Style="{StaticResource toolBarButton}">
+                    <Image Source="Images/delete.png" Style="{StaticResource toobarImage}"></Image>
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+
+        <Grid Background="{DynamicResource {x:Static SystemColors.MenuBrushKey}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton Name="btnTestCaseDesign" Content="Test Case Design" PreviewMouseLeftButtonDown="mainTabButton_PreviewMouseLeftButtonDown" Style="{StaticResource tabButton}" IsChecked="True"></RadioButton>
+                    <RadioButton Name="btnGlobalVariables" Content="Global Variables" PreviewMouseLeftButtonDown="mainTabButton_PreviewMouseLeftButtonDown" Style="{StaticResource tabButton}"></RadioButton>
+                </StackPanel>
+                <UserControls:TestCaseUI x:Name="ucTestCase" BorderThickness="0" Grid.Row="1" />
+                <UserControls:GlobalVariablesUI x:Name="ucGlobalVariables" Visibility="Hidden" Grid.Row="1" />
+            </Grid>
+            <GridSplitter Grid.Column="1"/>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton Name="btnTestCaseDetail" Content="Test Case Detail" GroupName="TestCaseDetail" PreviewMouseLeftButtonDown="btnTestCaseDetail_PreviewMouseLeftButtonDown" Style="{StaticResource tabButton}" IsChecked="True"></RadioButton>
+                    <RadioButton Name="btnLog" Content="Log" GroupName="TestCaseDetail" PreviewMouseLeftButtonDown="btnTestCaseDetail_PreviewMouseLeftButtonDown" Style="{StaticResource tabButton}"></RadioButton>
+                </StackPanel>
+                <Grid Grid.Row="1" Background="White" Visibility="{Binding IsChecked,ElementName=btnTestCaseDetail,Converter={StaticResource booleanToVisibilityConverter}}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="5*"/>
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Test Case: "></Label>
+                            <Label x:Name="lblTestCaseDetail" Style="{StaticResource labelSection}"></Label>
+                        </StackPanel>
+                        <UserControls:TestCaseDetailUI x:Name="ucFunctionParas" Grid.Row="1" Visibility="Hidden"/>
+                    </Grid>
+                    <GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                    ShowsPreview="True" Height="3" BorderBrush="{DynamicResource {x:Static SystemColors.ScrollBarBrushKey}}"/>
+                    <Grid Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Step: "></Label>
+                            <Label x:Name="lblStepDetail" Style="{StaticResource labelSection}" ></Label>
+                        </StackPanel>
+
+                        <Grid Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Horizontal">
+                                <RadioButton Name="btnStepParameters" Content="Step Parameters" GroupName="StepDetail" PreviewMouseLeftButtonDown="btnStepDetail_PreviewMouseLeftButtonDown"  Style="{StaticResource tabButton}" IsChecked="True"></RadioButton>
+                                <RadioButton Name="btnBeforeRunning" Content="Before Running" GroupName="StepDetail" PreviewMouseLeftButtonDown="btnStepDetail_PreviewMouseLeftButtonDown" Style="{StaticResource tabButton}"></RadioButton>
+                                <RadioButton Name="btnAfterRunning" Content="After Running" GroupName="StepDetail" PreviewMouseLeftButtonDown="btnStepDetail_PreviewMouseLeftButtonDown" Style="{StaticResource tabButton}"></RadioButton>
+                            </StackPanel>
+                            <Grid x:Name="gridStepContent" Grid.Row="1" Visibility="{Binding IsChecked,ElementName=btnStepParameters,Converter={StaticResource booleanToVisibilityConverter}}">
+                            </Grid>
+                            <UserControls:CSharpEditor x:Name="ucBeforeRunning" IsBindingToBeforeRunning="True" Grid.Row="1" Visibility="{Binding IsChecked,ElementName=btnBeforeRunning,Converter={StaticResource booleanToVisibilityConverter}}"/>
+                            <UserControls:CSharpEditor x:Name="ucAfterRunning" IsBindingToBeforeRunning="False" Grid.Row="1" Visibility="{Binding IsChecked,ElementName=btnAfterRunning,Converter={StaticResource booleanToVisibilityConverter}}"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <local:LogFileUI x:Name="ucLogFile" Grid.Row="1" Visibility="{Binding IsChecked,ElementName=btnLog,Converter={StaticResource booleanToVisibilityConverter}}" />
+            </Grid>
+        </Grid>
+    </DockPanel>
+</Window>

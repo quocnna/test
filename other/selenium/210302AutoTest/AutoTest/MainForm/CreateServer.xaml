@@ -1,0 +1,51 @@
+﻿<Window x:Class="AutoTest.CreateServer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Style="{StaticResource modalWindow}"
+        Title="Create Server" Height="500" Width="500" WindowStartupLocation="CenterOwner">
+    <Window.Resources>
+        <Style x:Key="label" TargetType="Label">
+            <Setter Property="HorizontalAlignment"  Value="Right"/>
+            <Setter Property="VerticalContentAlignment"  Value="Center"/>
+        </Style>
+        <Style x:Key="text" TargetType="TextBox">
+            <Setter Property="Width"  Value="200"/>
+            <Setter Property="Height"  Value="26"/>
+            <Setter Property="Padding"  Value="2"/>
+            <Setter Property="HorizontalAlignment"  Value="Left"/>
+            <Setter Property="VerticalContentAlignment"  Value="Center"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <StackPanel>
+            <Grid Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="40"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Content="Name:" Style="{StaticResource label}"/>
+                <TextBox Name="txbName" Grid.Column="1" Style="{StaticResource text}" IsEnabled="False"/>
+                <Label Grid.Row="1" Content="Port:" Style="{StaticResource label}"/>
+                <TextBox Name="txbPort" Grid.Row="1" Grid.Column="1" Style="{StaticResource text}" Text="7373"/>
+
+                <DataGrid Margin="10,15,10,0" Name="gridNetwork" Grid.Row="2" Height="280" SelectionMode="Single" CanUserAddRows="True" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False" Grid.ColumnSpan="2">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn IsReadOnly="True" Header="Status" MinWidth="90" Binding="{Binding Path=Status}"/>
+                        <DataGridTextColumn Header="UserName" MinWidth="110" Binding="{Binding Path=UserName,UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn Header="Password" MinWidth="110" Binding="{Binding Path=Password,UpdateSourceTrigger=PropertyChanged}"/>
+                        <DataGridTextColumn IsReadOnly="True" Header="IP" Width="*"  Binding="{Binding Path=IP}"/>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+            <Button Name="btnStart"  Content="Start Sever" HorizontalAlignment="Center"  Width="100" Click="btnStart_Click"/>
+        </StackPanel>
+
+    </Grid>
+</Window>

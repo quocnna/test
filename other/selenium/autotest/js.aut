@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NeogovTest>
+  <Mark Start="" End="" />
+  <TestCase Id="ac0925fc-05be-468e-b0ba-6a5f56a7a61e" Title="New Test Case" IsFunction="false" Status="3" LogRowIndex="0">
+    <Steps>
+      <TestStep Id="7b6a9ab8-f9f1-4770-8bd9-864a84311827" Title="New action..." Status="3" LogRowIndex="2">
+        <BeforeRunning></BeforeRunning>
+        <AfterRunning></AfterRunning>
+        <Action Type="AutoTest.WebAction.WebAction">
+          <Name>WebUI Action</Name>
+          <States>
+            <State Key="Event" Value="LaunchApp" />
+            <State Key="Browser" Value="Chrome" />
+            <State Key="Url" Value="https://shopee.vn/S%E1%BB%AFa-t%E1%BA%AFm-LIFEBUOY-800g-v%E1%BB%9Bi-Ion-b%E1%BA%A1c-c%C3%B9ng-%C4%91%E1%BB%81-kh%C3%A1ng-da-i.111138057.2855276371" />
+          </States>
+        </Action>
+      </TestStep>
+      <TestStep Id="ad6b1dc6-bfd3-4052-846c-6bc6fe3c284d" Title="New action..." Status="3" LogRowIndex="15">
+        <BeforeRunning>me.Sleep(3000);</BeforeRunning>
+        <AfterRunning></AfterRunning>
+        <Action Type="AutoTest.WebAction.WebAction">
+          <Name>WebUI Action</Name>
+          <States>
+            <State Key="Event" Value="JavaScript" />
+            <State Key="FindBy" Value="XPath" />
+            <State Key="ObjectIdentify" Value="//div/input" />
+            <State Key="Condition" Value="" />
+            <State Key="ScriptContent" Value="me.click()" />
+          </States>
+        </Action>
+      </TestStep>
+      <TestStep Id="7d1fa9da-84dd-4991-8c9a-cba98c312d09" Title="New action..." Status="3" LogRowIndex="30">
+        <BeforeRunning></BeforeRunning>
+        <AfterRunning></AfterRunning>
+        <Action Type="AutoTest.WebAction.WebAction">
+          <Name>WebUI Action</Name>
+          <States>
+            <State Key="Event" Value="JavaScript" />
+            <State Key="FindBy" Value="XPath" />
+            <State Key="ObjectIdentify" Value="//div/input" />
+            <State Key="Condition" Value="" />
+            <State Key="ScriptContent" Value="me.value= '111'" />
+          </States>
+        </Action>
+      </TestStep>
+    </Steps>
+  </TestCase>
+  <Log><![CDATA[
+8:22 PM: _________________________________________________________
+8:22 PM: BEGIN TESTCASE New Test Case
+
+8:22 PM: BEGIN STEP New action...
+8:22 PM: [Before Running...]
+8:22 PM: [Execute Action...]
+8:22 PM: Action: LaunchApp
+8:22 PM: Executing: LaunchApp...
+8:22 PM: Browser=Chrome
+8:22 PM: Browser = Chrome
+8:22 PM: Url=https://shopee.vn/S%E1%BB%AFa-t%E1%BA%AFm-LIFEBUOY-800g-v%E1%BB%9Bi-Ion-b%E1%BA%A1c-c%C3%B9ng-%C4%91%E1%BB%81-kh%C3%A1ng-da-i.111138057.2855276371
+8:22 PM: Url = Chrome
+8:22 PM: Executed
+8:22 PM: [After Running...]
+8:22 PM: END STEP New action...
+
+8:22 PM: BEGIN STEP New action...
+8:22 PM: [Before Running...]
+8:22 PM: [Execute Action...]
+8:22 PM: Action: JavaScript
+8:22 PM: Executing: JavaScript...
+8:22 PM: FindBy=XPath
+8:22 PM: Condition=
+8:22 PM: ObjectIdentify=//div/input
+8:22 PM: Displayed: True
+8:22 PM: Find OK
+8:22 PM: ScriptContent=me.click()
+8:22 PM: Executed
+8:22 PM: [After Running...]
+8:22 PM: END STEP New action...
+
+8:22 PM: BEGIN STEP New action...
+8:22 PM: [Before Running...]
+8:22 PM: [Execute Action...]
+8:22 PM: Action: JavaScript
+8:22 PM: Executing: JavaScript...
+8:22 PM: FindBy=XPath
+8:22 PM: Condition=
+8:22 PM: ObjectIdentify=//div/input
+8:22 PM: Displayed: True
+8:22 PM: Find OK
+8:22 PM: ScriptContent=me.value= '111'
+8:22 PM: Executed
+8:22 PM: [After Running...]
+8:22 PM: END STEP New action...
+8:22 PM: END TESTCASE New Test Case]]></Log>
+</NeogovTest>

@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7A6870A6-7563-43FE-A645-11E42F6A5A5C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AutoTest</RootNamespace>
+    <AssemblyName>AutoTest</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ICSharpCode.AvalonEdit">
+      <HintPath>..\Libraries\ICSharpCode.AvalonEdit.dll</HintPath>
+    </Reference>
+    <Reference Include="SyntaxHighlight, Version=1.0.0.0, Culture=neutral, PublicKeyToken=e3b23013f3f66900, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libraries\SyntaxHighlight.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CheckPoints.xaml.cs">
+      <DependentUpon>CheckPoints.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ConnectServer.xaml.cs">
+      <DependentUpon>ConnectServer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CreateServer.xaml.cs">
+      <DependentUpon>CreateServer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Loading.xaml.cs">
+      <DependentUpon>Loading.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\GlobalVariablesUI.xaml.cs">
+      <DependentUpon>GlobalVariablesUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\CallTestActionUI.xaml.cs">
+      <DependentUpon>CallTestActionUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\CSharpEditor.xaml.cs">
+      <DependentUpon>CSharpEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\LogFileUI.xaml.cs">
+      <DependentUpon>LogFileUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TableDataUI.xaml.cs">
+      <DependentUpon>TableDataUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TestCaseDetailUI.xaml.cs">
+      <DependentUpon>TestCaseDetailUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\TestCaseUI.xaml.cs">
+      <DependentUpon>TestCaseUI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\VariablesUI.xaml.cs">
+      <DependentUpon>VariablesUI.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Main.xaml.cs">
+      <DependentUpon>Main.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.manifest" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <EmbeddedResource Include="UserControls\CSharpEditorInfo.xshd" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CheckPoints.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ConnectServer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CreateServer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Loading.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\GlobalVariablesUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Main.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\CallTestActionUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\CSharpEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\LogFileUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\TableDataUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\TestCaseDetailUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\TestCaseUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\VariablesUI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Actions\DBAction\DBAction.csproj">
+      <Project>{7ebce9bd-f5a4-4a90-9235-76e7d9c33755}</Project>
+      <Name>DBAction</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Actions\ExternalFunction\ExternalFunction.csproj">
+      <Project>{6c415fb7-d8b6-4747-b206-d9f58fc4935f}</Project>
+      <Name>ExternalFunction</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Actions\WebAction\WebAction.csproj">
+      <Project>{84b12cbe-0265-4d8a-97f3-2a00ccff182c}</Project>
+      <Name>WebAction</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Core.csproj">
+      <Project>{626f7d20-e257-4ecc-b3fc-3998f9b74f17}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{68b27c9a-50ad-4cf9-b763-3acb36f971f7}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\add_child.png" />
+    <Resource Include="Images\arrow_down.png" />
+    <Resource Include="Images\arrow_up.png" />
+    <Resource Include="Images\compile.png" />
+    <Resource Include="Images\copy.png" />
+    <Resource Include="Images\customize.png" />
+    <Resource Include="Images\cut.png" />
+    <Resource Include="Images\delete.png" />
+    <Resource Include="Images\error.png" />
+    <Resource Include="Images\fail.png" />
+    <Resource Include="Images\icon.ico" />
+    <Resource Include="Images\iconMethod.gif" />
+    <Resource Include="Images\iconProperty.gif" />
+    <Resource Include="Images\insert.png" />
+    <Resource Include="Images\lock.png" />
+    <Resource Include="Images\lock_open.png" />
+    <Resource Include="Images\markEnd.png" />
+    <Resource Include="Images\markStart.png" />
+    <Resource Include="Images\open.png" />
+    <Resource Include="Images\pass.png" />
+    <Resource Include="Images\paste.png" />
+    <Resource Include="Images\process.png" />
+    <Resource Include="Images\save.png" />
+    <Resource Include="Images\setting.png" />
+    <Resource Include="Images\socketConfig.png" />
+    <Resource Include="Images\stop.png" />
+    <Resource Include="Images\sync.png" />
+    <Resource Include="Images\syncComputer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\addAction.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ready.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\unlock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\connect.png" />
+    <Resource Include="Images\server.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\clear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\clearMark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\go.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\variable.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\table.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="logo.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

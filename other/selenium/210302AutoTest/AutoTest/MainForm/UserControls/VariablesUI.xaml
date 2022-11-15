@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="AutoTest.UserControls.VariablesUI"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:local="clr-namespace:AutoTest.UserControls"
+             xmlns:common="clr-namespace:AutoTest.Core;assembly=AutoTest.Core"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <DataGrid x:Name="dataGrid" CanUserAddRows="True" AutoGenerateColumns="False" RowHeaderWidth="0" CanUserReorderColumns="False" CanUserResizeRows="False" CanUserSortColumns="False"
+                  PreviewMouseDown="dataGrid_PreviewMouseDown">
+            <DataGrid.CommandBindings>
+                <CommandBinding Command="Cut" CanExecute="cutCommand_CanExecute" Executed="cutCommand_Executed" />
+                <CommandBinding Command="Copy" CanExecute="copyCommand_CanExecute" Executed="copyCommand_Executed" />
+                <CommandBinding Command="Paste" CanExecute="pasteCommand_CanExecute" Executed="pasteCommand_Executed" />
+                <CommandBinding Command="common:UICommands.MoveUp" CanExecute="moveUpCommand_CanExecute" Executed="moveUpCommand_Executed" />
+                <CommandBinding Command="common:UICommands.MoveDown" CanExecute="moveDownCommand_CanExecute" Executed="moveDownCommand_Executed" />
+            </DataGrid.CommandBindings>
+            <DataGrid.Resources>
+                <DataTemplate x:Key="TextTemplate">
+                    <Border Margin="2,0,0,0" SnapsToDevicePixels="True">
+                        <TextBlock Text="{Binding Value}" />
+                    </Border>
+                </DataTemplate>
+                <DataTemplate x:Key="TableTemplate">
+                    <Border Margin="2,0,0,0" SnapsToDevicePixels="True">
+                        <TextBlock Text="{Binding Value}" />
+                    </Border>
+                </DataTemplate>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="colName" Header="Name" Width="2*" Binding="{Binding Path=Name}" />
+                <DataGridTemplateColumn Header="Value" Width="3*">
+                    <DataGridTemplateColumn.CellTemplateSelector>
+                        <local:VariableCellTemplateSelector TextTemplate="{StaticResource TextTemplate}" TableTemplate="{StaticResource TableTemplate}"/>
+                    </DataGridTemplateColumn.CellTemplateSelector>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate DataType="{x:Type System:String}">
+                            <Border SnapsToDevicePixels="True" FocusManager.FocusedElement="{Binding ElementName=txt}">
+                                <TextBox Name="txt" BorderThickness="0" Text="{Binding Value}" GotFocus="textBoxCellEditing_GotFocus"></TextBox>
+                            </Border>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+                <DataGridCheckBoxColumn x:Name="colPublic" Header="Public" Width="1*" Binding="{Binding Path=IsPublic}" Visibility="Collapsed" />
+                <DataGridTextColumn Header="Description" Width="4*" Binding="{Binding Path=Description}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="AutoTest.WebAction.WebActionUI"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" >
+    <UserControl.Resources>
+        <Style x:Key="row" TargetType="StackPanel">
+            <Setter Property="Height" Value="40"/>
+        </Style>
+        <Style x:Key="label" TargetType="Label">
+            <Setter Property="Margin"  Value="2,4,0,0"/>
+            <Setter Property="Foreground"  Value="Gray"/>
+        </Style>
+    </UserControl.Resources>
+    <StackPanel Margin="10">
+        <Label Content="Action" Style="{StaticResource label}"/>
+        <ComboBox x:Name="cmbAction" Padding="4" Width="200" HorizontalAlignment="Left">
+            <ComboBox.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" HorizontalAlignment="Right" Margin="0,0,15,0" TextDecorations="Underline"/>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ComboBox.GroupStyle>
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Event}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <StackPanel Name="stackParas">
+        </StackPanel>
+    </StackPanel>
+</UserControl>

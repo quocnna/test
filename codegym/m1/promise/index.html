@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+const t = 9;
+let p = new Promise(function (resolve, reject){
+    setTimeout(()=> console.log("to"), 0);
+    if(t === 9){
+        console.log("q9")
+        resolve(9);
+    }
+    else {
+        console.log("q0")
+        reject(0);
+    }
+});
+
+p.then(e =>{
+    console.log("---")
+    console.log(e)
+}).finally(e => {
+    console.log("finally")
+});
+
+console.log("qqqqqq")
+</script>
+</body>
+</html>
