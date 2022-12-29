@@ -5,10 +5,18 @@
     <title>Title</title>
 </head>
 <body>
+<button onclick="test()">Click</button>
+
 <script>
 const t = 9;
+// const test = (waitTimeInMs) =>{
+//     console.log("t")
+//     return  new Promise(resolve => setTimeout(resolve, waitTimeInMs));
+// }
+
+// da chay luon
 let p = new Promise(function (resolve, reject){
-    setTimeout(()=> console.log("to"), 0);
+    setTimeout(()=> console.log("to"), 2000);
     if(t === 9){
         console.log("q9")
         resolve(9);
@@ -19,13 +27,18 @@ let p = new Promise(function (resolve, reject){
     }
 });
 
-p.then(e =>{
-    console.log("---")
-    console.log(e)
-}).finally(e => {
-    console.log("finally")
-});
+function test(){
+    p.then(e =>{
+        console.log("---")
+        console.log(e)
+    }).finally(e => {
+        console.log("finally")
+    });
+}
 
+// test(5000).then(e => {
+//     console.log("done")
+// })
 console.log("qqqqqq")
 </script>
 </body>

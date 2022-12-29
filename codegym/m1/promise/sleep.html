@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button onclick="guitin()">Send</button>
+<script>
+    function sleepSync(milliseconds) {
+        // const start = new Date().getTime();
+        // for (let i = 0; i < 1e7; i++) {
+        //     if ((new Date().getTime() - start) > milliseconds){
+        //         break;
+        //     }
+        // }
+
+        const start = new Date().getTime();
+        while ((new Date().getTime() -  start) < milliseconds);
+    }
+
+    function sleepAsync(milliseconds){
+        setTimeout(function (){
+            console.log('test')
+        }, milliseconds)
+    }
+
+    async function guitin() {
+        for (let i = 1; i < 10; i++) {
+            console.log(i)
+            // sleepSync(5000);
+            // sleepAsync(5000);
+            // await new Promise(resolve => setTimeout(resolve, 5000));
+            await sleep(10000).then(() => {
+                console.log("a")
+            });
+        }
+
+        console.log("send successfully")
+    }
+
+    // in promise will be async function
+    const sleep = (waitTimeInMs) => new Promise(resolve => setTimeout(resolve, waitTimeInMs));
+</script>
+</body>
+</html>
