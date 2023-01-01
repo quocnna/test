@@ -1,0 +1,9 @@
+Vehicle(parent):id-int,driverPlate-String,manufacturer-String,yearOfManufacturer-int,owner-String
+Car:numberOfSeat-int,typeOfCar-String
+Motor:wattage-double
+Truck:load-double
+search:driverPlate
+sort:driverPlate-asc
+validate:driverPlate-[ABC]\w*,yearOfManufacturer-number
+menu:create,display,delete,search
+path:src/data/vehicle.txt
