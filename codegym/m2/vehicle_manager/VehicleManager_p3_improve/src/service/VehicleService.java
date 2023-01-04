@@ -96,17 +96,15 @@ public class VehicleService {
         List<String> lines = fileCar.read(FilePath.Car);
 
         for (String line : lines) {
-            if (!line.isEmpty()) {
-                String[] tmp = line.split(",");
-                String driverPlate = tmp[0];
-                Manufacturer manufacturer = manufactureService.findByName(tmp[1]).orElseGet(() -> new Manufacturer("Unknown"));
-                int year = Integer.parseInt(tmp[2]);
-                String owner = tmp[3];
-                int numberSeat = Integer.parseInt(tmp[4]);
-                String typeCar = tmp[5];
-                Car car = new Car(driverPlate, manufacturer, year, owner, numberSeat, TypeOfCar.valueOf(typeCar));
-                res.add(car);
-            }
+            String[] tmp = line.split(",");
+            String driverPlate = tmp[0];
+            Manufacturer manufacturer = manufactureService.findByName(tmp[1]).orElseGet(() -> new Manufacturer("Unknown"));
+            int year = Integer.parseInt(tmp[2]);
+            String owner = tmp[3];
+            int numberSeat = Integer.parseInt(tmp[4]);
+            String typeCar = tmp[5];
+            Car car = new Car(driverPlate, manufacturer, year, owner, numberSeat, TypeOfCar.valueOf(typeCar));
+            res.add(car);
         }
 
         return res;
@@ -117,16 +115,14 @@ public class VehicleService {
         List<String> lines = fileCar.read(FilePath.Truck);
 
         for (String line : lines) {
-            if (!line.isEmpty()) {
-                String[] tmp = line.split(",");
-                String driverPlate = tmp[0];
-                Manufacturer manufacturer = manufactureService.findByName(tmp[1]).orElseGet(() -> new Manufacturer("Unknown"));
-                int year = Integer.parseInt(tmp[2]);
-                String owner = tmp[3];
-                double load = Double.parseDouble(tmp[4]);
-                Truck truck = new Truck(driverPlate, manufacturer, year, owner, load);
-                res.add(truck);
-            }
+            String[] tmp = line.split(",");
+            String driverPlate = tmp[0];
+            Manufacturer manufacturer = manufactureService.findByName(tmp[1]).orElseGet(() -> new Manufacturer("Unknown"));
+            int year = Integer.parseInt(tmp[2]);
+            String owner = tmp[3];
+            double load = Double.parseDouble(tmp[4]);
+            Truck truck = new Truck(driverPlate, manufacturer, year, owner, load);
+            res.add(truck);
         }
 
         return res;
@@ -137,16 +133,14 @@ public class VehicleService {
         List<String> lines = fileCar.read(FilePath.Motor);
 
         for (String line : lines) {
-            if (!line.isEmpty()) {
-                String[] tmp = line.split(",");
-                String numberPlate = tmp[0];
-                Manufacturer manufacturer = manufactureService.findByName(tmp[1]).orElseGet(() -> new Manufacturer("Unknown"));
-                int year = Integer.parseInt(tmp[2]);
-                String owner = tmp[3];
-                double wattage = Double.parseDouble(tmp[4]);
-                Motor motor = new Motor(numberPlate, manufacturer, year, owner, wattage);
-                res.add(motor);
-            }
+            String[] tmp = line.split(",");
+            String numberPlate = tmp[0];
+            Manufacturer manufacturer = manufactureService.findByName(tmp[1]).orElseGet(() -> new Manufacturer("Unknown"));
+            int year = Integer.parseInt(tmp[2]);
+            String owner = tmp[3];
+            double wattage = Double.parseDouble(tmp[4]);
+            Motor motor = new Motor(numberPlate, manufacturer, year, owner, wattage);
+            res.add(motor);
         }
 
         return res;
