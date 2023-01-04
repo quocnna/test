@@ -13,8 +13,10 @@ public class FileHelper<E> {
     public void write(String path, List<E> list, boolean isAppend) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path, isAppend))) {
             for (E e : list) {
-                writer.write(e.toString());
-                writer.newLine();
+                if(!e.toString().isBlank()){
+                    writer.write(e.toString());
+                    writer.newLine();
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();

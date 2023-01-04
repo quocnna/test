@@ -195,7 +195,7 @@ public class MainMenu {
 
         if(trucks.size() > 0){
             System.out.printf("%-20s %-20s %-30s %-20s %20s %n", "DRIVER PLATE", "MANUFACTURER", "YEAR OF MANUFACTURER", "OWNER", "LOAD");
-            System.out.println("-----------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("-------------------------------------------------------------------------------------------------------------------------");
 
             for(Truck t: trucks){
                 System.out.printf("%-20s %-20s %-30s %-20s %20s %n", t.getDriverPlate(), t.getManufacturer().getName(), t.getYearOfManufacturer(), t.getOwner(), t.getLoad());
@@ -209,7 +209,7 @@ public class MainMenu {
     private static void displayMotor(List<Motor> motors){
         if(motors.size() > 0){
             System.out.printf("%-20s %-20s %-30s %-20s %20s %n", "DRIVER PLATE", "MANUFACTURER", "YEAR OF MANUFACTURER", "OWNER", "WATTAGE");
-            System.out.println("----------------------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("------------------------------------------------------------------------------------------------------------------------");
 
             for(Motor t: motors){
                 System.out.printf("%-20s %-20s %-30s %-20s %20s %n", t.getDriverPlate(), t.getManufacturer().getName(), t.getYearOfManufacturer(), t.getOwner(), t.getWattage());
