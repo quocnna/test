@@ -8,8 +8,13 @@ import util.Validation;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
+
+import static util.CommonUtil.getChoice;
+import static util.CommonUtil.inputToDouble;
+import static util.CommonUtil.inputToEnum;
+import static util.CommonUtil.inputToInteger;
+import static util.CommonUtil.inputWithOutEmpty;
 
 public class MainMenu {
     //region fields
@@ -22,7 +27,7 @@ public class MainMenu {
         while (true) {
             System.out.println("--- Main Menu ---");
             System.out.println("1. Add\n2. Display\n3. Delete\n4. Search\n5. Exit");
-            int choice = getChoice();
+            int choice = getChoice(1,5);
 
             switch (choice) {
                 case 1 -> add();
@@ -36,7 +41,7 @@ public class MainMenu {
 
     private static void display() {
         System.out.println("1. Truck\n2. Car\n3. Motor");
-        int choice = getChoice();
+        int choice = getChoice(1,3);
 
         switch (choice) {
             case 1 -> displayTruck(vehicleService.getAllTruck());
@@ -49,7 +54,7 @@ public class MainMenu {
         boolean check = false;
 
         do {
-            String driverPlate = getInputWithoutEmpty(check ? "Enter driver plate again" : "Enter driver plate to delete");
+            String driverPlate = inputWithOutEmpty(check ? "Enter driver plate again" : "Enter driver plate to delete");
 
             try {
                 //region delete with confirm
@@ -82,7 +87,7 @@ public class MainMenu {
     }
 
     private static void search() {
-        String driverPlate = getInputWithoutEmpty("Enter driver plate to search");
+        String driverPlate = inputWithOutEmpty("Enter driver plate to search");
 
         List<? extends Vehicle> vehicles = vehicleService.search(driverPlate);
 
@@ -106,7 +111,7 @@ public class MainMenu {
 
     private static void add() {
         System.out.println("1. Truck\n2. Car\n3. Motor");
-        int choice = getChoice();
+        int choice = getChoice(1,3);
 
         //region validate driver plate
         String plate = "";
@@ -115,14 +120,14 @@ public class MainMenu {
                 plate = getPlateWithoutExists();
 
                 while (!Validation.isTruck(plate)){
-                    plate = getInputWithoutEmpty("Invalid format. Please input again");
+                    plate = inputWithOutEmpty("Invalid format. Please input again");
                 }
             }
             case 3 -> {
                 plate = getPlateWithoutExists();
 
                 while (!Validation.isMotor(plate)){
-                    plate = getInputWithoutEmpty("Invalid format. Please input again");
+                    plate = inputWithOutEmpty("Invalid format. Please input again");
                 }
             }
         }
@@ -137,41 +142,35 @@ public class MainMenu {
             System.out.println(manufacturerList.get(i));
         }
 
-        String manufacturerName = getInputWithoutEmpty("Enter manufacturer name");
+        String manufacturerName = inputWithOutEmpty("Enter manufacturer name");
         Manufacturer manufacturer = manufactureService.findByName(manufacturerName).orElseGet(() -> new Manufacturer("Unknown"));
 
-        int yearOfManufacturer = Integer.parseInt(getInputWithoutEmpty("Year Of Manufacturer"));
+        int yearOfManufacturer = inputToInteger("Year Of Manufacturer");
         //endregion
 
-        String owner = getInputWithoutEmpty("Owner");
+        String owner = inputWithOutEmpty("Owner");
 
         Vehicle vehicle = null;
 
         switch (choice) {
             case 1 -> {
-                Double load = Double.parseDouble(getInputWithoutEmpty("Load"));
+                Double load = inputToDouble("Load");
                 vehicle = new Truck(plate, manufacturer, yearOfManufacturer, owner, load);
             }
             case 2 -> {
-                int numberOfSeat = Integer.parseInt(getInputWithoutEmpty("Number of seat"));
+                int numberOfSeat = inputToInteger("Number of seat");
 
-                boolean check;
-                String typeOfCar = null;
-                do{
-                    typeOfCar = getInputWithoutEmpty(typeOfCar != null ? "Incorrect type of car. Please input again (tourist or coach)" : "Type of car");
-                    String finalTypeOfCar = typeOfCar;
-                    check = Arrays.stream(TypeOfCar.values()).anyMatch(e -> e.name().equalsIgnoreCase(finalTypeOfCar));
-                }while (!check);
+                TypeOfCar typeOfCar = inputToEnum(TypeOfCar.class, "Type of car");
 
                 plate = getPlateWithoutExists();
-                while (!Validation.isCarPlate(plate, TypeOfCar.valueOf(typeOfCar.toUpperCase()).name().equalsIgnoreCase("TOURIST") )){
-                    plate = getInputWithoutEmpty("Invalid format. Please input again");
+                while (!Validation.isCarPlate(plate, typeOfCar.name().equalsIgnoreCase("TOURIST") )){
+                    plate = inputWithOutEmpty("Invalid format. Please input again");
                 }
 
-                vehicle = new Car(plate, manufacturer, yearOfManufacturer, owner, numberOfSeat, TypeOfCar.valueOf(typeOfCar.toUpperCase()));
+                vehicle = new Car(plate, manufacturer, yearOfManufacturer, owner, numberOfSeat, typeOfCar);
             }
             case 3 -> {
-                Double wattage = Double.parseDouble(getInputWithoutEmpty("Wattage"));
+                Double wattage = inputToDouble("Wattage");
                 vehicle = new Motor(plate, manufacturer, yearOfManufacturer, owner, wattage);
             }
         }
@@ -182,26 +181,11 @@ public class MainMenu {
     //endregion
 
     //region private function
-    private static int getChoice() {
-        System.out.printf("Enter your choice:");
-        return Integer.parseInt(scanner.nextLine());
-    }
-
-    private static String getInputWithoutEmpty(String message) {
-        String result = null;
-
-        do{
-            System.out.printf(result!= null ? message + " Cannot empty, please input again:" : message+ ":");
-            result = scanner.nextLine();
-        }while (result.isEmpty());
-
-        return result;
-    }
 
     private static String getPlateWithoutExists(){
         String plate = null;
         do{
-            plate = getInputWithoutEmpty(plate != null ? "Driver plate exists. Please input again:" : "Driver plate");
+            plate = inputWithOutEmpty(plate != null ? "Driver plate exists. Please input again:" : "Driver plate");
         }while (vehicleService.findByDriverPlate(plate));
 
         return plate;
