@@ -14,6 +14,7 @@ public class RemoteDebuggingApplication {
         SpringApplication.run(RemoteDebuggingApplication.class, args);
     }
 
+//    https://www.rookout.com/blog/intellij-remote-debugging-java/
     @GetMapping("hello")
     public String hello(@RequestParam String name){
         return String.format("Hello %s", name);
