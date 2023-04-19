@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  // const pageAccessedByReload = (
+  //         (window.performance.navigation && window.performance.navigation.type === 1) ||
+  //         window.performance
+  //                 .getEntriesByType('navigation')
+  //                 .map((nav) => nav.type)
+  //                 .includes('reload')
+  // );
+  //
+  // let u = new URLSearchParams(location.search);
+  // if(!pageAccessedByReload && u.get("m")== 1){
+  //     alert("a")
+  // }
+
+
+  const navigationType = window.performance.getEntriesByType('navigation')[0].type;
+  const isPageReload = navigationType === 'reload';
+  alert(isPageReload)
+</script>
+</body>
+</html>
