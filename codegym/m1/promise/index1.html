@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button onclick="test()">Click</button>
+
+<script>
+    function fcnPromise() {
+        return new Promise(function (resolve, reject) {
+            console.log(1);
+
+
+            // for (let i = 0; i < 5; i++) {
+            //     const r = Math.random();
+            //     console.log(r);
+            //     if (r > 0.5) {
+            //         resolve(r);
+            //     } else {
+            //         reject(r);
+            //     }
+            // }
+
+            setTimeout(() => {
+                for (let i = 0; i < 5; i++) {
+                    const r = Math.random();
+                    console.log(r);
+                    if (r > 0.5) {
+                        resolve(r);
+                    } else {
+                        reject(r);
+                    }
+                }
+
+                console.log("setTimeout");
+            }, 9000);
+        })
+    }
+
+    function test() {
+        console.log(3);
+        fcnPromise()
+            // e is first resolve
+            .then(e => {
+                console.log(e);
+            }).catch(e => {
+            console.log(e);
+        })
+            // next undefined because above is no promise and no specifi
+            .then(e => {
+                console.log(e);
+            }).catch(e => {
+            console.log(e);
+        })
+
+        console.log(4);
+    }
+
+    console.log(2);
+
+
+</script>
+</body>
+</html>
