@@ -11,7 +11,8 @@ import java.util.Set;
 
 @WebFilter("/*")
 public class AuthenFilter implements Filter {
-    private static final Set<String> ALLOWED_PATHS = Set.of("", "/login", "/logout", "/register");
+    private static final Set<String> ALLOWED_PATHS = Set.of("", "/login", "/logout", "/register","/login.jsp");
+//    private static final Set<String> ALLOWED_PATHS = Set.of("", "/login", "/logout", "/register","/login.jsp");
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
@@ -19,16 +20,9 @@ public class AuthenFilter implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
         HttpSession session = httpRequest.getSession(false);
 
-//        String a = httpRequest.getRequestURI();
-//        String b = httpRequest.getContextPath();
-//        String c = httpRequest.getServletPath();
-//        String d = httpRequest.getQueryString();
-//        String e = httpRequest.getRequestedSessionId();
-//        String f = httpRequest.getPathInfo();
-
 //        String path = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length()).replaceAll("[/]+$", "");
         String path = httpRequest.getServletPath();
-
+        String encodedURL=httpResponse.encodeURL(path);
         boolean isLoggedIn = session != null && session.getAttribute("username") != null;
         boolean allowedPath = ALLOWED_PATHS.contains(path);
 
@@ -39,3 +33,4 @@ public class AuthenFilter implements Filter {
         }
     }
 }
+

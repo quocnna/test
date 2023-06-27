@@ -15,5 +15,10 @@ ${abc}
 
 
 <a href="#" id="id1">aaaa</a>
+
+<%--<script>--%>
+<%--    const response = fetch("http://localhost:8082/second?ck=aaa");--%>
+<%--    console.log(response);--%>
+<%--</script>--%>
 </body>
 </html>

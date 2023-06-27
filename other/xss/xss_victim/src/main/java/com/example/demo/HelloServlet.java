@@ -25,9 +25,17 @@ public class HelloServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession(false);
+        boolean b = session == null;
+        System.out.println(b);
+
+        if(session!= null){
+            System.out.println(session.getId());
+        }
+
         String s = req.getParameter("p");
         req.setAttribute("abc", s);
-        req.getRequestDispatcher("/test.jsp").forward(req, resp);
+//        req.getRequestDispatcher("/test.jsp").forward(req, resp);
     }
 
     public void destroy() {
