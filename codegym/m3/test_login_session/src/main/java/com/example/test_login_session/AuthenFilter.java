@@ -22,7 +22,7 @@ public class AuthenFilter implements Filter {
 
 //        String path = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length()).replaceAll("[/]+$", "");
         String path = httpRequest.getServletPath();
-        String encodedURL=httpResponse.encodeURL(path);
+
         boolean isLoggedIn = session != null && session.getAttribute("username") != null;
         boolean allowedPath = ALLOWED_PATHS.contains(path);
 
