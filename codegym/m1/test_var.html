@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            /*margin: 0;*/
+            /*padding: 0;*/
+            font-family: 'Poppins', sans-serif;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --main-bg-color: pink;
+        }
+
+        body {
+            background-color: var(--main-bg-color);
+            height: 98vh;
+            /*margin: 5px;*/
+        }
+
+        body div:first-child {
+            height: 100%;
+            width: 100%;
+            background: white;
+            position: relative;
+            padding: 5px;
+        }
+
+        #title{
+            background: white;
+            text-align: center;
+            color: white;
+            /*position: absolute;*/
+            /*top: 10px;*/
+            height: initial;
+            margin: 0;
+        }
+
+        body div:first-child div {
+            margin: 10px;
+        }
+
+        h1 {
+            background: orange;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        label{
+            color: green;
+            display: inline-block;
+            width: 100px;
+            text-align: right;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div id="title">
+        <h1>Favourite</h1>
+    </div>
+
+    <div>
+        <label>Full name</label>
+        <input>
+    </div>
+
+    <div>
+        <label>Email</label>
+        <input>
+    </div>
+
+</div>
+</body>
+</html>

@@ -45,13 +45,13 @@ public class Apple {
         this.weight = weight;
     }
 
-    @Override
-    public String toString() {
-        return "Apple{" +
-                "id=" + id +
-                ", color='" + color + '\'' +
-                ", price=" + price +
-                ", weight=" + weight +
-                '}';
-    }
+//    @Override
+//    public String toString() {
+//        return "Apple{" +
+//                "id=" + id +
+//                ", color='" + color + '\'' +
+//                ", price=" + price +
+//                ", weight=" + weight +
+//                '}';
+//    }
 }
