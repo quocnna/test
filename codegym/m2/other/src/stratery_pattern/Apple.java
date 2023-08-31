@@ -1,6 +1,8 @@
 package stratery_pattern;
 
-public class Apple {
+import java.io.Serializable;
+
+public class Apple implements Serializable {
     private int id;
     private String color;
     private double price;
@@ -45,13 +47,13 @@ public class Apple {
         this.weight = weight;
     }
 
-//    @Override
-//    public String toString() {
-//        return "Apple{" +
-//                "id=" + id +
-//                ", color='" + color + '\'' +
-//                ", price=" + price +
-//                ", weight=" + weight +
-//                '}';
-//    }
+    @Override
+    public String toString() {
+        return "Apple{" +
+                "id=" + id +
+                ", color='" + color + '\'' +
+                ", price=" + price +
+                ", weight=" + weight +
+                '}';
+    }
 }
