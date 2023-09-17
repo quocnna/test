@@ -15,17 +15,17 @@ public class HomeMenu {
     //endregion
 
     public static void main(String[] args) {
-        while (true){
+        while (true) {
             System.out.print("""
-                === Phone Menu ===
-                1. Create
-                2. Update
-                3. Delete
-                4. Display
-                5. Search by name
-                6. Sort by price
-                7. Exit
-                """);
+                    === Phone Menu ===
+                    1. Create
+                    2. Update
+                    3. Delete
+                    4. Display
+                    5. Search by name
+                    6. Sort by price
+                    7. Exit
+                    """);
 
             int choice = Integer.parseInt(ValidationUtil.inputWithOutEmpty("Enter your choice"));
             switch (choice) {
@@ -41,12 +41,12 @@ public class HomeMenu {
     }
 
     //region menu function
-    private static void create(){
+    private static void create() {
         save(false);
         System.out.println("Create successfully!!");
     }
 
-    private static void update(){
+    private static void update() {
         save(true);
         System.out.println("Updated successfully!!");
     }
@@ -60,53 +60,44 @@ public class HomeMenu {
         do {
             try {
                 int id = Integer.parseInt(ValidationUtil.getScanner().nextLine());
-                if(choice == 1){
+                if (choice == 1) {
                     authenticPhoneService.delete(id);
-                }
-                else if(choice == 2){
+                } else if (choice == 2) {
                     handPhoneService.delete(id);
                 }
 
                 isExists = true;
                 System.out.println("Deleted successfully");
-            }
-            catch (NumberFormatException | NotFoundPhoneException e){
+            } catch (NumberFormatException | NotFoundPhoneException e) {
                 System.err.print(e.getMessage() + "\nPlease input ID again:");
                 isExists = false;
             }
-        }while (!isExists);
+        } while (!isExists);
     }
 
-    private static void display(){
-        int choice = choosePhone();
+    private static void display() {
+        authenticPhoneService.findAll().forEach(System.out::println);
 
-        if(choice == 1){
-            authenticPhoneService.findAll().forEach(System.out::println);
-        }
-        else if(choice == 2){
-            handPhoneService.findAll().forEach(System.out::println);
-        }
+        handPhoneService.findAll().forEach(System.out::println);
     }
 
-    private static void searchByName(){
+    private static void searchByName() {
         int choice = choosePhone();
         String name = ValidationUtil.inputWithOutEmpty("Enter Name you want to search");
 
-        if(choice == 1){
+        if (choice == 1) {
             authenticPhoneService.findByName(name).forEach(System.out::println);
-        }
-        else if(choice == 2){
+        } else if (choice == 2) {
             handPhoneService.findByName(name).forEach(System.out::println);
         }
     }
 
-    private static void sortByPrice(){
+    private static void sortByPrice() {
         int choice = choosePhone();
 
-        if(choice == 1){
+        if (choice == 1) {
             authenticPhoneService.sortByPrice().forEach(System.out::println);
-        }
-        else {
+        } else if (choice == 2) {
             handPhoneService.sortByPrice().forEach(System.out::println);
         }
     }
@@ -119,7 +110,7 @@ public class HomeMenu {
         return Integer.parseInt(ValidationUtil.getScanner().nextLine());
     }
 
-    private static int choosePhone(){
+    private static int choosePhone() {
         System.out.print("""
                 1. Authentic
                 2. Hand
