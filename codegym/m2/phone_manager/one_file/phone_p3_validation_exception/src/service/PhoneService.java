@@ -67,7 +67,7 @@ public class PhoneService {
         List<String> lines = FileUtil.read(PATH_PHONE);
         for (String line : lines){
             String[] tmp = line.split(",");
-            int id = Integer.parseInt(tmp[2]);
+            int id = Integer.parseInt(tmp[1]);
             String name = tmp[2];
             Double price = Double.parseDouble(tmp[3]);
             String manufacturer = tmp[4];
