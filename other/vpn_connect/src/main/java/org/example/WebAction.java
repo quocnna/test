@@ -21,11 +21,12 @@ public class WebAction {
 
     public static void launchWeb() {
         LOGGER.info("start chrome selenium");
-        String chromeDriverPath = Objects.requireNonNull(WebAction.class.getClassLoader().getResource("chromedriver.exe")).getPath();
-        System.setProperty("webdriver.chrome.driver", chromeDriverPath);
+//        String chromeDriverPath = Objects.requireNonNull(WebAction.class.getClassLoader().getResource("chromedriver.exe")).getPath();
+        System.setProperty("webdriver.chrome.driver", CommonUtil.getValueProperties("selenium.path"));
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("user-data-dir=" + CommonUtil.getValueProperties("data.chrome"));
         chromeOptions.addArguments("profile-directory="+ CommonUtil.getValueProperties("profile.chrome"));
+        chromeOptions.addArguments("--headless=new");
         webDriver = new ChromeDriver(chromeOptions);
         wait = new WebDriverWait(webDriver, Duration.ofMinutes(1));
         webDriver.manage().window().maximize();
