@@ -17,8 +17,9 @@ public class Main {
 
         LOGGER.info("start vpn ewerk");
         try {
-            Thread.sleep(2000);
+            LOGGER.info("launch web");
             WebAction.launchWeb();
+            LOGGER.info("navigate to extention");
             WebAction.navigate("chrome-extension://bhghoamapcdpbohphigoooaddinpkbai/view/popup.html");
             WebElement e = WebAction.getElementForVisibility("//*[@id=\"codes\"]/div[3]/a/div[@class='code']");
             String code = e.getText();
@@ -29,13 +30,16 @@ public class Main {
                 tmp = e.getText();
             }while (code.equals(tmp));
 
+            LOGGER.info("write code: "+ tmp);
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(CommonUtil.getValueProperties("login.path")));
             bufferedWriter.write(CommonUtil.getValueProperties("user.ewerk"));
             bufferedWriter.newLine();
             bufferedWriter.write(CommonUtil.getValueProperties("pass.ewerk") + tmp);
             bufferedWriter.flush();
             bufferedWriter.close();
+            LOGGER.info("connect ewerk");
             connectVPN(CommonUtil.getValueProperties("command.ewerk"));
+            LOGGER.info("quit selenium");
             WebAction.quit();
         } catch (Exception e) {
             LOGGER.info(e.getMessage());
