@@ -17,6 +17,7 @@ public class Main {
 
         LOGGER.info("start vpn ewerk");
         try {
+            Thread.sleep(2000);
             WebAction.launchWeb();
             WebAction.navigate("chrome-extension://bhghoamapcdpbohphigoooaddinpkbai/view/popup.html");
             WebElement e = WebAction.getElementForVisibility("//*[@id=\"codes\"]/div[3]/a/div[@class='code']");
@@ -41,10 +42,9 @@ public class Main {
             throw new RuntimeException(e);
         }
         LOGGER.info("end vpn ewerk");
-        System.exit(0);
 
-//        LOGGER.info("start schedule");
-//        SchedulerConnect.run("0 0 */4 ? * *");
+        LOGGER.info("start schedule");
+        SchedulerConnect.run("0 0 1/2 ? * *");
     }
 
     private static void connectVPN(String command){
