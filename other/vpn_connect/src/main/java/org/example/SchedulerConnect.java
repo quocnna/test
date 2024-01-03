@@ -19,7 +19,7 @@ public class SchedulerConnect {
                     .withIdentity("myJob", "group1")
                     .build();
 
-            Date startTime = DateBuilder.evenHourDateAfterNow();
+            Date startTime = new Date();
 
             Trigger trigger = newTrigger()
                     .withIdentity("myTrigger", "group1")
