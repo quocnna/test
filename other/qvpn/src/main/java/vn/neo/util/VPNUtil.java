@@ -16,7 +16,7 @@ public class VPNUtil {
             LOGGER.info("disconnect ewerk");
             runCommand(CommonUtil.getValueProperties("disconnect.ewerk"));
             LOGGER.info("navigate to extention");
-            WebAction.navigate("moz-extension://76020629-d0d4-4f8d-ab28-5b96bd3f418a/view/popup.html");
+            WebAction.navigate("chrome-extension://" + CommonUtil.getValueProperties("extension.id") + "/view/popup.html");
             WebElement e = WebAction.getElementForVisibility(AppConstant.FindBy.XPath,"//*[@id=\"codes\"]/div[3]/a/div[@class='code']");
             String code = e.getText();
             String tmp;

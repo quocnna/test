@@ -3,6 +3,8 @@ package vn.neo.action;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
@@ -30,14 +32,11 @@ public class WebAction {
     private static WebDriverWait wait;
 
     public static void launchWeb() {
-        System.setProperty("webdriver.gecko.driver", "D:\\tmp\\geckodriver.exe");
-
-        ProfilesIni profile = new ProfilesIni();
-        FirefoxProfile myprofile = profile.getProfile("default");
-        FirefoxOptions firefoxOptions = new FirefoxOptions();
-        firefoxOptions.setProfile(myprofile);
-        firefoxOptions.addArguments("-headless");
-        webDriver = new FirefoxDriver(firefoxOptions);
+        EdgeOptions options = new EdgeOptions();
+        options.addArguments("user-data-dir="+ CommonUtil.getValueProperties("data.edge"));
+        options.addArguments("profile-directory="+ CommonUtil.getValueProperties("profile.edge"));
+        options.addArguments("--headless=new");
+        webDriver = new EdgeDriver(options);
         wait = new WebDriverWait(webDriver, Duration.ofSeconds(30));
         webDriver.manage().window().maximize();
         webDriver.manage().deleteAllCookies();
