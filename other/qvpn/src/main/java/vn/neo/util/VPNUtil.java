@@ -14,23 +14,23 @@ public class VPNUtil {
     public static void connectEwerk() {
         try {
             LOGGER.info("disconnect ewerk");
-            runCommand(CommonUtil.getValueProperties("disconnect.ewerk"));
+            runCommand(CommonUtil.getValueProperties("connect.ewerk").replace("--connect", "--command disconnect"));
             LOGGER.info("navigate to extention");
             WebAction.navigate("chrome-extension://" + CommonUtil.getValueProperties("extension.id") + "/view/popup.html");
             WebElement e = WebAction.getElementForVisibility(AppConstant.FindBy.XPath,"//*[@id=\"codes\"]/div[3]/a/div[@class='code']");
-            String code = e.getText();
-            String tmp;
-
-            do{
-                Thread.sleep(2000);
-                tmp = e.getText();
-            }while (code.equals(tmp));
-
-            LOGGER.info("write code: "+ tmp);
+//            String code = e.getText();
+//            String tmp;
+//
+//            do{
+//                Thread.sleep(2000);
+//                tmp = e.getText();
+//            }while (code.equals(tmp));
+//
+//            LOGGER.info("write code: "+ tmp);
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(CommonUtil.getValueProperties("login.path")));
             bufferedWriter.write(CommonUtil.getValueProperties("user.ewerk"));
             bufferedWriter.newLine();
-            bufferedWriter.write(CommonUtil.getValueProperties("pass.ewerk") + tmp);
+            bufferedWriter.write(CommonUtil.getValueProperties("pass.ewerk") + e.getText());
             bufferedWriter.flush();
             bufferedWriter.close();
             LOGGER.info("connect ewerk");

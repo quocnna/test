@@ -32,8 +32,8 @@ public class WebAction {
     public static void launchWeb() {
         if (CommonUtil.getValueProperties("app.browser").equals("chrome")){
             ChromeOptions options = new ChromeOptions();
-            options.addArguments("user-data-dir="+ CommonUtil.getValueProperties("data.edge"));
-            options.addArguments("profile-directory="+ CommonUtil.getValueProperties("profile.edge"));
+            options.addArguments("user-data-dir="+ CommonUtil.getValueProperties("data.browser"));
+            options.addArguments("profile-directory="+ CommonUtil.getValueProperties("profile.browser"));
             options.addArguments("--headless=new");
             webDriver = new ChromeDriver(options);
         }
