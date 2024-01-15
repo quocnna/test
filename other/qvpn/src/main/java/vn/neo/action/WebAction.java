@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.chromium.ChromiumOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -12,7 +13,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import vn.neo.util.AppConstant.FindBy;
 import vn.neo.util.CommonUtil;
 
-import java.io.File;
 import java.time.Duration;
 import java.util.List;
 
@@ -30,20 +30,9 @@ public class WebAction {
     private static WebDriverWait wait;
 
     public static void launchWeb() {
-        if (CommonUtil.getValueProperties("app.browser").equals("chrome")){
-            ChromeOptions options = new ChromeOptions();
-            options.addArguments("user-data-dir="+ CommonUtil.getValueProperties("data.browser"));
-            options.addArguments("profile-directory="+ CommonUtil.getValueProperties("profile.browser"));
-            options.addArguments("--headless=new");
-            webDriver = new ChromeDriver(options);
-        }
-        else {
-            EdgeOptions options = new EdgeOptions();
-            options.addArguments("user-data-dir="+ CommonUtil.getValueProperties("data.edge"));
-            options.addArguments("profile-directory="+ CommonUtil.getValueProperties("profile.edge"));
-            options.addArguments("--headless=new");
-            webDriver = new EdgeDriver(options);
-        }
+        boolean isChrome = CommonUtil.getValueProperties("app.browser").equals("chrome");
+        webDriver = isChrome ? new ChromeDriver((ChromeOptions) chromiumOptions(true))
+                : new EdgeDriver((EdgeOptions) chromiumOptions(false));
 
         wait = new WebDriverWait(webDriver, Duration.ofSeconds(30));
         webDriver.manage().window().maximize();
@@ -153,5 +142,14 @@ public class WebAction {
                                 findBy == FindBy.CssSelector ? By.cssSelector(valueToFind) :
                                         findBy == FindBy.XPath ? By.xpath(valueToFind) :
                                                 findBy == FindBy.LinkText ? By.linkText(valueToFind) : By.partialLinkText(valueToFind);
+    }
+
+    private static ChromiumOptions chromiumOptions(boolean isChrome) {
+        ChromiumOptions options = isChrome ? new ChromeOptions() : new EdgeOptions();
+        options.addArguments("user-data-dir=" + CommonUtil.getValueProperties("data.browser"));
+        options.addArguments("profile-directory=" + CommonUtil.getValueProperties("profile.browser"));
+        options.addArguments("--headless=new");
+
+        return options;
     }
 }
